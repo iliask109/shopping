@@ -16,8 +16,6 @@ dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(express.static(path.resolve(__dirname, "client/build")));
-
 const connectDatabase = () => {
 	mongoose
 		.connect(process.env.DB_URI, {
@@ -29,12 +27,14 @@ const connectDatabase = () => {
 		});
 };
 
+
 app.use("/api/user", userRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/", productRouter);
 app.use("/api/orders", orderRouter);
 
 app.use(errorMiddleware);
+app.use(express.static(path.resolve(__dirname, "client/build")));
 
 app.get("*", (req, res) => {
 	const index = path.join(__dirname, "client/build", "index.html");
