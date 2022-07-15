@@ -41,7 +41,8 @@ app.get("*", (req, res) => {
 	req.sendFile(index);
 });
 
+connectDatabase();
 app.listen(process.env.PORT || 8800, () => {
-	connectDatabase();
+
 	console.log("content to backend");
 });
