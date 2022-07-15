@@ -37,7 +37,8 @@ app.use("/api/orders", orderRouter);
 app.use(errorMiddleware);
 
 app.get("*", (req, res) => {
-	res.sendFile(path.resolve(__dirname, "/client/build", "index.html"));
+	const index = path.join(__dirname, "client/build", "index.html");
+	res.sendFile(index);
 });
 
 app.listen(process.env.PORT || 8800, () => {
