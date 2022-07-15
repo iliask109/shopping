@@ -6,6 +6,7 @@ const userRouter = require("./routes/user");
 const adminRouter = require("./routes/admin");
 const orderRouter = require("./routes/order");
 const productRouter = require("./routes/product");
+import path from 'path'
 
 const cookieParser = require("cookie-parser");
 const errorMiddleware = require("./utils/errorMiddleware");
