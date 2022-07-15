@@ -11,10 +11,12 @@ const cookieParser = require("cookie-parser");
 const errorMiddleware = require("./utils/errorMiddleware");
 const path = require("path");
 const app = express();
-const dirname = require("path");
+
 dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 
 const connectDatabase = () => {
 	mongoose
@@ -34,12 +36,10 @@ app.use("/api/orders", orderRouter);
 
 app.use(errorMiddleware);
 
-app.use(express.static(path.resolve(__dirname,"/client/build")));
 app.get("*", (req, res) => {
-	res.sendFile(path.resolve(__dirname,"/client/build", "index.html"));
+	res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
-console.log(__dirname,"/client/build");
 app.listen(process.env.PORT || 8800, () => {
 	connectDatabase();
 	console.log("content to backend");
