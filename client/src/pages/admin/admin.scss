@@ -1,0 +1,224 @@
+.home {
+  display: flex;
+  flex-direction: column;
+
+
+
+  .widgets,
+  .charts {
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .charts {
+    padding: 5px 20px;
+  }
+
+  .listContainer {
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    padding: 20px;
+    margin: 20px;
+
+    .listTitle {
+      font-weight: 500;
+      color: gray;
+      margin-bottom: 15px;
+    }
+  }
+
+}
+
+.widget {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  padding: 10px;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 10px;
+  height: 100px;
+
+  .left,
+  .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .title {
+      font-weight: bold;
+      font-size: 14px;
+      color: rgb(160, 160, 160);
+    }
+
+    .counter {
+      font-size: 28px;
+      font-weight: 300;
+    }
+
+    .link {
+      width: max-content;
+      color: black;
+      font-size: 12px;
+      font-weight: bold;
+      border-bottom: 1px solid gray;
+    }
+
+    .percentage {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+
+      &.positive {
+        color: green;
+      }
+
+      &.negative {
+        color: red;
+      }
+    }
+
+    .icon {
+      font-size: 18px;
+      padding: 5px;
+      border-radius: 5px;
+      align-self: flex-end;
+    }
+  }
+}
+
+.table {
+  .cellWrapper {
+    display: flex;
+    align-items: center;
+
+    .image {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-right: 10px;
+      object-fit: cover;
+    }
+  }
+}
+
+.listAdmin {
+  display: flex;
+  width: 100%;
+
+  .listContainer {
+    flex: 6;
+  }
+}
+
+
+
+@media screen and (max-width: 1200px) {
+  .product_admin img {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .create_product img {
+    display: none;
+  }
+}
+
+
+.datatable {
+  height: 700px;
+  padding: 20px;
+  margin-bottom: 120px;
+
+  .datatableTitle {
+    width: 100%;
+    font-size: 24px;
+    color: gray;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .link {
+      text-decoration: none;
+      color: green;
+      font-size: 16px;
+      font-weight: 400;
+      border: 1px solid green;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .cellWithImg {
+    display: flex;
+    align-items: center;
+
+    .cellImg {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+  }
+
+  .cellWithStatus {
+    padding: 5px;
+    border-radius: 5px;
+
+    &.active {
+      background-color: rgba(0, 128, 0, 0.05);
+      color: green;
+    }
+
+    &.pending {
+      background-color: rgba(255, 217, 0, 0.05);
+      color: goldenrod;
+    }
+
+    &.passive {
+      background-color: rgba(255, 0, 0, 0.05);
+      color: crimson;
+    }
+  }
+
+  .cellAction {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .viewButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: darkblue;
+      border: 1px dotted rgba(0, 0, 139, 0.596);
+      cursor: pointer;
+    }
+  }
+}
+
+.deleteButton {
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: crimson;
+  border: 1px dotted rgba(220, 20, 60, 0.6);
+  cursor: pointer;
+}
+
+.status {
+  padding: 5px;
+  border-radius: 5px;
+
+  &.inStock {
+    color: green;
+    background-color: rgba(0, 128, 0, 0.151);
+  }
+
+  &.outStock {
+    color: rgb(243, 14, 14);
+    background-color: rgba(189, 3, 3, 0.103);
+  }
+}

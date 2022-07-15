@@ -1,0 +1,27 @@
+.modal {
+  .container {
+    text-align: center;
+  }
+  body {
+    padding: 70px;
+  }
+  h1 {
+    margin: auto;
+    text-align: center;
+  }
+  .row {
+    margin-left: 2px;
+    border-radius: 5px;
+    height: 90px;
+    width: 100%;
+    background-color: paleturquoise;
+  }
+
+  .input-group {
+    margin-bottom: 10px;
+  }
+
+  .input-group-text {
+    width: 40px;
+  }
+}
