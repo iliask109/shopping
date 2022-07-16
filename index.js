@@ -34,10 +34,10 @@ app.use("/api/", productRouter);
 app.use("/api/orders", orderRouter);
 
 app.use(errorMiddleware);
-app.use(express.static(path.resolve(__dirname, "client/build")));
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 
 app.get("*", (req, res) => {
-	res.sendFile(__dirname, "client/build", "index.html");
+	res.sendFile(__dirname, "./client/build", "index.html");
 
 });
 
