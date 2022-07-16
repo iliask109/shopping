@@ -9,10 +9,11 @@ body {
 
 .homeContainer {
 	display: flex;
-	
 }
 
-
+.dsad {
+	margin: 1;
+}
 
 .fa-bars {
 	cursor: pointer;
