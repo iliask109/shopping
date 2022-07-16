@@ -6,6 +6,7 @@ const userRouter = require("./routes/user");
 const adminRouter = require("./routes/admin");
 const orderRouter = require("./routes/order");
 const productRouter = require("./routes/product");
+const authRouter = require("./routes/auth");
 
 const cookieParser = require("cookie-parser");
 const errorMiddleware = require("./utils/errorMiddleware");
@@ -28,6 +29,8 @@ const connectDatabase = () => {
 };
 
 app.use("/api/user", userRouter);
+app.use("/api/auth", authRouter);
+
 app.use("/api/admin", adminRouter);
 app.use("/api/", productRouter);
 app.use("/api/orders", orderRouter);
