@@ -235,7 +235,7 @@ export default function ProductPage() {
 												<div className="media">
 													<div className="media-body">
 														<div className="reviews-members-header">
-															{item.user === userInfo._id && (
+															{item.user === userInfo?._id && (
 																<span
 																	className="delete_review btn btn-danger"
 																	onClick={() => deleteReviewHandler(item._id)}>
