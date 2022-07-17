@@ -35,7 +35,7 @@ export default function Navbar() {
 				<div className="logo ">
 					<Link to="/" style={{ textDecoration: "none" }}>
 						<SiShopware style={{ marginRight: "10px" }} />
-						Shoppping
+						<span>Shoppping</span>
 					</Link>
 				</div>
 				<div className="search">
@@ -54,9 +54,9 @@ export default function Navbar() {
 				<div className="items">
 					<div className="item">
 						<BorderColorIcon className="icon" />
-						<Link to="/content" style={{ textDecoration: "none" }}>
+						<Link to="/contact" style={{ textDecoration: "none" }}>
 							{" "}
-							Content
+							Contact
 						</Link>
 					</div>
 

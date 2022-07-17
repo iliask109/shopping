@@ -30,7 +30,7 @@ import ReviewsAdmin from "./pages/admin/ReviewsAdmin";
 import ReviewsSingel from "./pages/admin/ReviewsSingel";
 import ProductsSeller from "./pages/seller/ProductsSeller";
 import SingleProductSeller from "./pages/seller/SingelProductSeller";
-import ContentPage from "./pages/ContentPage";
+import ContactPage from "./pages/ContactPage";
 function App() {
 	const [openSidebar, setOpenSidebar] = useState(true);
 
@@ -59,12 +59,12 @@ function App() {
 				<div className="homeContainer ">
 					{openSidebar && <Sidebar />}
 					{!openSidebar && (
-						<i class="fas fa-bars" onClick={() => setOpenSidebar(true)}></i>
+						<i className="fas fa-bars" onClick={() => setOpenSidebar(true)}></i>
 					)}
 					<div className="container">
 						<Routes>
 							<Route path="/" expect element={<Home />} />
-							<Route path="/content" element={<ContentPage />} />
+							<Route path="/contact" element={<ContactPage />} />
 							<Route path="/search" element={<FiltersPage />} />
 							<Route
 								path="/search/category/:category"

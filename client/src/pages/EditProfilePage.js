@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -22,10 +22,14 @@ export default function EditProfilePage() {
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
 	const userUpdatePassword = useSelector((state) => state.userUpdatePassword);
-	const { loading: loadingPassword, error: errorPassword } = userUpdatePassword;
+	const {
+		loading: loadingPassword,
+		error: errorPassword,
+		isUpdate: updatePassowrd,
+	} = userUpdatePassword;
 	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
 	const {
-		success: successUpdate,
+		isUpdate,
 		loading: loadingUpdate,
 		error: errorUpdate,
 	} = userUpdateProfile;
@@ -39,16 +43,15 @@ export default function EditProfilePage() {
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
+
 	const submitHandler = () => {
 		if (changePassword) {
 			if (newPassword === confirmPassword) {
 				dispatch(updateUserPassword({ oldPassword, newPassword }));
-				if ("successPassword") {
+				if (updatePassowrd) {
 					setOldPassword("");
 					setNewPassword("");
 					setConfirmPassword("");
-					dispatch({ type: USER_UPDATE_PASSWORD_RESET });
-					navigate("/me");
 				}
 			} else {
 				alert(error);
@@ -61,16 +64,8 @@ export default function EditProfilePage() {
 					avatar,
 				})
 			);
-			if (successUpdate) {
-				navigate("/me");
-			}
 		}
 	};
-
-	if (error) {
-		dispatch(clearErrors());
-		navigate("/me");
-	}
 
 	return (
 		<div>
@@ -81,10 +76,10 @@ export default function EditProfilePage() {
 
 				{loading ? (
 					<Loading></Loading>
-				) : error ? (
-					<MessageBox variant="danger">{error}</MessageBox>
 				) : (
 					<div className="row">
+						{error && <MessageBox variant="danger">{error}</MessageBox>}
+
 						<div className="col-md-3 border-right ">
 							{!changePassword && (
 								<img
@@ -98,6 +93,11 @@ export default function EditProfilePage() {
 							)}
 						</div>
 						<div className="col-md-5 border-right">
+							{(isUpdate || updatePassowrd) && (
+								<MessageBox variant="success">
+									The update was successful
+								</MessageBox>
+							)}
 							<div className="p-3 py-5">
 								<div className="d-flex justify-content-between align-items-center mb-3">
 									<h4 className="text-right">

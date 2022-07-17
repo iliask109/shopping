@@ -92,7 +92,7 @@ export const productUpdateReducer = (state = {}, action) => {
     case UPDATE_PRODUCT_REQUEST:
       return { loading: true };
     case UPDATE_PRODUCT_SUCCESS:
-      return { loading: false, success: true };
+      return { loading: false, isUpdate: true };
     case UPDATE_PRODUCT_FAIL:
       return { loading: false, error: action.payload };
     case UPDATE_PRODUCT_RESET:
@@ -107,7 +107,7 @@ export const productDeleteReducer = (state = {}, action) => {
     case DELETE_PRODUCT_REQUEST:
       return { loading: true };
     case DELETE_PRODUCT_SUCCESS:
-      return { loading: false, success: true };
+      return { loading: false, isDeleted: true };
     case DELETE_PRODUCT_FAIL:
       return { loading: false, error: action.payload };
     case DELETE_PRODUCT_RESET:

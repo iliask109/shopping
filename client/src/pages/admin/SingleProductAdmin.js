@@ -14,7 +14,7 @@ export default function SingleProductAdmin() {
 	const productDetails = useSelector((state) => state.productDetails);
 	const { loading, error, product } = productDetails;
 	const productUpdateAdmin = useSelector((state) => state.productUpdateAdmin);
-	const { success } = productUpdateAdmin;
+	const { isUpdate } = productUpdateAdmin;
 
 	const { id } = useParams();
 	const [name, setName] = useState("");
@@ -26,8 +26,6 @@ export default function SingleProductAdmin() {
 	const [stock, setStock] = useState("");
 
 	useEffect(() => {
-		dispatch({ type: UPDATE_PRODUCT_RESET });
-
 		if (!product || product._id !== id) {
 			dispatch(detailsProduct(id));
 		} else {
@@ -55,9 +53,7 @@ export default function SingleProductAdmin() {
 			})
 		);
 	};
-	if (success) {
-		navigate("/admin/products");
-	}
+	
 	const categories = [
 		"Electronics",
 		"Cameras",
@@ -81,6 +77,7 @@ export default function SingleProductAdmin() {
 				) : (
 					<div className="row">
 						{error && <MessageBox variant="danger">{error}</MessageBox>}
+
 						<div className="col-md-4 border-right ">
 							{image && (
 								<img
@@ -93,6 +90,11 @@ export default function SingleProductAdmin() {
 							)}
 						</div>
 						<div className="col-md-5 border-right">
+							{isUpdate && (
+								<MessageBox variant="success">
+									The update was successful
+								</MessageBox>
+							)}
 							<form className="p-3 py-5" onSubmit={submitHandler}>
 								<div className="d-flex justify-content-between align-items-center mb-3">
 									<h4 className="text-right">Product Settings</h4>
@@ -137,8 +139,10 @@ export default function SingleProductAdmin() {
 											value={category}
 											className="form-control"
 											onChange={(e) => setCategory(e.target.value)}>
-											{categories.map((item) => (
-												<option value={item}>{item}</option>
+											{categories.map((item, index) => (
+												<option value={item} key={index}>
+													{item}
+												</option>
 											))}
 										</Form.Select>
 									</div>

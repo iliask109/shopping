@@ -111,13 +111,22 @@
 
 @media screen and (max-width: 500px) {
   .navbar .wrapper {
+    display: flex;
+
+
+
+
     .search {
       margin-top: 5px;
     }
 
-    .logo a {
-      font-size: 20px;
+
+
+    .logo a span {
+      display: none;
 
     }
+
+
   }
 }

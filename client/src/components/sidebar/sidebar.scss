@@ -1,21 +1,13 @@
-.open_sidebar {
-  position: relative;
-  left: 100%;
-  font-size: 30px;
-  cursor: pointer;
-  margin-left: 5px;
-}
-
-
-
 .sidebar {
-  border-right: 0.5px solid rgb(230, 227, 227);
+  border-right: 2.5px solid rgb(230, 227, 227);
+  border-bottom: 2.5px solid rgb(230, 227, 227);
   min-height: 100vh;
   background-color: white;
   width: 130px;
-  transform: translateX(0px);
-  transition: transform 1.5s ease;
   z-index: 99;
+  outline: none;
+
+
 
   .top {
     height: 60px;
@@ -30,14 +22,7 @@
     }
   }
 
-  .close_sidebar {
-    position: relative;
-    color: red;
-    left: 80%;
-    top: -20px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+
 
   hr {
     height: 0;
@@ -140,5 +125,12 @@
       left: -25px;
       cursor: pointer;
     }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    position: absolute;
+
   }
 }

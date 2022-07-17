@@ -70,10 +70,10 @@ export default function ProductPage() {
 			<div className="product_page col-xl-12  ">
 				{loading ? (
 					<Loading />
-				) : error ? (
-					<MessageBox variant="danger">{error}</MessageBox>
 				) : (
 					<div className="modal-content ">
+						{error && <MessageBox variant="danger">{error}</MessageBox>}
+
 						<div className="modal-header">
 							<h4 className="modal-title" id="myModalLabel">
 								<i className="text-muted fa fa-shopping-cart"></i>

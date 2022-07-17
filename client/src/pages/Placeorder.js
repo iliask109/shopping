@@ -56,7 +56,7 @@ export default function Placeorder() {
               </div>
               <div className="card-body p-4">
                 {cart.cartItems.map((item) => (
-                  <div className="card shadow-0 border mb-2">
+                  <div className="card shadow-0 border mb-2" key={item.name}>
                     <div className="card-body">
                       <div className="row">
                         <div className="col-md-2">

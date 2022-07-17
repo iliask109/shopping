@@ -1,8 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Footer() {
-  return (
+	const [emailFooter, setEmailFooter] = useState("");
+	const [errorFooter, setErrorFooter] = useState(false);
+	const navigate = useNavigate();
+
+	const handleEmail = () => {
+		var pattern = "^s*[w-+_]+(.[w-+_]+)*@[w-+_]+.[w-+_]+(.[w-+_]+)*s*$";
+		if (emailFooter.match(pattern)) {
+			setErrorFooter(false);
+			window.location.reload();
+		} else {
+			setErrorFooter(true);
+		}
+	};
+
+	return (
 		<footer className="bg-dark text-center text-white">
 			<div className=" p-4 pb-0">
 				<section className="">
@@ -20,15 +34,19 @@ export default function Footer() {
 										type="email"
 										id="form5Example29"
 										className="form-control"
+										onChange={(e) => setEmailFooter(e.target.value)}
 									/>
 									<label className="form-label" htmlFor="form5Example29">
-										Email address
+										{errorFooter ? "Email Address Invalid" : "Email Address"}
 									</label>
 								</div>
 							</div>
 
 							<div className="col-auto">
-								<button type="submit" className="btn btn-outline-light mb-4">
+								<button
+									type="button"
+									className="btn btn-outline-light mb-4"
+									onClick={() => handleEmail()}>
 									Subscribe
 								</button>
 							</div>
