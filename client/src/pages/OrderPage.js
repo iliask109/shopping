@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function OrderPage() {
 	const { id } = useParams();
@@ -13,6 +14,9 @@ export default function OrderPage() {
 
 	return (
 		<div>
+			<button className="goBack" onClick={() => navigate(-1)}>
+				<ArrowBackIcon className="icon" />
+			</button>
 			<div className="container mt-5 d-flex justify-content-center order_page  p-5 ">
 				<div className="card p-4 mt-3">
 					<div className="first d-flex justify-content-between align-items-center mb-3">

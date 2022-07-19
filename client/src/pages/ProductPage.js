@@ -11,6 +11,7 @@ import {
 import Loading from "../components/loading/Loading";
 import { AddToCart } from "./../actions/cartActions";
 import MessageBox from "../components/MessageBox";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function ProductPage() {
 	const [query, setQuery] = useState(0);
@@ -67,6 +68,9 @@ export default function ProductPage() {
 
 	return (
 		<div className="row ">
+			<button className="goBack" onClick={() => navigate(-1)}>
+				<ArrowBackIcon className="icon" />
+			</button>
 			<div className="product_page col-xl-12  ">
 				{loading ? (
 					<Loading />
@@ -94,7 +98,7 @@ export default function ProductPage() {
 
 									<tr>
 										<td className="h6">
-											<strong>Category : </strong>
+											<strong>Category: </strong>
 										</td>
 										<td> </td>
 										<td className="h5">{product.category}</td>
@@ -113,7 +117,7 @@ export default function ProductPage() {
 											<strong>Ratings : </strong>
 										</td>
 										<td> </td>
-										<td className="h5">
+										<td className="h5 ratings_product">
 											<Rating
 												rating={product.ratings}
 												numReviews={product.numOfReviews}

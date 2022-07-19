@@ -70,9 +70,9 @@ export default function EditProfilePage() {
 	return (
 		<div>
 			<div className="container edit_profile_page rounded bg-white mt-5 mb-5">
-				<Link to="/me">
-					<ArrowBackIcon />
-				</Link>
+			<button className="goBack" onClick={() => navigate(-1)}>
+				<ArrowBackIcon className="icon" />
+			</button>
 
 				{loading ? (
 					<Loading></Loading>

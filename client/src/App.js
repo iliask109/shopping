@@ -10,6 +10,7 @@ import PaymentPage from "./pages/PaymentPage";
 import Placeorder from "./pages/Placeorder";
 import ErrorPage from "./pages/ErrorPage";
 import PrivateRoute from "./components/PrivateRoute";
+import SellerRoute from "./components/SellerRoute";
 import OrderPage from "./pages/OrderPage";
 import ProfilePage from "./pages/ProfilePage";
 import MyOrder from "./pages/MyOrder";
@@ -34,33 +35,33 @@ import ContactPage from "./pages/ContactPage";
 function App() {
 	const [openSidebar, setOpenSidebar] = useState(true);
 
-	window.addEventListener("resize", () => {
-		let width = window.innerWidth;
-		if (width < 700) {
-			setOpenSidebar(false);
-		} else {
-			setOpenSidebar(true);
-		}
+	useEffect(() => {
+		window.addEventListener("resize", () => {
+			let width = window.innerWidth;
+			if (width < 700) {
+				setOpenSidebar(false);
+			} else {
+				setOpenSidebar(true);
+			}
+		});
 	});
 
 	document.addEventListener("click", function (event) {
 		let width = window.innerWidth;
-
 		if (openSidebar && width < 700) {
 			if (event.srcElement.localName === "span" || event.clientX > 130) {
 				setOpenSidebar(false);
 			}
 		}
 	});
+
 	return (
 		<div className="main">
 			<BrowserRouter>
 				<Navbar />
 				<div className="homeContainer ">
-					{openSidebar && <Sidebar />}
-					{!openSidebar && (
-						<i className="fas fa-bars" onClick={() => setOpenSidebar(true)}></i>
-					)}
+					<Sidebar />
+
 					<div className="container">
 						<Routes>
 							<Route path="/" expect element={<Home />} />
@@ -216,17 +217,25 @@ function App() {
 							<Route
 								path="/seller"
 								element={
-									<PrivateRoute>
+									<SellerRoute>
 										<ProductsSeller />
-									</PrivateRoute>
+									</SellerRoute>
 								}
 							/>
 							<Route
 								path="/seller/product/:id"
 								element={
-									<PrivateRoute>
+									<SellerRoute>
 										<SingleProductSeller />
-									</PrivateRoute>
+									</SellerRoute>
+								}
+							/>
+							<Route
+								path="/seller/products/new"
+								element={
+									<SellerRoute>
+										<CreateProduct />
+									</SellerRoute>
 								}
 							/>
 						</Routes>

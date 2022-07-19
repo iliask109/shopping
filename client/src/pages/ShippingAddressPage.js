@@ -3,46 +3,50 @@ import { useDispatch, useSelector } from "react-redux";
 import CheckoutSteps from "../components/checkoutSteps/CheckoutSteps";
 import { useNavigate } from "react-router-dom";
 import { saveShippingAddress } from "../actions/cartActions";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function ShippingAddressPage() {
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
-  const cart = useSelector((state) => state.cart);
-  const { shippingAddress } = cart;
+	const cart = useSelector((state) => state.cart);
+	const { shippingAddress } = cart;
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
-  if (!userInfo) {
-    alert("Please Login or Register");
-  }
+	const userSignin = useSelector((state) => state.userSignin);
+	const { userInfo } = userSignin;
+	if (!userInfo) {
+		alert("Please Login or Register");
+	}
 
-  const [fullName, setFullName] = useState(shippingAddress.fullName || "");
-  const [address, setAddress] = useState(shippingAddress.address || "");
-  const [city, setCity] = useState(shippingAddress.city || "");
-  const [phone, setPhone] = useState(shippingAddress.phone || "");
-  const [postalCode, setPostalCode] = useState(
-    shippingAddress.postalCode || ""
-  );
-  const [country, setCountry] = useState(shippingAddress.country || "");
-  const dispatch = useDispatch();
+	const [fullName, setFullName] = useState(shippingAddress.fullName || "");
+	const [address, setAddress] = useState(shippingAddress.address || "");
+	const [city, setCity] = useState(shippingAddress.city || "");
+	const [phone, setPhone] = useState(shippingAddress.phone || "");
+	const [postalCode, setPostalCode] = useState(
+		shippingAddress.postalCode || ""
+	);
+	const [country, setCountry] = useState(shippingAddress.country || "");
+	const dispatch = useDispatch();
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      saveShippingAddress({
-        fullName,
-        address,
-        city,
-        postalCode,
-        country,
-        phone,
-      })
-    );
-    navigate("/payment");
-  };
+	const submitHandler = (e) => {
+		e.preventDefault();
+		dispatch(
+			saveShippingAddress({
+				fullName,
+				address,
+				city,
+				postalCode,
+				country,
+				phone,
+			})
+		);
+		navigate("/payment");
+	};
 
-  return (
+	return (
 		<div>
+			<button className="goBack" onClick={() => navigate(-1)}>
+				<ArrowBackIcon className="icon" />
+			</button>
 			<div className="shipping_page container">
 				<CheckoutSteps step1 step2></CheckoutSteps>
 				{userInfo && (

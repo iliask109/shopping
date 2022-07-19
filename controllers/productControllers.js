@@ -16,7 +16,18 @@ exports.newProduct = catchAsyncError(async (req, res, next) => {
 	});
 });
 
-// to do sort
+exports.getAdminProducts = catchAsyncError(async (req, res, next) => {
+	const products = await Product.find();
+
+	var sortBySale = products.sort(function (a, b) {
+		return b.numOfSale - a.numOfSale;
+	});
+
+	res.status(200).json({
+		success: true,
+		products,
+	});
+});
 
 // Get all products   =>   /api/v1/products?keyword=apple
 exports.getProducts = catchAsyncError(async (req, res, next) => {
@@ -67,7 +78,6 @@ exports.getProducts = catchAsyncError(async (req, res, next) => {
 // Get single product details   =>   /api/v1/product/:id
 exports.getSingleProduct = catchAsyncError(async (req, res, next) => {
 	const id = req.params.id.trim();
-	console.log(id);
 
 	const product = await Product.findById(id);
 

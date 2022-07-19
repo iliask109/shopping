@@ -51,9 +51,9 @@ export default function SingleOrderAdmin() {
 
 	return (
 		<div>
-			<Link to="/admin/orders">
-				<ArrowBackIcon />
-			</Link>
+		<button className="goBack" onClick={() => navigate(-1)}>
+				<ArrowBackIcon className="icon" />
+			</button>
 			<div className="container rounded bg-white mt-5 mb-5">
 				{loading ? (
 					<Loading></Loading>

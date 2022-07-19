@@ -1,3 +1,38 @@
+@mixin cross($size: 20px, $color: currentColor, $thickness: 1px) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  position: relative;
+  width: $size;
+  height: $size;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: ($size - $thickness) / 2;
+    left: 0;
+    right: 0;
+    height: $thickness;
+    background: $color;
+    border-radius: $thickness;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
+
+  span {
+    display: block;
+  }
+
+}
+
 .sidebar {
   border-right: 2.5px solid rgb(230, 227, 227);
   border-bottom: 2.5px solid rgb(230, 227, 227);
@@ -126,11 +161,47 @@
       cursor: pointer;
     }
   }
+
+  .btn-close {
+    position: absolute;
+    top: 10px;
+    left: 140px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: hsl(216, 100, 50);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 150ms;
+
+    .icon-cross {
+      @include cross(20px, #fff, 6px);
+    }
+
+    &:hover,
+    &:focus {
+      transform: rotateZ(90deg);
+      background: hsl(216, 100, 40);
+    }
+
+  }
 }
 
 @media screen and (max-width: 700px) {
   .sidebar {
     position: absolute;
 
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .sidebar .btn-close {
+    display: none;
   }
 }

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { savePaymentMethod } from "../actions/cartActions";
 import CheckoutSteps from "../components/checkoutSteps/CheckoutSteps";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function PaymentPage() {
   const cart = useSelector((state) => state.cart);
@@ -21,6 +22,9 @@ export default function PaymentPage() {
 
   return (
 		<div>
+			<button className="goBack" onClick={() => navigate(-1)}>
+				<ArrowBackIcon className="icon" />
+			</button>
 			<div>
 				<CheckoutSteps step1 step2 step3></CheckoutSteps>
 

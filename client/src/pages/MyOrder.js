@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { detailsOrder } from "../actions/orderActions";
 import Loading from "../components/loading/Loading";
 import MessageBox from "../components/MessageBox";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function MyOrder() {
 	const { id: orderId } = useParams();
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const orderDetails = useSelector((state) => state.orderDetails);
 	const { order, loading, error } = orderDetails;
@@ -18,6 +20,9 @@ export default function MyOrder() {
 
 	return (
 		<div>
+			<button className="goBack" onClick={() => navigate(-1)}>
+				<ArrowBackIcon className="icon" />
+			</button>
 			<div className="container py-5 h-100 my_order_page">
 				{loading ? (
 					<Loading></Loading>
@@ -41,18 +46,19 @@ export default function MyOrder() {
 										</div>
 									</div>
 
+									<p className="small text-muted mb-1">Products</p>
 									<div
 										className="mx-n5 px-5 py-4"
 										style={{ backgroundColor: "#f2f2f2" }}>
 										{order.orderItems.map((item) => (
 											<div className="row" key={item.name}>
-												<div className="col-md-8 col-lg-8">
+												<div className="col-6">
 													<p>{item.name}</p>
 												</div>
-												<div className="col-md-4 col-lg-2">
+												<div className=" col-2">
 													<p>{item.qty}</p>
 												</div>
-												<div className="col-md-4 col-lg-2">
+												<div className=" col-4">
 													<p>${item.qty * item.price}</p>
 												</div>
 											</div>
@@ -69,25 +75,24 @@ export default function MyOrder() {
 											<p
 												className="lead fw-bold mb-0"
 												style={{ color: "#f37a27" }}>
-												${order.totalPrice}
+												Total Price : ${order.totalPrice}
 											</p>
 										</div>
 									</div>
-
-									<p
-										className="lead fw-bold mb-4 pb-2"
-										style={{ color: "#f37a27" }}>
-										Tracking Order :
-									</p>
 
 									<div className="row">
 										<div className="col-lg-12">
 											<ul className="list-inline items d-flex justify-content-between">
 												<li className="list-inline-item items-list">
 													<p
-														className="py-1 px-2 rounded text-white"
-														style={{ backgroundColor: "#f37a27" }}>
-														{order.orderStatus}
+														className="lead fw-bold mb-4 pb-2"
+														style={{ color: "#f37a27" }}>
+														Tracking Order :{" "}
+														<span
+															className="py-1 px-2 rounded text-white"
+															style={{ backgroundColor: "#f37a27" }}>
+															{order.orderStatus}
+														</span>
 													</p>
 												</li>
 											</ul>
@@ -97,7 +102,7 @@ export default function MyOrder() {
 									<p className="mt-4 pt-2 mb-0">
 										Want any help?
 										<Link to="/contact" style={{ color: "#f37a27" }}>
-											Please contact us
+											{" "}Please contact us
 										</Link>
 									</p>
 								</div>

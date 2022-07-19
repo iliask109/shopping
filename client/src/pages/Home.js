@@ -5,6 +5,7 @@ import Loading from "../components/loading/Loading";
 import MessageBox from "../components/MessageBox";
 import Product from "../components/product/Product";
 import Pagination from "react-js-pagination";
+import TopProduct from "../components/TopProduct";
 
 export default function Home() {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -30,7 +31,11 @@ export default function Home() {
 				) : error ? (
 					<MessageBox variant="danger">{error}</MessageBox>
 				) : (
-					<Product products={products} />
+					<>
+					<h4>Top Products</h4>
+						<TopProduct />
+						<Product products={products} />
+					</>
 				)}
 			</div>
 			{pageSize <= productsCount && (

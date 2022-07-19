@@ -1,7 +1,7 @@
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { allUsersAdmin, deleteUser } from "../../actions/userActions";
 import { userColumns } from "./datatablesource";
 import Loading from "../../components/loading/Loading";
@@ -11,6 +11,7 @@ import MessageBox from "../../components/MessageBox";
 
 export default function UserAdmin() {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const allUsers = useSelector((state) => state.allUsers);
 	const { users, loading } = allUsers;
@@ -57,9 +58,7 @@ export default function UserAdmin() {
 	];
 	return (
 		<div className="listAdmin">
-			<Link to="/admin">
-				<ArrowBackIcon />
-			</Link>
+	
 			<div className="listContainer">
 				{loading ? (
 					<Loading />
@@ -68,6 +67,9 @@ export default function UserAdmin() {
 						{isDeleted && (
 							<MessageBox variant="success">The User Delete</MessageBox>
 						)}
+						<button className="goBack" onClick={() => navigate(-1)}>
+							<ArrowBackIcon className="icon" />
+						</button>
 						<div className="datatableTitle">Users</div>
 						<DataGrid
 							className="datagrid"

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { listOrderMine } from "../actions/orderActions";
 import { deleteFavoriteUser, detailsUser } from "../actions/userActions";
 import Loading from "../components/loading/Loading";
@@ -26,6 +26,7 @@ export default function ProfilePage() {
 	const { orders } = orderMineList;
 	const deleteFavorite = useSelector((state) => state.deleteFavorite);
 	const { isDelete } = deleteFavorite;
+	const navigate = useNavigate();
 
 	const dispatch = useDispatch();
 
@@ -44,9 +45,9 @@ export default function ProfilePage() {
 	return (
 		<div>
 			<div className="container profile_page">
-				<Link to="/">
-					<ArrowBackIcon />
-				</Link>
+			<button className="goBack" onClick={() => navigate(-1)}>
+				<ArrowBackIcon className="icon" />
+			</button>
 				{loading ? (
 					<Loading />
 				) : (

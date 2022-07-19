@@ -22,12 +22,14 @@ export default function Product({ products }) {
 	const { userInfo } = userSignin;
 
 	return (
-		<div className="poduct ">
+		<div className="poduct">
 			<div style={{ marginTop: "50px" }}>
 				<div className="row">
 					{products.map((product) => (
-						<div className="col-md-4  col-12" key={product.name}>
-							<div className="card-sl">
+						<div
+							className="col-md-4 col-sm-6 col-xl-3 poduct_card "
+							key={product.name}>
+							<div className="card-sl ">
 								<div className="card-image">
 									<img src={product.image} alt="img" />
 								</div>

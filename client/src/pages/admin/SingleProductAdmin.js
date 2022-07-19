@@ -7,6 +7,7 @@ import { Form } from "react-bootstrap";
 import { detailsProduct, updateProduct } from "../../actions/productActions";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 import "./admin.scss";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function SingleProductAdmin() {
 	const dispatch = useDispatch();
@@ -71,6 +72,9 @@ export default function SingleProductAdmin() {
 
 	return (
 		<div>
+			<button className="goBack" onClick={() => navigate(-1)}>
+				<ArrowBackIcon className="icon" />
+			</button>
 			<div className=" container product_admin rounded bg-white mt-5 mb-5 ">
 				{loading ? (
 					<Loading></Loading>

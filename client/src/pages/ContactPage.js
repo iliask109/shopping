@@ -1,8 +1,15 @@
 import React from "react";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
 
 export default function ContactPage() {
+	const navigate = useNavigate();
+
 	return (
 		<div className="contact_page">
+			<button className="goBack" onClick={() => navigate(-1)}>
+				<ArrowBackIcon className="icon" />
+			</button>
 			<div className="container contact-form">
 				<div className="contact-image">
 					<img
@@ -10,7 +17,7 @@ export default function ContactPage() {
 						alt="rocket_contact"
 					/>
 				</div>
-				<form method="post">
+				<form>
 					<h3>Drop Us a Message</h3>
 					<div className="row">
 						<div className="col-md-6">

@@ -13,6 +13,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import MessageBox from "../../components/MessageBox";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function ReviewsSingel() {
 	const dispatch = useDispatch();
@@ -37,6 +38,9 @@ export default function ReviewsSingel() {
 
 	return (
 		<div>
+			<button className="goBack" onClick={() => navigate(-1)}>
+				<ArrowBackIcon className="icon" />
+			</button>
 			{isDeleted && (
 				<MessageBox variant="success">The Review Delete</MessageBox>
 			)}

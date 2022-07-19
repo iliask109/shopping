@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { listProducts } from "../actions/productActions";
 import Loading from "../components/loading/Loading";
 import MessageBox from "../components/MessageBox";
 import Product from "../components/product/Product";
 import Rating from "../components/rating/Rating";
 import { prices, ratings } from "../utils";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function FiltersPage() {
 	const { category, name } = useParams();
@@ -19,6 +20,8 @@ export default function FiltersPage() {
 	const [ratingOpen, setRatingOpen] = useState(false);
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		dispatch(
 			listProducts({
@@ -35,7 +38,10 @@ export default function FiltersPage() {
 	const { loading, error, products } = productList;
 
 	return (
-		<div className="container my-sm-5 border p-0 bg-sec-light filter_page">
+		<div className="container  border p-0 bg-sec-light filter_page col-12">
+			<button className="goBack" onClick={() => navigate(-1)}>
+				<ArrowBackIcon className="icon" />
+			</button>
 			{error && <MessageBox variant="danger">{error}</MessageBox>}
 
 			<div id="content">
@@ -48,8 +54,8 @@ export default function FiltersPage() {
 				</div>
 
 				<div className="d-sm-flex">
-					<div className="me-sm-3">
-						<div id="filter" className="p-2 bg-light ms-md-4 ms-sm-2 border">
+					<div className="me-sm-12 ">
+						<div id="filter" className="p-2 bg-light ms-md-5 ms-sm-3 border">
 							<div className="border-bottom h5 text-uppercase">Filter By</div>
 							<div className="box border-bottom">
 								<div className="box-label text-uppercase d-flex align-items-center">
@@ -131,7 +137,7 @@ export default function FiltersPage() {
 					) : error ? (
 						<MessageBox variant="danger">{error}</MessageBox>
 					) : (
-						<div className="bg-white p-2 border">
+						<div className="bg-white p-2 border col-md-12 col-sm-6 col-l-6 ">
 							<b>{products.length}</b> Products <Product products={products} />
 						</div>
 					)}

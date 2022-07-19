@@ -11,6 +11,7 @@ import {
 	updateProduct,
 } from "../../actions/productActions";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function CreateProduct() {
 	const dispatch = useDispatch();
@@ -66,13 +67,20 @@ export default function CreateProduct() {
 		}
 
 		if (success) {
-			navigate("/admin/products");
+			if (userInfo.role === "admin") {
+				navigate("/admin/products");
+			} else {
+				navigate("/seller");
+			}
 			alert("Product created successfully");
 		}
 	}, [dispatch, error, success, navigate]);
 
 	return (
 		<div>
+			<button className="goBack" onClick={() => navigate(-1)}>
+				<ArrowBackIcon className="icon" />
+			</button>
 			<div className="container create_product rounded bg-white mt-5 mb-5">
 				{loading ? (
 					<Loading></Loading>

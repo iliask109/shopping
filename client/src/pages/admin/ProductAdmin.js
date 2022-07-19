@@ -1,16 +1,17 @@
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deleteProduct, listProducts } from "../../actions/productActions";
 import Loading from "../../components/loading/Loading";
 import { productColumns } from "./datatablesource";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
+import { NEW_PRODUCT_RESET, UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 import MessageBox from "../../components/MessageBox";
 
 export default function ProductAdmin() {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const productList = useSelector((state) => state.productList);
 	const { loading, error, products, productsCount } = productList;
@@ -21,7 +22,7 @@ export default function ProductAdmin() {
 	useEffect(() => {
 		dispatch(listProducts({}));
 		dispatch({ type: UPDATE_PRODUCT_RESET });
-		
+		dispatch({ type: NEW_PRODUCT_RESET });
 	}, [dispatch]);
 
 	const handleDelete = (id) => {
@@ -68,9 +69,9 @@ export default function ProductAdmin() {
 						{isDeleted && (
 							<MessageBox variant="success">The Product Delete</MessageBox>
 						)}
-						<Link to="/admin">
-							<ArrowBackIcon />
-						</Link>
+						<button className="goBack" onClick={() => navigate(-1)}>
+							<ArrowBackIcon className="icon" />
+						</button>
 						<div className="datatableTitle">
 							Products{" "}
 							<Link to="/admin/products/new" className="link">

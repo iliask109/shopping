@@ -2,6 +2,7 @@
 	z-index: 1;
 	margin: 15px;
 }
+
 .card-sl {
 	border-radius: 8px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -10,8 +11,9 @@
 
 .card-image img {
 	height: 240px;
-	max-width: 100%;
+	width: 100%;
 	border-radius: 8px 8px 0px 0;
+	margin-right: auto;
 }
 
 .card-action {

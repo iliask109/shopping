@@ -71,8 +71,15 @@ exports.updateOrder = catchAsyncError(async (req, res, next) => {
 		return next(new ErrorHandler("You have already delivered this order", 400));
 	}
 
+	order.orderItems.forEach(async (item) => {
+		const product = await Product.findById(item.product.toString());
+		product.numOfSale = product.numOfSale + item.qty;
 
-	(order.orderStatus = req.body.status), (order.deliveredAt = Date.now());
+		await product.save({ validateBeforeSave: false });
+	});
+
+	order.orderStatus = req.body.status;
+	order.deliveredAt = Date.now();
 
 	await order.save();
 
@@ -80,8 +87,6 @@ exports.updateOrder = catchAsyncError(async (req, res, next) => {
 		success: true,
 	});
 });
-
-
 
 exports.deleteOrder = catchAsyncError(async (req, res, next) => {
 	const order = await Order.findById(req.params.id);

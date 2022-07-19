@@ -1,89 +1,100 @@
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
-  deleteProduct,
-  getProductsSeller,
-  listProducts,
+	deleteProduct,
+	getProductsSeller,
+	listProducts,
 } from "../../actions/productActions";
 import Loading from "../../components/loading/Loading";
 import { productColumns } from "../admin/datatablesource";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import MessageBox from "../../components/MessageBox";
 
 export default function ProductsSeller() {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-  const productSellerList = useSelector((state) => state.productSellerList);
-  const { loading, products } = productSellerList;
+	const productSellerList = useSelector((state) => state.productSellerList);
+	const { loading, products } = productSellerList;
 
-  const productDeleteAdmin = useSelector((state) => state.productDeleteAdmin);
-  const { success } = productDeleteAdmin;
+	const productDeleteAdmin = useSelector((state) => state.productDeleteAdmin);
+	const { isDeleted } = productDeleteAdmin;
 
-  useEffect(() => {
-    dispatch(getProductsSeller());
-  }, [dispatch]);
+	useEffect(() => {
+		dispatch(getProductsSeller());
+	}, [dispatch]);
 
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
-      dispatch(deleteProduct(id));
-    }
-    if (success) window.location.reload();
-  };
+	const handleDelete = (id) => {
+		if (window.confirm("Are you sure you want to delete this user?")) {
+			dispatch(deleteProduct(id));
+		}
+	};
 
-  const actionColumn = [
-    {
-      field: "action",
-      headerName: "Action",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="cellAction">
-            <Link
-              to={`/seller/product/${params.row._id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <div className="viewButton">Edit</div>
-            </Link>
-            {
-              <div
-                className="deleteButton"
-                onClick={() => handleDelete(params.row._id)}
-              >
-                Delete
-              </div>
-            }
-          </div>
-        );
-      },
-    },
-  ];
+	if (isDeleted) {
+		setTimeout(window.location.reload(), 1500);
+	}
 
-  return (
-    <div className="listAdmin">
-      <div className="listContainer">
-        {loading ? (
-          <Loading />
-        ) : (
-          <div className="datatable">
-            <div className="datatableTitle">
-              Products{" "}
-              <Link to="/admin/products/new" className="link">
-                Add New Product
-              </Link>
-            </div>
+	const actionColumn = [
+		{
+			field: "action",
+			headerName: "Action",
+			width: 200,
+			renderCell: (params) => {
+				return (
+					<div className="cellAction">
+						<Link
+							to={`/seller/product/${params.row._id}`}
+							style={{ textDecoration: "none" }}>
+							<div className="viewButton">Edit</div>
+						</Link>
+						{
+							<div
+								className="deleteButton"
+								onClick={() => handleDelete(params.row._id)}>
+								Delete
+							</div>
+						}
+					</div>
+				);
+			},
+		},
+	];
 
-            <DataGrid
-              className="datagrid"
-              rows={products}
-              getRowId={(row) => row._id}
-              columns={productColumns.concat(actionColumn)}
-              pageSize={10}
-              rowsPerPageOptions={[10]}
-              checkboxSelection
-            />
-          </div>
-        )}
-      </div>
-    </div>
-  );
+	return (
+		<div className="listAdmin">
+			
+			<div className="listContainer">
+				{loading ? (
+					<Loading />
+				) : (
+					<div className="datatable">
+						{isDeleted && (
+							<MessageBox variant="success">The Product Delete</MessageBox>
+						)}
+						<button className="goBack" onClick={() => navigate(-1)}>
+							<ArrowBackIcon className="icon" />
+						</button>
+						<div className="datatableTitle">
+							Products{" "}
+							<Link to="/seller/products/new" className="link">
+								Add New Product
+							</Link>
+						</div>
+
+						<DataGrid
+							className="datagrid"
+							rows={products}
+							getRowId={(row) => row._id}
+							columns={productColumns.concat(actionColumn)}
+							pageSize={10}
+							rowsPerPageOptions={[10]}
+							checkboxSelection
+						/>
+					</div>
+				)}
+			</div>
+		</div>
+	);
 }

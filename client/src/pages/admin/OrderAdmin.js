@@ -12,6 +12,7 @@ import MessageBox from "../../components/MessageBox";
 
 export default function OrderAdmin() {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const allOrders = useSelector((state) => state.allOrders);
 	const { orders, loading } = allOrders;
@@ -60,9 +61,6 @@ export default function OrderAdmin() {
 
 	return (
 		<div className="listAdmin">
-			<Link to="/admin">
-				<ArrowBackIcon />
-			</Link>
 			<div className="listContainer">
 				{loading ? (
 					<Loading />
@@ -71,6 +69,9 @@ export default function OrderAdmin() {
 						{isDeleted && (
 							<MessageBox variant="success">The Order Delete</MessageBox>
 						)}
+						<button className="goBack" onClick={() => navigate(-1)}>
+							<ArrowBackIcon className="icon" />
+						</button>
 						<div className="datatableTitle">Orders </div>
 
 						<DataGrid

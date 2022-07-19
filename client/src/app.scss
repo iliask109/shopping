@@ -1,4 +1,6 @@
 .product_page {
+
+
   .result {
     margin-top: 20px;
   }
@@ -51,6 +53,24 @@
   }
 }
 
+@media screen and (max-width: 700px) {
+  .product_page {
+    width: 95%;
+
+    td.h6 {
+      font-size: 15px;
+    }
+
+    td.h5 {
+      font-size: 15px;
+    }
+
+    td.h5 i {
+      font-size: 8px;
+    }
+  }
+}
+
 .card_input {
   border-top: none !important;
   display: flex;
@@ -61,6 +81,8 @@
   width: 45px;
   text-align: center;
   border-radius: 20px;
+  height: 30px;
+
 }
 
 .card_icon {
@@ -77,6 +99,14 @@
 }
 
 .cart_page {
+
+
+  .removeCart {
+    height: 35px;
+
+  }
+
+
   .shopping-cart {
     padding-bottom: 50px;
     font-family: 'Montserrat', sans-serif;
@@ -123,6 +153,13 @@
     margin-bottom: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
+    border-bottom: 2px solid #5ea4f3;
+    ;
+  }
+
+  .shopping-cart .items .product:last-child {
+    border-bottom: none;
+    ;
   }
 
   .shopping-cart .items .product .info {
@@ -209,37 +246,19 @@
       padding: 4px 10px;
       text-align: center;
     }
+
   }
 
 
 
 }
 
-@media screen and (max-width: 900px) {
-  .cart_page {
-    a {
-      font-size: 15px;
-    }
-
-    strong {
-      font-size: 10px;
-
-    }
-
-    .card_input input {
-      width: 25px;
-    }
-
-    button {
-      font-size: 10px;
-
-    }
-
-    h5 {
-      font-size: 10px;
-    }
+@media screen and (max-width: 700px) {
+  .removeCart {
+    position: absolute;
+    right: 20px;
+    margin-top: -20px;
   }
-
 }
 
 .error_page {
@@ -418,7 +437,8 @@
 
 .filter_page {
   position: relative;
-  min-height: 800px;
+  min-height: 100vh;
+  margin-bottom: 5px;
   overflow-y: auto;
 
   .container::-webkit-scrollbar {
@@ -981,7 +1001,7 @@
   }
 
   .contact-form .btnContact {
-    width: 70%;
+    width: 100%;
     border: none;
     border-radius: 1rem;
     padding: 1.5%;
@@ -1000,4 +1020,23 @@
     border: none;
     cursor: pointer;
   }
+}
+
+.carousel-root {
+
+  img {
+    height: 300px !important;
+    margin: 5px;
+    width: 50% !important;
+  }
+
+  .legend {
+    width: 20% !important;
+    margin-left: -10% !important;
+  }
+
+  .carousel-status {
+    display: none !important;
+  }
+
 }

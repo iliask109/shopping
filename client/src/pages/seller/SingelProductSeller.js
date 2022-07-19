@@ -6,6 +6,7 @@ import MessageBox from "../../components/MessageBox";
 import { Form } from "react-bootstrap";
 import { detailsProduct, updateProduct } from "../../actions/productActions";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function SingleProductSeller() {
 	const dispatch = useDispatch();
@@ -74,6 +75,7 @@ export default function SingleProductSeller() {
 
 	return (
 		<div>
+			
 			<div className="container rounded bg-white mt-5 mb-5">
 				{loading ? (
 					<Loading></Loading>
