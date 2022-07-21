@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { createFavorite } from "../../actions/userActions";
+import { createFavorite, deleteFavoriteUser } from "../../actions/userActions";
 import Rating from "../rating/Rating";
 
 import "./product.css";
@@ -10,12 +10,18 @@ export default function Product({ products }) {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
+	const [love, setLove] = useState(false);
+
 	const handleCart = (productId) => {
 		navigate(`/products/${productId}`);
 	};
 
 	const favoriteHandler = (productId) => {
 		dispatch(createFavorite(productId));
+	};
+
+	const deleteFavoriteId = (productId) => {
+		dispatch(deleteFavoriteUser(productId));
 	};
 
 	const userSignin = useSelector((state) => state.userSignin);
@@ -42,7 +48,11 @@ export default function Product({ products }) {
 												: ""
 										}`}
 										to="/"
-										onClick={() => favoriteHandler(product._id)}>
+										onClick={() =>
+											userInfo.favorites?.find((i) => i.product === product._id)
+												? deleteFavoriteId(product._id)
+												: favoriteHandler(product._id)
+										}>
 										<i className="fa fa-heart "></i>
 									</Link>
 								)}

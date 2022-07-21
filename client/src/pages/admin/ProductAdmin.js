@@ -1,5 +1,5 @@
 import { DataGrid } from "@mui/x-data-grid";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteProduct, listProducts } from "../../actions/productActions";

@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Loading from "../../components/loading/Loading";
 import MessageBox from "../../components/MessageBox";
 import { Form } from "react-bootstrap";
 import {
 	clearErrors,
-	detailsProduct,
 	newProductAdmin,
-	updateProduct,
 } from "../../actions/productActions";
-import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function CreateProduct() {

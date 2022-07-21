@@ -5,7 +5,6 @@ import Loading from "../../components/loading/Loading";
 import MessageBox from "../../components/MessageBox";
 import { Form } from "react-bootstrap";
 import { detailsProduct, updateProduct } from "../../actions/productActions";
-import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 import "./admin.scss";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 

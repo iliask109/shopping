@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
 	getUserDetailsAdmin,
 	updateUserAdmin,
@@ -55,66 +55,71 @@ export default function SingleUserAdmin() {
 									The update was successful
 								</MessageBox>
 							)}
-							<div className="p-3 py-5">
-								<div className="d-flex justify-content-between align-items-center mb-3">
-									<h4 className="text-right">Profile Settings</h4>
-								</div>
-
-								<div className="row mt-3">
-									<div className="col-md-12">
-										<label className="labels">Name</label>
-										<input
-											type="text"
-											className="form-control"
-											value={name}
-											onChange={(e) => setName(e.target.value)}
-										/>
-									</div>
-									<div className="col-md-12">
-										<label className="labels">Email</label>
-										<input
-											type="text"
-											className="form-control"
-											value={email}
-											onChange={(e) => setEmail(e.target.value)}
-										/>
+							{loadingUpdate ? (
+								<Loading></Loading>
+							) : (
+								<div className="p-3 py-5">
+									<div className="d-flex justify-content-between align-items-center mb-3">
+										<h4 className="text-right">Profile Settings</h4>
 									</div>
 
-									<div className="col-md-12">
-										<label className="labels">Role</label>
+									<div className="row mt-3">
+										<div className="col-md-12">
+											<label className="labels">Name</label>
+											<input
+												type="text"
+												className="form-control"
+												value={name}
+												onChange={(e) => setName(e.target.value)}
+											/>
+										</div>
+										<div className="col-md-12">
+											<label className="labels">Email</label>
+											<input
+												type="text"
+												className="form-control"
+												value={email}
+												onChange={(e) => setEmail(e.target.value)}
+											/>
+										</div>
 
-										<Form.Select
-											className="form-control "
-											onChange={(e) => setRole(e.target.value)}
-											value={role}>
-											{user?.role === "admin" || (
-												<>
-													{" "}
-													<option value="user" disabled={user?.role === "user"}>
-														user
-													</option>
-													<option
-														value="seller"
-														disabled={user?.role === "seller"}>
-														seller
-													</option>
-												</>
-											)}
-											<option value="admin">admin</option>
-										</Form.Select>
+										<div className="col-md-12">
+											<label className="labels">Role</label>
+
+											<Form.Select
+												className="form-control "
+												onChange={(e) => setRole(e.target.value)}
+												value={role}>
+												{user?.role === "admin" || (
+													<>
+														{" "}
+														<option
+															value="user"
+															disabled={user?.role === "user"}>
+															user
+														</option>
+														<option
+															value="seller"
+															disabled={user?.role === "seller"}>
+															seller
+														</option>
+													</>
+												)}
+												<option value="admin">admin</option>
+											</Form.Select>
+										</div>
+									</div>
+
+									<div className="mt-5 text-center">
+										<button
+											className="btn btn-primary profile-button"
+											type="button"
+											onClick={() => submitHandler()}>
+											Update
+										</button>
 									</div>
 								</div>
-
-								<div className="mt-5 text-center">
-									<button
-										className="btn btn-primary profile-button"
-										type="button"
-										onClick={() => submitHandler()}
-										>
-										Update
-									</button>
-								</div>
-							</div>
+							)}
 						</div>
 						<div className="col-md-4"></div>
 					</div>

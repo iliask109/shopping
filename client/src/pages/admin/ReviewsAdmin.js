@@ -2,9 +2,9 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { deleteProduct, listProducts } from "../../actions/productActions";
+import {  listProducts } from "../../actions/productActions";
 import Loading from "../../components/loading/Loading";
-import { productColumns, reviewsColumns } from "./datatablesource";
+import {  reviewsColumns } from "./datatablesource";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function ReviewsAdmin() {
@@ -12,10 +12,8 @@ export default function ReviewsAdmin() {
 	const navigate = useNavigate();
 
 	const productList = useSelector((state) => state.productList);
-	const { loading, error, products } = productList;
+	const { loading, products } = productList;
 
-	const productDeleteAdmin = useSelector((state) => state.productDeleteAdmin);
-	const { success } = productDeleteAdmin;
 
 	useEffect(() => {
 		dispatch(listProducts({}));

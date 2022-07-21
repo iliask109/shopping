@@ -23,7 +23,6 @@ import {
 	NEW_REVIEW_SUCCESS,
 	PRODUCT_DETAILS_FAIL,
 	PRODUCT_DETAILS_REQUEST,
-	PRODUCT_DETAILS_RESET,
 	PRODUCT_DETAILS_SUCCESS,
 	PRODUCT_LIST_FAIL,
 	PRODUCT_LIST_REQUEST,
@@ -36,7 +35,6 @@ import {
 	UPDATE_PRODUCT_RESET,
 	UPDATE_PRODUCT_SUCCESS,
 } from "../constants/productConstants";
-import { CLEAR_ERRORS } from "../constants/userConstants";
 
 export const productListReducer = (
 	state = { loading: true, products: [] },

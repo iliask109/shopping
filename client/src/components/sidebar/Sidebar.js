@@ -46,7 +46,6 @@ export default function Sidebar() {
 	}, [Mobile]);
 
 	document.addEventListener("click", function (event) {
-		console.log(event.clientX);
 		let width = window.innerWidth;
 		if (sidebar && width < 700) {
 			if (event.srcElement.localName === "span" ) {

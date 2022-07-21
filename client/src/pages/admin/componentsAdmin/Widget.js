@@ -1,10 +1,7 @@
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { allUsersAdmin } from "../../../actions/userActions";
-import { allOrdersAdmin } from "../../../actions/orderActions";
+import { useSelector } from "react-redux";
 import Loading from "../../../components/loading/Loading";
 import { Link } from "react-router-dom";
 

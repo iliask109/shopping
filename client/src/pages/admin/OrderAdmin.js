@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { allOrdersAdmin, deleteOrderAdmin } from "../../actions/orderActions";
-import { deleteProduct, listProducts } from "../../actions/productActions";
 import Loading from "../../components/loading/Loading";
 import { UPDATE_ORDER_RESET } from "../../constants/orderConstants";
 import { orderColumns, productColumns } from "./datatablesource";
