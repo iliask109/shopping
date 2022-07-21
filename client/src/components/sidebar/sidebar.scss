@@ -35,8 +35,10 @@
 
 .sidebar.mobile {
   width: 100%;
+  margin-left: -20px;
+  margin-top: -43px;
 
- 
+
 
   .btn-close {
     position: absolute;
@@ -78,7 +80,6 @@
   background-color: white;
   width: 130px;
   z-index: 99;
-  outline: none;
 
 
 
@@ -199,6 +200,11 @@
       cursor: pointer;
     }
   }
+
+  svg {
+    color: black !important;
+  }
+
 
 
 }

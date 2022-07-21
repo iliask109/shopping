@@ -33,38 +33,21 @@ import ProductsSeller from "./pages/seller/ProductsSeller";
 import SingleProductSeller from "./pages/seller/SingelProductSeller";
 import ContactPage from "./pages/ContactPage";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 function App() {
 	const [openSidebar, setOpenSidebar] = useState(true);
 
 	const sidebarReducer = useSelector((state) => state.sidebarReducer);
 	const { sidebar, Blur } = sidebarReducer;
 
-	useEffect(() => {
-		window.addEventListener("resize", () => {
-			let width = window.innerWidth;
-			if (width < 700) {
-				setOpenSidebar(false);
-			} else {
-				setOpenSidebar(true);
-			}
-		});
-	});
-
-	document.addEventListener("click", function (event) {
-		let width = window.innerWidth;
-		if (openSidebar && width < 700) {
-			if (event.srcElement.localName === "span" || event.clientX > 130) {
-				setOpenSidebar(false);
-			}
-		}
-	});
+	const Mobile = useMediaQuery({ query: "(min-width: 700px)" });
 
 	return (
 		<div className="main">
 			<BrowserRouter>
 				<Navbar />
 				<div className="homeContainer ">
-					<Sidebar />
+					{Mobile && <Sidebar />}
 
 					<div
 						className="container"

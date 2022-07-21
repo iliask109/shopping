@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { SiShopware } from "react-icons/si";
 import { Link, useNavigate } from "react-router-dom";
 import "./navbar.scss";
+import Sidebar from "../sidebar/Sidebar";
 
 import { useSelector } from "react-redux";
 import Button from "react-bootstrap/esm/Button";
 import Auth from "../auth/Auth";
+import { useMediaQuery } from "react-responsive";
 
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -29,9 +31,12 @@ export default function Navbar() {
 		}
 	};
 
+	const Mobile = useMediaQuery({ query: "(max-width: 700px)" });
+
 	return (
 		<div className="navbar col-lg-12">
 			<div className="wrapper ">
+				{Mobile && <Sidebar />}
 				<div className="logo ">
 					<Link to="/" style={{ textDecoration: "none" }}>
 						<SiShopware style={{ marginRight: "10px" }} />

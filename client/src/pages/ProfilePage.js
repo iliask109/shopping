@@ -137,7 +137,7 @@ export default function ProfilePage() {
 										<div className="card h-100">
 											<div className="card-body">
 												<h6 className="d-flex align-items-center mb-3">
-													<i className="material-icons text-info mr-2">
+													<i className="material-icons text-info ">
 														Last 5 Orders
 													</i>
 												</h6>
