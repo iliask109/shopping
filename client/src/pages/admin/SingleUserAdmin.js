@@ -48,8 +48,8 @@ export default function SingleUserAdmin() {
 				) : (
 					<div className="row">
 						{error && <MessageBox variant="danger">{error}</MessageBox>}
-						<div className="col-md-3 border-right"></div>
-						<div className="col-md-5 border-right">
+						<div className="col-md-3 "></div>
+						<div className="col-md-5 ">
 							{isUpdate && (
 								<MessageBox variant="success">
 									The update was successful

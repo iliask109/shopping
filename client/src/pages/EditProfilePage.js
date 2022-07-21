@@ -80,7 +80,7 @@ export default function EditProfilePage() {
 					<div className="row">
 						{error && <MessageBox variant="danger">{error}</MessageBox>}
 
-						<div className="col-md-3 border-right ">
+						<div className="col-md-3  border-right">
 							{!changePassword && (
 								<img
 									src={avatar}
@@ -92,7 +92,7 @@ export default function EditProfilePage() {
 								/>
 							)}
 						</div>
-						<div className="col-md-5 border-right">
+						<div className="col-md-5 ">
 							{(isUpdate || updatePassowrd) && (
 								<MessageBox variant="success">
 									The update was successful
@@ -122,6 +122,7 @@ export default function EditProfilePage() {
 														required
 														type="password"
 														className="form-control"
+														value={oldPassword}
 														onChange={(e) => setOldPassword(e.target.value)}
 													/>
 												</div>

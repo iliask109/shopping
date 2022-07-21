@@ -93,7 +93,7 @@ export default function SingleProductAdmin() {
 								/>
 							)}
 						</div>
-						<div className="col-md-5 border-right">
+						<div className="col-md-5 ">
 							{isUpdate && (
 								<MessageBox variant="success">
 									The update was successful

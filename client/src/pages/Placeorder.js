@@ -39,7 +39,7 @@ export default function Placeorder() {
 	}, [dispatch, order, navigate, success]);
 
 	return (
-		<div>
+		<div className="placeorder_page">
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>
@@ -47,7 +47,7 @@ export default function Placeorder() {
 				<CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
 				<div className="container py-5 h-100">
 					<div className="row d-flex justify-content-center align-items-center h-100">
-						<div className="col-lg-10 col-xl-8">
+						<div className="col-lg-12 col-xl-12  ">
 							<div className="card" style={{ borderRadius: "10px" }}>
 								<div className="card-header px-4 py-5">
 									<h5 className="text-muted mb-0">
@@ -91,26 +91,32 @@ export default function Placeorder() {
 									))}
 
 									<div className="d-flex justify-content-between pt-2">
-										<p className="fw-bold mb-0">Order Details</p>
+										<p className=" mb-0 ">
+											<b>Order Details</b>
+										</p>
 										<p className="text-muted mb-0">
-											<span className="fw-bold me-4">Total</span> $
-											{cart.itemsPrice}
+											<span className="me-4">
+												<b>Total</b>
+											</span>{" "}
+											${cart.itemsPrice}
 										</p>
 									</div>
 
 									<div className="d-flex justify-content-between">
 										<p className="text-muted mb-0">
-											Invoice Date : 22 Dec,2019
+											<b>Invoice Date</b> : 22 Dec,2019
 										</p>
 										<p className="text-muted mb-0">
-											<span className="fw-bold me-4">GST 18%</span>{" "}
+											<span className="fw-bold me-4">
+												<b>Tex</b>
+											</span>{" "}
 											{cart.taxPrice}
 										</p>
 									</div>
 
 									<div className="d-flex justify-content-between mb-5">
 										<p className="text-muted mb-0">
-											Total qty :{" "}
+											<b>Total qty</b> :{" "}
 											{cart.cartItems.reduce((a, c) => a + c.qty, 0)}
 										</p>
 										<p className="text-muted mb-0">

@@ -16,34 +16,40 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import {
+	CLOSE_SIDEBAR,
+	OPEN_SIDEBAR,
+	OPEN_SIDEBAR_MOBILE,
+} from "../../constants/cartConstants";
 
 export default function Sidebar() {
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
 	const navigate = useNavigate();
+	const sidebarReducer = useSelector((state) => state.sidebarReducer);
+	const { sidebar } = sidebarReducer;
 	const cart = useSelector((state) => state.cart);
 	const { cartItems } = cart;
 
 	const [openCategory, setOpenCategory] = useState(false);
-	const [openSidebar, setOpenSidebar] = useState(true);
+
 	const dispatch = useDispatch();
 
 	const Mobile = useMediaQuery({ query: "(max-width: 700px)" });
 
-
 	useEffect(() => {
 		if (Mobile) {
-			setOpenSidebar(false);
+			dispatch({ type: CLOSE_SIDEBAR });
 		} else {
-			setOpenSidebar(true);
+			dispatch({ type: OPEN_SIDEBAR });
 		}
 	}, [Mobile]);
 
 	document.addEventListener("click", function (event) {
 		let width = window.innerWidth;
-		if (openSidebar && width < 700) {
+		if (sidebar && width < 700) {
 			if (event.srcElement.localName === "span" || event.clientX > 130) {
-				setOpenSidebar(false);
+				dispatch({ type: CLOSE_SIDEBAR });
 			}
 		}
 	});
@@ -55,14 +61,16 @@ export default function Sidebar() {
 
 	return (
 		<div>
-			{!openSidebar ? (
-				<i className="fas fa-bars" onClick={(e) => setOpenSidebar(true)}></i>
+			{!sidebar ? (
+				<i
+					className="fas fa-bars"
+					onClick={() => dispatch({ type: OPEN_SIDEBAR_MOBILE })}></i>
 			) : (
-				<div className="sidebar">
+				<div className={`sidebar ${Mobile ? "mobile" : ""}`}>
 					<button
 						type="button"
 						className="btn-close"
-						onClick={(e) => setOpenSidebar(false)}>
+						onClick={() => dispatch({ type: CLOSE_SIDEBAR })}>
 						<span className="icon-cross"></span>
 					</button>
 					{userInfo && (
@@ -93,12 +101,14 @@ export default function Sidebar() {
 								</Link>
 							</li>
 
-							<li>
-								<PersonIcon className="icon" />{" "}
-								<Link to="/me" style={{ textDecoration: "none" }}>
-									<span>Profile</span>{" "}
-								</Link>
-							</li>
+							{userInfo && (
+								<li>
+									<PersonIcon className="icon" />{" "}
+									<Link to="/me" style={{ textDecoration: "none" }}>
+										<span>Profile</span>{" "}
+									</Link>
+								</li>
+							)}
 							<div className="category">
 								<p className="title">Category</p>
 								{!openCategory ? (

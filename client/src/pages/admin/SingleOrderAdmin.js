@@ -30,10 +30,8 @@ export default function SingleOrderAdmin() {
 	const [status, setStatus] = useState("");
 
 	useEffect(() => {
-		if (order._id !== id) {
-			dispatch(detailsOrder(id));
-		}
-	}, [dispatch, id, order]);
+		dispatch(detailsOrder(id));
+	}, [dispatch, id]);
 
 	const submitHandler = () => {
 		dispatch(
@@ -51,7 +49,7 @@ export default function SingleOrderAdmin() {
 
 	return (
 		<div>
-		<button className="goBack" onClick={() => navigate(-1)}>
+			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>
 			<div className="container rounded bg-white mt-5 mb-5">
@@ -60,8 +58,8 @@ export default function SingleOrderAdmin() {
 				) : (
 					<div className="row">
 						{error && <MessageBox variant="danger">{error}</MessageBox>}
-						<div className="col-md-3 border-right"></div>
-						<div className="col-md-5 border-right">
+						<div className="col-md-3 "></div>
+						<div className="col-md-5 ">
 							{isUpdate && (
 								<MessageBox variant="success">
 									The update was successful
@@ -140,7 +138,7 @@ export default function SingleOrderAdmin() {
 										<label className="labels">Category</label>
 
 										<Form.Select
-											value={status}
+											value={order.orderStatus}
 											className="form-control"
 											onChange={(e) => setStatus(e.target.value)}
 											disabled={order.orderStatus === "Delivered"}>

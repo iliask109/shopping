@@ -32,8 +32,12 @@ import ReviewsSingel from "./pages/admin/ReviewsSingel";
 import ProductsSeller from "./pages/seller/ProductsSeller";
 import SingleProductSeller from "./pages/seller/SingelProductSeller";
 import ContactPage from "./pages/ContactPage";
+import { useSelector } from "react-redux";
 function App() {
 	const [openSidebar, setOpenSidebar] = useState(true);
+
+	const sidebarReducer = useSelector((state) => state.sidebarReducer);
+	const { sidebar, Blur } = sidebarReducer;
 
 	useEffect(() => {
 		window.addEventListener("resize", () => {
@@ -62,7 +66,9 @@ function App() {
 				<div className="homeContainer ">
 					<Sidebar />
 
-					<div className="container">
+					<div
+						className="container"
+						style={{ filter: `${Blur ? "blur(5px)" : ""}` }}>
 						<Routes>
 							<Route path="/" expect element={<Home />} />
 							<Route path="/contact" element={<ContactPage />} />

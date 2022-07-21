@@ -27,7 +27,7 @@ export default function ContactPage() {
 									name="txtName"
 									className="form-control"
 									placeholder="Your Name *"
-									value=""
+									
 								/>
 							</div>
 							<div className="form-group">
@@ -36,7 +36,6 @@ export default function ContactPage() {
 									name="txtEmail"
 									className="form-control"
 									placeholder="Your Email *"
-									value=""
 								/>
 							</div>
 							<div className="form-group">
@@ -44,8 +43,7 @@ export default function ContactPage() {
 									type="text"
 									name="txtPhone"
 									className="form-control"
-									placeholder="Your Phone Number *"
-									value=""
+									placeholder="Your Phone *"
 								/>
 							</div>
 							<div className="form-group">

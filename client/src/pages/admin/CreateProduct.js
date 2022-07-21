@@ -14,6 +14,20 @@ import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function CreateProduct() {
+	const categories = [
+		"Electronics",
+		"Cameras",
+		"Laptops",
+		"Accessories",
+		"Headphones",
+		"Food",
+		"Books",
+		"Clothes/Shoes",
+		"Beauty/Health",
+		"Sports",
+		"Outdoor",
+		"Home",
+	];
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -26,7 +40,7 @@ export default function CreateProduct() {
 	const [price, setPrice] = useState("");
 	const [description, setDescription] = useState("");
 	const [image, setImage] = useState("");
-	const [category, setCategory] = useState("");
+	const [category, setCategory] = useState(categories[0]);
 	const [seller, setSeller] = useState(userInfo?.name);
 	const [stock, setStock] = useState("");
 
@@ -44,21 +58,6 @@ export default function CreateProduct() {
 			})
 		);
 	};
-
-	const categories = [
-		"Electronics",
-		"Cameras",
-		"Laptops",
-		"Accessories",
-		"Headphones",
-		"Food",
-		"Books",
-		"Clothes/Shoes",
-		"Beauty/Health",
-		"Sports",
-		"Outdoor",
-		"Home",
-	];
 
 	useEffect(() => {
 		if (error) {

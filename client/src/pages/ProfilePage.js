@@ -13,7 +13,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { USER_UPDATE_PASSWORD_RESET, USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
+import {
+	USER_UPDATE_PASSWORD_RESET,
+	USER_UPDATE_PROFILE_RESET,
+} from "../constants/userConstants";
 
 export default function ProfilePage() {
 	const userSignin = useSelector((state) => state.userSignin);
@@ -45,9 +48,9 @@ export default function ProfilePage() {
 	return (
 		<div>
 			<div className="container profile_page">
-			<button className="goBack" onClick={() => navigate(-1)}>
-				<ArrowBackIcon className="icon" />
-			</button>
+				<button className="goBack" onClick={() => navigate(-1)}>
+					<ArrowBackIcon className="icon" />
+				</button>
 				{loading ? (
 					<Loading />
 				) : (
@@ -135,7 +138,7 @@ export default function ProfilePage() {
 											<div className="card-body">
 												<h6 className="d-flex align-items-center mb-3">
 													<i className="material-icons text-info mr-2">
-														My Orders
+														Last 5 Orders
 													</i>
 												</h6>
 												<TableContainer component={Paper} className="table">
@@ -156,7 +159,7 @@ export default function ProfilePage() {
 															</TableRow>
 														</TableHead>
 														<TableBody>
-															{orders?.map((row, index) => (
+															{orders?.slice(-6, -1).map((row, index) => (
 																<TableRow key={row.index}>
 																	<TableCell className="tableCell">
 																		{index}
@@ -203,7 +206,7 @@ export default function ProfilePage() {
 															</TableRow>
 														</TableHead>
 														<TableBody>
-															{user?.user.favorites.map((row, index) => (
+															{user?.user.favorites.slice(0,5).map((row, index) => (
 																<TableRow key={row.index}>
 																	<TableCell className="tableCell">
 																		{index}

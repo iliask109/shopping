@@ -37,15 +37,18 @@ export default function ReviewsSingel() {
 	}
 
 	return (
-		<div>
+		<div className="reviews_admin">
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>
 			{isDeleted && (
 				<MessageBox variant="success">The Review Delete</MessageBox>
 			)}
-			<TableContainer component={Paper} className="table">
-				<Table sx={{ minWidth: 650 }} aria-label="simple table">
+			<TableContainer
+				component={Paper}
+				className="table"
+				style={{ width: "100%" }}>
+				<Table aria-label="simple table" style={{ minWidth: 600 }}>
 					<TableHead>
 						<TableRow>
 							<TableCell className="tableCell">Reviews ID</TableCell>

@@ -111,17 +111,27 @@
   }
 }
 
-
+.reviews_admin {
+  object-fit: none;
+}
 
 @media screen and (max-width: 1200px) {
   .product_admin img {
     display: none;
   }
+
+
 }
 
 @media screen and (max-width: 1200px) {
   .create_product img {
     display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .MuiPaper-root {
+    width: 310px !important;
   }
 }
 

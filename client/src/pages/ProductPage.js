@@ -67,7 +67,7 @@ export default function ProductPage() {
 	}
 
 	return (
-		<div className="row ">
+		<div className=" ">
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>
@@ -75,7 +75,7 @@ export default function ProductPage() {
 				{loading ? (
 					<Loading />
 				) : (
-					<div className="modal-content ">
+					<div className="modal-content row ">
 						{error && <MessageBox variant="danger">{error}</MessageBox>}
 
 						<div className="modal-header">
@@ -230,11 +230,11 @@ export default function ProductPage() {
 								aria-labelledby="pills-reviews-tab">
 								{product?.reviews.length > 0 && (
 									<div className="bg-white rounded shadow-sm p-4 mb-4  restaurant-detailed-ratings-and-reviews">
-										<h5 className="mb-1">All Ratings and Reviews</h5>
+										<h5 className="mb-1">All  Reviews</h5>
 
 										{product.reviews.map((item) => (
 											<div
-												className="reviews-members pt-4 pb-4 col-xl-12"
+												className="reviews-members pt-4 pb-4 col-xl-"
 												key={item._id}>
 												<div className="media">
 													<div className="media-body">

@@ -13,7 +13,8 @@ export default function CartPage() {
 	const cart = useSelector((state) => state.cart);
 	const { cartItems } = cart;
 
-	
+	const userSignin = useSelector((state) => state.userSignin);
+	const { userInfo } = userSignin;
 
 	const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
 	const shippingPrice = itemsPrice > 250 ? 0 : itemsPrice / 10;
@@ -30,6 +31,14 @@ export default function CartPage() {
 			}
 		} else {
 			dispatch(AddToCart(id, qty));
+		}
+	};
+
+	const checkoutHandle = () => {
+		if (userInfo) {
+			navigate("/shipping");
+		} else {
+			alert("you need login if you want continue ");
 		}
 	};
 
@@ -129,7 +138,7 @@ export default function CartPage() {
 											<span className="price">${totalPrice.toFixed(2)}</span>
 										</div>
 										<button
-											onClick={() => navigate("/shipping")}
+											onClick={() => checkoutHandle()}
 											type="button"
 											className="btn btn-primary btn-lg btn-block">
 											Checkout

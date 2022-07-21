@@ -28,8 +28,8 @@ export default function PaymentPage() {
 			<div>
 				<CheckoutSteps step1 step2 step3></CheckoutSteps>
 
-				<div className="card">
-					<div className="card-body p-5">
+				<div className="card mb-3">
+					<div className="card-body p-5 ">
 						<ul
 							className="nav bg-light nav-pills rounded nav-fill mb-3"
 							role="tablist">

@@ -33,6 +33,44 @@
 
 }
 
+.sidebar.mobile {
+  width: 100%;
+
+ 
+
+  .btn-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: hsl(216, 100, 50);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 150ms;
+
+    .icon-cross {
+      @include cross(20px, #fff, 6px);
+    }
+
+    &:hover,
+    &:focus {
+      transform: rotateZ(90deg);
+      background: hsl(216, 100, 40);
+    }
+
+  }
+
+
+}
+
 .sidebar {
   border-right: 2.5px solid rgb(230, 227, 227);
   border-bottom: 2.5px solid rgb(230, 227, 227);
@@ -162,35 +200,7 @@
     }
   }
 
-  .btn-close {
-    position: absolute;
-    top: 10px;
-    left: 140px;
-    margin: 0;
-    border: 0;
-    padding: 0;
-    background: hsl(216, 100, 50);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all 150ms;
 
-    .icon-cross {
-      @include cross(20px, #fff, 6px);
-    }
-
-    &:hover,
-    &:focus {
-      transform: rotateZ(90deg);
-      background: hsl(216, 100, 40);
-    }
-
-  }
 }
 
 @media screen and (max-width: 700px) {

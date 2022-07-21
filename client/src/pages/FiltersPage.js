@@ -45,13 +45,7 @@ export default function FiltersPage() {
 			{error && <MessageBox variant="danger">{error}</MessageBox>}
 
 			<div id="content">
-				<div className="bg-light p-2 px-md-4 px-3 shadow-sm">
-					<div className="d-flex align-items-center">
-						<div className="user-select-none">Home</div>
-						<div className="fas fa-angle-right px-2"></div>
-						<div id="navigator" className="text-primary"></div>
-					</div>
-				</div>
+			
 
 				<div className="d-sm-flex">
 					<div className="me-sm-12 ">

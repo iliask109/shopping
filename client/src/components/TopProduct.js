@@ -16,11 +16,11 @@ export default function TopProduct() {
 	const { products } = productListAdmin;
 
 	return (
-		<Carousel showArrows autoPlay showThumbs={false} >
+		<Carousel showArrows autoPlay showThumbs={false}>
 			{products?.slice(0, 5).map((item) => (
 				<div key={item.name}>
 					<Link to={`/products/${item._id}`}>
-						<img src={item.image} />
+						 <img src={item.image} />
 						<p className="legend">{item.name}</p>
 					</Link>
 				</div>
