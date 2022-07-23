@@ -8,6 +8,7 @@ import Loading from "../../components/loading/Loading";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { UPDATE_USER_RESET } from "../../constants/userConstants";
 import MessageBox from "../../components/MessageBox";
+import Title from "../../components/Title";
 
 export default function UserAdmin() {
 	const dispatch = useDispatch();
@@ -58,7 +59,8 @@ export default function UserAdmin() {
 	];
 	return (
 		<div className="listAdmin">
-	
+			<Title title={"admin users"} />
+
 			<div className="listContainer">
 				{loading ? (
 					<Loading />

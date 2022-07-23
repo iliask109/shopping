@@ -9,6 +9,7 @@ import Loading from "../../components/loading/Loading";
 import MessageBox from "../../components/MessageBox";
 import { Form } from "react-bootstrap";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Title from "../../components/Title";
 
 export default function SingleUserAdmin() {
 	const userDetails = useSelector((state) => state.userDetailsAdmin);
@@ -39,6 +40,8 @@ export default function SingleUserAdmin() {
 
 	return (
 		<div>
+			<Title title={"admin users"} />
+
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>

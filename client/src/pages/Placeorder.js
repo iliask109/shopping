@@ -5,6 +5,7 @@ import { createOrder } from "../actions/orderActions";
 import CheckoutSteps from "../components/checkoutSteps/CheckoutSteps";
 import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Title from "../components/Title";
 
 export default function Placeorder() {
 	const navigate = useNavigate();
@@ -40,6 +41,8 @@ export default function Placeorder() {
 
 	return (
 		<div className="placeorder_page">
+			<Title title={"Order"} />
+
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>

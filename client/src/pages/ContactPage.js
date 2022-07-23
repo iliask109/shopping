@@ -1,12 +1,15 @@
 import React from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
+import Title from "../components/Title";
 
 export default function ContactPage() {
 	const navigate = useNavigate();
 
 	return (
 		<div className="contact_page">
+			<Title title={"Contact"} />
+
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>
@@ -27,7 +30,6 @@ export default function ContactPage() {
 									name="txtName"
 									className="form-control"
 									placeholder="Your Name *"
-									
 								/>
 							</div>
 							<div className="form-group">

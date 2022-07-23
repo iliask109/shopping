@@ -5,6 +5,7 @@ import { detailsOrder } from "../actions/orderActions";
 import Loading from "../components/loading/Loading";
 import MessageBox from "../components/MessageBox";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Title from "../components/Title";
 
 export default function MyOrder() {
 	const { id: orderId } = useParams();
@@ -20,6 +21,8 @@ export default function MyOrder() {
 
 	return (
 		<div>
+			<Title title={"My Order"} />
+
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>
@@ -102,7 +105,8 @@ export default function MyOrder() {
 									<p className="mt-4 pt-2 mb-0">
 										Want any help?
 										<Link to="/contact" style={{ color: "#f37a27" }}>
-											{" "}Please contact us
+											{" "}
+											Please contact us
 										</Link>
 									</p>
 								</div>

@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TbSquareMinus, TbSquarePlus } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { AddToCart, removeFromCart } from "../actions/cartActions";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { getAdminProducts } from "../actions/productActions";
+import Title from "../components/Title";
 
 export default function CartPage() {
 	const dispatch = useDispatch();
@@ -44,6 +44,7 @@ export default function CartPage() {
 
 	return (
 		<div className="cart_page p-3">
+			<Title title={"Cart"} />
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>
@@ -61,6 +62,7 @@ export default function CartPage() {
 														<img
 															className="img-fluid mx-auto d-block image"
 															src={item.image}
+															alt="image_product"
 														/>
 													</div>
 													<div className="col-md-8">

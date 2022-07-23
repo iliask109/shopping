@@ -4,24 +4,27 @@ import { useNavigate } from "react-router-dom";
 import { savePaymentMethod } from "../actions/cartActions";
 import CheckoutSteps from "../components/checkoutSteps/CheckoutSteps";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Title from "../components/Title";
 
 export default function PaymentPage() {
-  const cart = useSelector((state) => state.cart);
-  const [paymentMethod, setPaymentMethod] = useState("PayPal");
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+	const cart = useSelector((state) => state.cart);
+	const [paymentMethod, setPaymentMethod] = useState("PayPal");
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-  const sumbitHandler = (e) => {
-    dispatch(savePaymentMethod(paymentMethod));
-    navigate("/placeorder");
-  };
+	const sumbitHandler = (e) => {
+		dispatch(savePaymentMethod(paymentMethod));
+		navigate("/placeorder");
+	};
 
-  const { cartItems } = cart;
+	const { cartItems } = cart;
 
-  const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+	const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
 
-  return (
+	return (
 		<div>
+			<Title title={"Payment"} />
+
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>

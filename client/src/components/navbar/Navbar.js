@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SiShopware } from "react-icons/si";
 import { Link, useNavigate } from "react-router-dom";
 import "./navbar.scss";
@@ -18,11 +18,13 @@ export default function Navbar() {
 	const [name, setName] = useState("");
 	const navigate = useNavigate();
 
+
 	const cart = useSelector((state) => state.cart);
 	const { cartItems } = cart;
 
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
+	useEffect(() => {}, [cartItems]);
 
 	const handleSearch = () => {
 		if (name) {

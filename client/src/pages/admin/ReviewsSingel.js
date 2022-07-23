@@ -14,6 +14,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import MessageBox from "../../components/MessageBox";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Loading from "../../components/loading/Loading";
+import Title from "../../components/Title";
 
 export default function ReviewsSingel() {
 	const dispatch = useDispatch();
@@ -38,50 +40,56 @@ export default function ReviewsSingel() {
 
 	return (
 		<div className="reviews_admin">
+			<Title title={"admin reviews"} />
+
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>
 			{isDeleted && (
 				<MessageBox variant="success">The Review Delete</MessageBox>
 			)}
-			<TableContainer
-				component={Paper}
-				className="table"
-				style={{ width: "100%" }}>
-				<Table aria-label="simple table" style={{ minWidth: 600 }}>
-					<TableHead>
-						<TableRow>
-							<TableCell className="tableCell">Reviews ID</TableCell>
-							<TableCell className="tableCell">Date</TableCell>
-							<TableCell className="tableCell">Customer Name</TableCell>
-							<TableCell className="tableCell">Rating</TableCell>
-							<TableCell className="tableCell">Comment</TableCell>
-							<TableCell className="tableCell">Action</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{reviews?.map((row) => (
-							<TableRow key={row._id}>
-								<TableCell className="tableCell">{row._id}</TableCell>
-
-								<TableCell className="tableCell">
-									{row.createdAt.slice(0, 10)}
-								</TableCell>
-								<TableCell className="tableCell">{row.name}</TableCell>
-								<TableCell className="tableCell">{row.rating}</TableCell>
-								<TableCell className="tableCell">{row.comment}</TableCell>
-								<TableCell className="tableCell">
-									<div
-										className="deleteButton"
-										onClick={() => deleteReviewHandler(row._id)}>
-										Delete
-									</div>
-								</TableCell>
+			{loading ? (
+				<Loading />
+			) : (
+				<TableContainer
+					component={Paper}
+					className="table"
+					style={{ width: "100%" }}>
+					<Table aria-label="simple table" style={{ minWidth: 600 }}>
+						<TableHead>
+							<TableRow>
+								<TableCell className="tableCell">Reviews ID</TableCell>
+								<TableCell className="tableCell">Date</TableCell>
+								<TableCell className="tableCell">Customer Name</TableCell>
+								<TableCell className="tableCell">Rating</TableCell>
+								<TableCell className="tableCell">Comment</TableCell>
+								<TableCell className="tableCell">Action</TableCell>
 							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</TableContainer>
+						</TableHead>
+						<TableBody>
+							{reviews?.map((row) => (
+								<TableRow key={row._id}>
+									<TableCell className="tableCell">{row._id}</TableCell>
+
+									<TableCell className="tableCell">
+										{row.createdAt.slice(0, 10)}
+									</TableCell>
+									<TableCell className="tableCell">{row.name}</TableCell>
+									<TableCell className="tableCell">{row.rating}</TableCell>
+									<TableCell className="tableCell">{row.comment}</TableCell>
+									<TableCell className="tableCell">
+										<div
+											className="deleteButton"
+											onClick={() => deleteReviewHandler(row._id)}>
+											Delete
+										</div>
+									</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
+				</TableContainer>
+			)}
 		</div>
 	);
 }

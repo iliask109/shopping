@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/Home";
@@ -34,11 +34,10 @@ import SingleProductSeller from "./pages/seller/SingelProductSeller";
 import ContactPage from "./pages/ContactPage";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
+import SalesPage from "./pages/SalesPage";
 function App() {
-	const [openSidebar, setOpenSidebar] = useState(true);
-
 	const sidebarReducer = useSelector((state) => state.sidebarReducer);
-	const { sidebar, Blur } = sidebarReducer;
+	const { Blur } = sidebarReducer;
 
 	const Mobile = useMediaQuery({ query: "(min-width: 700px)" });
 
@@ -56,6 +55,7 @@ function App() {
 							<Route path="/" expect element={<Home />} />
 							<Route path="/contact" element={<ContactPage />} />
 							<Route path="/search" element={<FiltersPage />} />
+							<Route path="/sales" element={<SalesPage />} />
 							<Route
 								path="/search/category/:category"
 								expect

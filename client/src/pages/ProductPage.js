@@ -12,6 +12,7 @@ import Loading from "../components/loading/Loading";
 import { AddToCart } from "./../actions/cartActions";
 import MessageBox from "../components/MessageBox";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Title from "../components/Title";
 
 export default function ProductPage() {
 	const [query, setQuery] = useState(0);
@@ -67,7 +68,9 @@ export default function ProductPage() {
 	}
 
 	return (
-		<div className=" ">
+		<div>
+			<Title title={"Product"} />
+
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>
@@ -144,7 +147,14 @@ export default function ProductPage() {
 											<strong>price : </strong>
 										</td>
 										<td> </td>
-										<td className="h5">{product.price}</td>
+										<td className="h5">
+											{product.discount === 0
+												? product.price
+												: (
+														product.price -
+														product.price * (product.discount / 100)
+												  ).toFixed(2)}
+										</td>
 									</tr>
 
 									{product.stock > 0 && (
@@ -230,7 +240,7 @@ export default function ProductPage() {
 								aria-labelledby="pills-reviews-tab">
 								{product?.reviews.length > 0 && (
 									<div className="bg-white rounded shadow-sm p-4 mb-4  restaurant-detailed-ratings-and-reviews">
-										<h5 className="mb-1">All  Reviews</h5>
+										<h5 className="mb-1">All Reviews</h5>
 
 										{product.reviews.map((item) => (
 											<div

@@ -36,6 +36,7 @@ exports.getProducts = catchAsyncError(async (req, res, next) => {
 	const page = Number(req.query.pageNumber) || 1;
 	const name = req.query.name || "";
 	const category = req.query.category || "";
+	const discount = req.query.discount || "";
 	const seller = req.query.seller || "";
 	const order = req.query.order || "";
 	const min =
@@ -50,6 +51,7 @@ exports.getProducts = catchAsyncError(async (req, res, next) => {
 	const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
 	const sellerFilter = seller ? { seller } : {};
 	const categoryFilter = category ? { category } : {};
+	const discountFilter = discount ? { discount: { $gte: discount } } : {};
 	const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
 	const ratingFilter = rating ? { ratings: { $gte: rating } } : {};
 	const sortOrder =
@@ -65,6 +67,7 @@ exports.getProducts = catchAsyncError(async (req, res, next) => {
 		...priceFilter,
 		...sellerFilter,
 		...nameFilter,
+		...discountFilter,
 		...categoryFilter,
 		...ratingFilter,
 	})

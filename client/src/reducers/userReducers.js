@@ -12,6 +12,9 @@ import {
 	DELETE_USER_REQUEST,
 	DELETE_USER_RESET,
 	DELETE_USER_SUCCESS,
+	FORGOT_PASSWORD_FAIL,
+	FORGOT_PASSWORD_REQUEST,
+	FORGOT_PASSWORD_SUCCESS,
 	UPDATE_USER_FAIL,
 	UPDATE_USER_REQUEST,
 	UPDATE_USER_RESET,
@@ -158,13 +161,16 @@ export const userUpdateAdminReducer = (
 		case UPDATE_USER_FAIL:
 			return { loading: false, error: action.payload };
 		case UPDATE_USER_RESET:
-			return { };
+			return {};
 
 		default:
 			return state;
 	}
 };
-export const userDeleteAdminReducer = (state = { isDeleted: false }, action) => {
+export const userDeleteAdminReducer = (
+	state = { isDeleted: false },
+	action
+) => {
 	switch (action.type) {
 		case DELETE_USER_REQUEST:
 			return { loading: true };
@@ -199,6 +205,34 @@ export const deleteFavoriteReducer = (state = { isDelete: false }, action) => {
 			return { loading: false, isDelete: true };
 		case DELETE_FAVORITE_FAIL:
 			return { loading: false, error: action.payload };
+
+		default:
+			return state;
+	}
+};
+
+export const forgotPasswordReducer = (state = {}, action) => {
+	switch (action.type) {
+		case FORGOT_PASSWORD_REQUEST:
+			return {
+				...state,
+				loading: true,
+				error: null,
+			};
+
+		case FORGOT_PASSWORD_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				message: action.payload,
+			};
+
+		case FORGOT_PASSWORD_FAIL:
+			return {
+				...state,
+				loading: false,
+				error: action.payload,
+			};
 
 		default:
 			return state;

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../../components/loading/Loading";
 import MessageBox from "../../components/MessageBox";
 import { Form } from "react-bootstrap";
 import { detailsOrder, updateOrderAdmin } from "../../actions/orderActions";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Title from "../../components/Title";
 
 export default function SingleOrderAdmin() {
 	const orderDetails = useSelector((state) => state.orderDetails);
@@ -48,6 +49,8 @@ export default function SingleOrderAdmin() {
 
 	return (
 		<div>
+			<Title title={"admin orders"} />
+
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>

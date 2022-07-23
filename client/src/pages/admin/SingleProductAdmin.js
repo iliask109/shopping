@@ -7,6 +7,7 @@ import { Form } from "react-bootstrap";
 import { detailsProduct, updateProduct } from "../../actions/productActions";
 import "./admin.scss";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Title from "../../components/Title";
 
 export default function SingleProductAdmin() {
 	const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export default function SingleProductAdmin() {
 	const { id } = useParams();
 	const [name, setName] = useState("");
 	const [price, setPrice] = useState("");
+	const [discount, setDiscount] = useState(0);
 	const [description, setDescription] = useState("");
 	const [image, setImage] = useState("");
 	const [category, setCategory] = useState("");
@@ -36,6 +38,7 @@ export default function SingleProductAdmin() {
 			setCategory(product?.category);
 			setSeller(product?.seller);
 			setStock(product?.stock);
+			setDiscount(product?.discount);
 		}
 	}, [dispatch, id, loading, product]);
 
@@ -45,6 +48,7 @@ export default function SingleProductAdmin() {
 			updateProduct(id, {
 				name,
 				price,
+				discount,
 				description,
 				image,
 				category,
@@ -53,7 +57,7 @@ export default function SingleProductAdmin() {
 			})
 		);
 	};
-	
+
 	const categories = [
 		"Electronics",
 		"Cameras",
@@ -71,6 +75,8 @@ export default function SingleProductAdmin() {
 
 	return (
 		<div>
+			<Title title={"admin products"} />
+
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>
@@ -122,6 +128,15 @@ export default function SingleProductAdmin() {
 											value={price}
 											required
 											onChange={(e) => setPrice(e.target.value)}
+										/>
+									</div>
+									<div className="col-md-12">
+										<label className="labels">Discount</label>
+										<input
+											type="text"
+											className="form-control"
+											value={discount}
+											onChange={(e) => setDiscount(e.target.value)}
 										/>
 									</div>
 

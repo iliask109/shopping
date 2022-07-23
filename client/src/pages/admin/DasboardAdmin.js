@@ -6,6 +6,7 @@ import { allOrdersAdmin } from "../../actions/orderActions";
 import { allUsersAdmin } from "../../actions/userActions";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
+import Title from "../../components/Title";
 
 export default function DasboardAdmin() {
 	const dispatch = useDispatch();
@@ -18,6 +19,8 @@ export default function DasboardAdmin() {
 
 	return (
 		<div className="home">
+			<Title title={"Admin"} />
+
 			<div className="widgets">
 				<button className="goBack" onClick={() => navigate(-1)}>
 					<ArrowBackIcon className="icon" />

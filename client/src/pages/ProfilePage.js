@@ -17,6 +17,7 @@ import {
 	USER_UPDATE_PASSWORD_RESET,
 	USER_UPDATE_PROFILE_RESET,
 } from "../constants/userConstants";
+import Title from "../components/Title";
 
 export default function ProfilePage() {
 	const userSignin = useSelector((state) => state.userSignin);
@@ -42,11 +43,14 @@ export default function ProfilePage() {
 
 	const deleteFavoriteId = (productId) => {
 		dispatch(deleteFavoriteUser(productId));
-		if (isDelete) window.location.reload();
 	};
+	
+	if (isDelete) window.location.reload();
 
 	return (
 		<div>
+			<Title title={"Profile"} />
+
 			<div className="container profile_page">
 				<button className="goBack" onClick={() => navigate(-1)}>
 					<ArrowBackIcon className="icon" />
@@ -159,10 +163,10 @@ export default function ProfilePage() {
 															</TableRow>
 														</TableHead>
 														<TableBody>
-															{orders?.slice(-6, -1).map((row, index) => (
-																<TableRow key={row.index}>
+															{orders?.slice(-5).map((row, index) => (
+																<TableRow key={index}>
 																	<TableCell className="tableCell">
-																		{index}
+																		{index + 1}
 																	</TableCell>
 																	<TableCell className="tableCell">
 																		<Link to={`/me/order/${row._id}`}>
@@ -206,30 +210,32 @@ export default function ProfilePage() {
 															</TableRow>
 														</TableHead>
 														<TableBody>
-															{user?.user.favorites.slice(0,5).map((row, index) => (
-																<TableRow key={row.index}>
-																	<TableCell className="tableCell">
-																		{index}
-																	</TableCell>
-																	<TableCell className="tableCell">
-																		<Link to={`/products/${row.product}`}>
-																			{row.name}
-																		</Link>
-																	</TableCell>
-																	<TableCell
-																		onClick={() =>
-																			deleteFavoriteId(row.product)
-																		}
-																		className="tableCell"
-																		style={{
-																			cursor: "pointer",
-																			color: "red",
-																			fontWeight: "bold",
-																		}}>
-																		x
-																	</TableCell>
-																</TableRow>
-															))}
+															{user?.user.favorites
+																.slice(0, 5)
+																.map((row, index) => (
+																	<TableRow key={index}>
+																		<TableCell className="tableCell">
+																			{index + 1}
+																		</TableCell>
+																		<TableCell className="tableCell">
+																			<Link to={`/products/${row.product}`}>
+																				{row.name}
+																			</Link>
+																		</TableCell>
+																		<TableCell
+																			onClick={() =>
+																				deleteFavoriteId(row.product)
+																			}
+																			className="tableCell"
+																			style={{
+																				cursor: "pointer",
+																				color: "red",
+																				fontWeight: "bold",
+																			}}>
+																			x
+																		</TableCell>
+																	</TableRow>
+																))}
 														</TableBody>
 													</Table>
 												</TableContainer>

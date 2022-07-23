@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-	clearErrors,
-	updateUserPassword,
-	updateUserProfile,
-} from "../actions/userActions";
+import { useLocation, useNavigate } from "react-router-dom";
+import { updateUserPassword, updateUserProfile } from "../actions/userActions";
 import Loading from "../components/loading/Loading";
 import MessageBox from "../components/MessageBox";
-import { USER_UPDATE_PASSWORD_RESET } from "../constants/userConstants";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Title from "../components/Title";
 
 export default function EditProfilePage() {
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
 
-	const [changePassword, setChangePassword] = useState(
-		pathname === "/me/updatePassowrd" ? true : false
-	);
+	let changePassword = pathname === "/me/updatePassowrd" ? true : false;
 
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
@@ -42,7 +36,6 @@ export default function EditProfilePage() {
 	const [oldPassword, setOldPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-
 
 	const submitHandler = () => {
 		if (changePassword) {
@@ -69,10 +62,11 @@ export default function EditProfilePage() {
 
 	return (
 		<div>
+			<Title title={"Edit Profile"} />
 			<div className="container edit_profile_page rounded bg-white mt-5 mb-5">
-			<button className="goBack" onClick={() => navigate(-1)}>
-				<ArrowBackIcon className="icon" />
-			</button>
+				<button className="goBack" onClick={() => navigate(-1)}>
+					<ArrowBackIcon className="icon" />
+				</button>
 
 				{loading ? (
 					<Loading></Loading>

@@ -4,11 +4,9 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../../components/loading/Loading";
 import MessageBox from "../../components/MessageBox";
 import { Form } from "react-bootstrap";
-import {
-	clearErrors,
-	newProductAdmin,
-} from "../../actions/productActions";
+import { clearErrors, newProductAdmin } from "../../actions/productActions";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Title from "../../components/Title";
 
 export default function CreateProduct() {
 	const categories = [
@@ -31,7 +29,7 @@ export default function CreateProduct() {
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
 	const newProduct = useSelector((state) => state.newProduct);
-	const { product, loading, error, success } = newProduct;
+	const { loading, error, success } = newProduct;
 
 	const [name, setName] = useState("");
 	const [price, setPrice] = useState("");
@@ -70,10 +68,12 @@ export default function CreateProduct() {
 			}
 			alert("Product created successfully");
 		}
-	}, [dispatch, error, success, navigate]);
+	}, [dispatch, error, success, navigate, userInfo.role]);
 
 	return (
 		<div>
+			<Title title={"new product"} />
+
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>

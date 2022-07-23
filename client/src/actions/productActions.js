@@ -1,7 +1,7 @@
 import Axios from "axios";
 import {
-  ADMIN_PRODUCTS_FAIL,
-  ADMIN_PRODUCTS_REQUEST,
+	ADMIN_PRODUCTS_FAIL,
+	ADMIN_PRODUCTS_REQUEST,
 	ADMIN_PRODUCTS_SUCCESS,
 	DELETE_PRODUCT_FAIL,
 	DELETE_PRODUCT_REQUEST,
@@ -39,6 +39,7 @@ export const listProducts =
 		pageNumber = "",
 		seller = "",
 		name = "",
+		discount = 0,
 		category = "",
 		order = "",
 		min = 0,
@@ -51,7 +52,7 @@ export const listProducts =
 		});
 		try {
 			const { data } = await Axios.get(
-				`/api/products?pageSize=${pageSize}&pageNumber=${pageNumber}&seller=${seller}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`
+				`/api/products?pageSize=${pageSize}&pageNumber=${pageNumber}&seller=${seller}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}&discount=${discount}`
 			);
 
 			dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
@@ -236,7 +237,6 @@ export const getProductsSeller = () => async (dispatch, getState) => {
 		});
 	}
 };
-
 
 export const getAdminProducts = () => async (dispatch) => {
 	try {

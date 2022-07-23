@@ -20,7 +20,7 @@ export default function TopProduct() {
 			{products?.slice(0, 5).map((item) => (
 				<div key={item.name}>
 					<Link to={`/products/${item._id}`}>
-						 <img src={item.image} />
+						<img src={item.image} alt="item_image" />
 						<p className="legend">{item.name}</p>
 					</Link>
 				</div>

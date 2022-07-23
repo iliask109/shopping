@@ -6,6 +6,7 @@ import MessageBox from "../../components/MessageBox";
 import { Form } from "react-bootstrap";
 import { detailsProduct, updateProduct } from "../../actions/productActions";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
+import Title from "../../components/Title";
 
 export default function SingleProductSeller() {
 	const dispatch = useDispatch();
@@ -74,7 +75,8 @@ export default function SingleProductSeller() {
 
 	return (
 		<div>
-			
+			<Title title={"seller products"} />
+
 			<div className="container rounded bg-white mt-5 mb-5">
 				{loading ? (
 					<Loading></Loading>

@@ -4,6 +4,7 @@ import CheckoutSteps from "../components/checkoutSteps/CheckoutSteps";
 import { useNavigate } from "react-router-dom";
 import { saveShippingAddress } from "../actions/cartActions";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Title from "../components/Title";
 
 export default function ShippingAddressPage() {
 	const navigate = useNavigate();
@@ -44,6 +45,8 @@ export default function ShippingAddressPage() {
 
 	return (
 		<div>
+			<Title title={"Shipping"} />
+
 			<button className="goBack" onClick={() => navigate(-1)}>
 				<ArrowBackIcon className="icon" />
 			</button>

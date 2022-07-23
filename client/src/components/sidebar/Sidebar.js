@@ -6,6 +6,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import GroupIcon from "@mui/icons-material/Group";
 import CategoryIcon from "@mui/icons-material/Category";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import { Link, useNavigate } from "react-router-dom";
 import "./sidebar.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,12 +44,12 @@ export default function Sidebar() {
 		} else {
 			dispatch({ type: OPEN_SIDEBAR });
 		}
-	}, [Mobile]);
+	}, [Mobile, dispatch]);
 
 	document.addEventListener("click", function (event) {
 		let width = window.innerWidth;
 		if (sidebar && width < 700) {
-			if (event.srcElement.localName === "span" ) {
+			if (event.srcElement.localName === "li") {
 				dispatch({ type: CLOSE_SIDEBAR });
 			}
 		}
@@ -76,7 +77,7 @@ export default function Sidebar() {
 					{userInfo && (
 						<div className="top">
 							<span>
-								Hi <b>{userInfo?.name}</b>{" "}
+								Hi <b>{userInfo?.name}</b>
 							</span>
 						</div>
 					)}
@@ -84,30 +85,34 @@ export default function Sidebar() {
 					<div className="center">
 						<ul>
 							<p className="title">MAIN</p>
-							<li>
-								<HomeIcon className="icon" />
-								<Link to="/" style={{ textDecoration: "none" }}>
+							<Link to="/" style={{ textDecoration: "none" }}>
+								<li>
+									<HomeIcon className="icon" />
 									<span>Home</span>
-								</Link>
-							</li>
-
-							<li>
-								<div className="counter">
-									{cartItems.reduce((a, c) => a + c.qty, 0)}
-								</div>
-								<ShoppingCartIcon className="icon" />
-								<Link to="/cart" style={{ textDecoration: "none" }}>
+								</li>{" "}
+							</Link>
+							<Link to="/sales" style={{ textDecoration: "none" }}>
+								<li>
+									<LoyaltyIcon className="icon" />
+									<span>Sales</span>
+								</li>
+							</Link>
+							<Link to="/cart" style={{ textDecoration: "none" }}>
+								<li>
+									<div className="counter">
+										{cartItems.reduce((a, c) => a + c.qty, 0)}
+									</div>
+									<ShoppingCartIcon className="icon" />
 									<span>Cart</span>{" "}
-								</Link>
-							</li>
+								</li>
+							</Link>
 
 							{userInfo && (
-								<li>
-									<PersonIcon className="icon" />{" "}
-									<Link to="/me" style={{ textDecoration: "none" }}>
-										<span>Profile</span>{" "}
-									</Link>
-								</li>
+								<Link to="/me" style={{ textDecoration: "none" }}>
+									<li>
+										<PersonIcon className="icon" /> <span>Profile</span>{" "}
+									</li>
+								</Link>
 							)}
 							<div className="category">
 								<p className="title">Category</p>
@@ -127,68 +132,60 @@ export default function Sidebar() {
 							{openCategory && (
 								<>
 									{Lists.map((list, index) => (
-										<li key={index}>
-											{list.icon}{" "}
-											<Link
-												to={`search/category/${list.title}`}
-												style={{ textDecoration: "none" }}>
-												<span>{list.title}</span>{" "}
-											</Link>
-										</li>
+										<Link
+											to={`search/category/${list.title}`}
+											style={{ textDecoration: "none" }}>
+											<li key={index}>
+												{list.icon} <span>{list.title}</span>{" "}
+											</li>{" "}
+										</Link>
 									))}
 								</>
 							)}
 							{userInfo && userInfo.role === "admin" && (
 								<>
-									<p className="title">Admin</p>
-									<li>
-										<DashboardIcon className="icon" />
-										<Link to="/admin" style={{ textDecoration: "none" }}>
+									<p className="title">Admin</p>{" "}
+									<Link to="/admin" style={{ textDecoration: "none" }}>
+										<li>
+											<DashboardIcon className="icon" />
 											<span>Dashboard</span>{" "}
-										</Link>
-									</li>
-									<li>
-										<CategoryIcon className="icon" />
-										<Link
-											to="/admin/products"
-											style={{ textDecoration: "none" }}>
+										</li>{" "}
+									</Link>
+									<Link to="/admin/products" style={{ textDecoration: "none" }}>
+										<li>
+											<CategoryIcon className="icon" />
 											<span>Products</span>{" "}
-										</Link>
-									</li>
-
-									<li>
-										<GroupIcon className="icon" />{" "}
-										<Link to="/admin/users" style={{ textDecoration: "none" }}>
-											<span>Users</span>{" "}
-										</Link>
-									</li>
-
-									<li>
-										<BookmarkBorderIcon className="icon" />
-										<Link to="/admin/orders" style={{ textDecoration: "none" }}>
+										</li>{" "}
+									</Link>
+									<Link to="/admin/users" style={{ textDecoration: "none" }}>
+										<li>
+											<GroupIcon className="icon" /> <span>Users</span>{" "}
+										</li>{" "}
+									</Link>
+									<Link to="/admin/orders" style={{ textDecoration: "none" }}>
+										<li>
+											<BookmarkBorderIcon className="icon" />
 											<span>Orders</span>{" "}
-										</Link>
-									</li>
-									<li>
-										<ReviewsIcon className="icon" />
-										<Link
-											to="/admin/reviews"
-											style={{ textDecoration: "none" }}>
+										</li>{" "}
+									</Link>
+									<Link to="/admin/reviews" style={{ textDecoration: "none" }}>
+										<li>
+											<ReviewsIcon className="icon" />
 											<span>Reviews</span>{" "}
-										</Link>
-									</li>
+										</li>{" "}
+									</Link>
 								</>
 							)}
 							{userInfo && userInfo.role === "seller" && (
 								<>
 									<p className="title">Seller</p>
 
-									<li>
-										<CategoryIcon className="icon" />
-										<Link to="/seller" style={{ textDecoration: "none" }}>
+									<Link to="/seller" style={{ textDecoration: "none" }}>
+										<li>
+											<CategoryIcon className="icon" />
 											<span>Products</span>{" "}
-										</Link>
-									</li>
+										</li>{" "}
+									</Link>
 								</>
 							)}
 

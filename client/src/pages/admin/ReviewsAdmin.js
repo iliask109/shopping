@@ -2,10 +2,11 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {  listProducts } from "../../actions/productActions";
+import { listProducts } from "../../actions/productActions";
 import Loading from "../../components/loading/Loading";
-import {  reviewsColumns } from "./datatablesource";
+import { reviewsColumns } from "./datatablesource";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Title from "../../components/Title";
 
 export default function ReviewsAdmin() {
 	const dispatch = useDispatch();
@@ -13,7 +14,6 @@ export default function ReviewsAdmin() {
 
 	const productList = useSelector((state) => state.productList);
 	const { loading, products } = productList;
-
 
 	useEffect(() => {
 		dispatch(listProducts({}));
@@ -42,12 +42,13 @@ export default function ReviewsAdmin() {
 
 	return (
 		<div className="listAdmin">
+			<Title title={"admin reviews"} />
+
 			<div className="listContainer">
 				{loading ? (
 					<Loading />
 				) : (
 					<div className="datatable">
-						
 						<button className="goBack" onClick={() => navigate(-1)}>
 							<ArrowBackIcon className="icon" />
 						</button>

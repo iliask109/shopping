@@ -6,6 +6,7 @@ import MessageBox from "../components/MessageBox";
 import Product from "../components/product/Product";
 import Pagination from "react-js-pagination";
 import TopProduct from "../components/TopProduct";
+import Title from "../components/Title";
 
 export default function Home() {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -25,6 +26,8 @@ export default function Home() {
 
 	return (
 		<div className="row">
+			<Title title={"Home"} />
+
 			<div className="container home col-md-12 ">
 				{loading ? (
 					<Loading />
@@ -32,7 +35,7 @@ export default function Home() {
 					<MessageBox variant="danger">{error}</MessageBox>
 				) : (
 					<>
-					<h4>Top Products</h4>
+						<h4>Top Products</h4>
 						<TopProduct />
 						<Product products={products} />
 					</>

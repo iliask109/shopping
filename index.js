@@ -13,7 +13,7 @@ const errorMiddleware = require("./utils/errorMiddleware");
 const path = require("path");
 const app = express();
 
-dotenv.config();
+dotenv.config({ path: 'config/config.env' });
 app.use(express.json());
 app.use(cookieParser());
 

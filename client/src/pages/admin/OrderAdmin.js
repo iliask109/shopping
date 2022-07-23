@@ -5,9 +5,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { allOrdersAdmin, deleteOrderAdmin } from "../../actions/orderActions";
 import Loading from "../../components/loading/Loading";
 import { UPDATE_ORDER_RESET } from "../../constants/orderConstants";
-import { orderColumns, productColumns } from "./datatablesource";
+import { orderColumns } from "./datatablesource";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MessageBox from "../../components/MessageBox";
+import Title from "../../components/Title";
 
 export default function OrderAdmin() {
 	const dispatch = useDispatch();
@@ -60,6 +61,8 @@ export default function OrderAdmin() {
 
 	return (
 		<div className="listAdmin">
+			<Title title={"admin orders"} />
+
 			<div className="listContainer">
 				{loading ? (
 					<Loading />

@@ -58,6 +58,19 @@ export const productColumns = [
 		width: 150,
 	},
 	{
+		field: "discount",
+		headerName: "Discount",
+		renderCell: (params) => {
+			return (
+				<div
+					className={`status ${params.row.discount > 0 ? "inStock" : ""}`}>
+					{params.row.discount}
+				</div>
+			);
+		},
+		width: 100,
+	},
+	{
 		field: "price",
 		headerName: "Price",
 		renderCell: (params) => {
@@ -82,11 +95,7 @@ export const productColumns = [
 		headerName: "Category",
 		width: 100,
 	},
-	{
-		field: "seller",
-		headerName: "Seller",
-		width: 100,
-	},
+
 	{
 		field: "stock",
 		headerName: "Stock",

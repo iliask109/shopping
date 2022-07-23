@@ -6,15 +6,19 @@ import { deleteProduct, listProducts } from "../../actions/productActions";
 import Loading from "../../components/loading/Loading";
 import { productColumns } from "./datatablesource";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { NEW_PRODUCT_RESET, UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
+import {
+	NEW_PRODUCT_RESET,
+	UPDATE_PRODUCT_RESET,
+} from "../../constants/productConstants";
 import MessageBox from "../../components/MessageBox";
+import Title from "../../components/Title";
 
 export default function ProductAdmin() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const productList = useSelector((state) => state.productList);
-	const { loading, error, products, productsCount } = productList;
+	const { loading, error, products } = productList;
 
 	const productDeleteAdmin = useSelector((state) => state.productDeleteAdmin);
 	const { isDeleted } = productDeleteAdmin;
@@ -61,6 +65,8 @@ export default function ProductAdmin() {
 
 	return (
 		<div className="listAdmin">
+			<Title title={"admin products"} />
+
 			<div className="listContainer">
 				{loading ? (
 					<Loading />
@@ -69,6 +75,7 @@ export default function ProductAdmin() {
 						{isDeleted && (
 							<MessageBox variant="success">The Product Delete</MessageBox>
 						)}
+						{error && <MessageBox variant="danger">{error}</MessageBox>}
 						<button className="goBack" onClick={() => navigate(-1)}>
 							<ArrowBackIcon className="icon" />
 						</button>

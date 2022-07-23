@@ -2,14 +2,12 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-	deleteProduct,
-	getProductsSeller,
-} from "../../actions/productActions";
+import { deleteProduct, getProductsSeller } from "../../actions/productActions";
 import Loading from "../../components/loading/Loading";
 import { productColumns } from "../admin/datatablesource";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MessageBox from "../../components/MessageBox";
+import Title from "../../components/Title";
 
 export default function ProductsSeller() {
 	const dispatch = useDispatch();
@@ -63,7 +61,8 @@ export default function ProductsSeller() {
 
 	return (
 		<div className="listAdmin">
-			
+			<Title title={"seller products"} />
+
 			<div className="listContainer">
 				{loading ? (
 					<Loading />

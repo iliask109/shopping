@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
 	const [emailFooter, setEmailFooter] = useState("");
 	const [errorFooter, setErrorFooter] = useState(false);
-	const navigate = useNavigate();
 
 	const handleEmail = () => {
 		var pattern = "^s*[w-+_]+(.[w-+_]+)*@[w-+_]+.[w-+_]+(.[w-+_]+)*s*$";

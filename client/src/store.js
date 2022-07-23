@@ -25,6 +25,7 @@ import {
 	allUsersReducer,
 	createFavoriteReducer,
 	deleteFavoriteReducer,
+	forgotPasswordReducer,
 	userDeleteAdminReducer,
 	userDetailsAdminReducer,
 	userDetailsReducer,
@@ -82,6 +83,7 @@ const reducer = combineReducers({
 	deleteFavorite: deleteFavoriteReducer,
 	productReviews: productReviewsReducer,
 	productSellerList: productSellerListReducer,
+	forgotPassword: forgotPasswordReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
