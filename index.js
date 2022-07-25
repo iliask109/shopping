@@ -18,7 +18,6 @@ app.use(express.json());
 app.use(cookieParser());
 
 const connectDatabase = () => {
-	
 	mongoose
 		.connect(process.env.DB_URI, {
 			useNewUrlParser: true,
@@ -42,7 +41,7 @@ app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "./client/build", "index.html"));
 });
 
-app.listen(8800, () => {
+app.listen(process.env.PORT || 8800, () => {
 	connectDatabase();
 	console.log("content to backend");
 });
