@@ -13,11 +13,12 @@ const errorMiddleware = require("./utils/errorMiddleware");
 const path = require("path");
 const app = express();
 
-dotenv.config({ path: 'config/config.env' });
+dotenv.config({ path: "config/config.env" });
 app.use(express.json());
 app.use(cookieParser());
 
 const connectDatabase = () => {
+	
 	mongoose
 		.connect(process.env.DB_URI, {
 			useNewUrlParser: true,
@@ -28,11 +29,10 @@ const connectDatabase = () => {
 		});
 };
 
-app.use("/api/user", userRouter);
-app.use("/api/auth", authRouter);
-
-app.use("/api/admin", adminRouter);
 app.use("/api", productRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
+app.use("/api/admin", adminRouter);
 app.use("/api/orders", orderRouter);
 
 app.use(errorMiddleware);
@@ -42,8 +42,7 @@ app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "./client/build", "index.html"));
 });
 
-app.listen(process.env.PORT || 8800, () => {
+app.listen(8800, () => {
 	connectDatabase();
-
 	console.log("content to backend");
 });

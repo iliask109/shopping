@@ -27,7 +27,7 @@ export default function SingleOrderAdmin() {
 	const navigate = useNavigate();
 
 	const { id } = useParams();
-	const [status, setStatus] = useState("");
+	const [status, setStatus] = useState(order.orderStatus);
 
 	useEffect(() => {
 		dispatch(detailsOrder(id));
@@ -46,7 +46,6 @@ export default function SingleOrderAdmin() {
 			})
 		);
 	};
-
 	return (
 		<div>
 			<Title title={"admin orders"} />
@@ -140,7 +139,7 @@ export default function SingleOrderAdmin() {
 										<label className="labels">Category</label>
 
 										<Form.Select
-											value={order.orderStatus}
+											value={status}
 											className="form-control"
 											onChange={(e) => setStatus(e.target.value)}
 											disabled={order.orderStatus === "Delivered"}>

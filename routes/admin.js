@@ -23,7 +23,7 @@ const {
 const router = express.Router();
 router
 	.route("/user/:id")
-	.get(isAuthenticatedUser, authorizeRoles("admin"), getUserDetails)
+	.get(getUserDetails)
 	.put(isAuthenticatedUser, authorizeRoles("admin"), updateUser)
 	.delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);
 
@@ -51,6 +51,6 @@ router
 
 router
 	.route("/product/new")
-	.post(isAuthenticatedUser, authorizeRoles("admin","seller"), newProduct);
+	.post(isAuthenticatedUser, authorizeRoles("admin", "seller"), newProduct);
 
 module.exports = router;

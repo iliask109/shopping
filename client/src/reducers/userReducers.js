@@ -6,9 +6,15 @@ import {
 	CREATE_FAVORITE_FAIL,
 	CREATE_FAVORITE_REQUEST,
 	CREATE_FAVORITE_SUCCESS,
+	CREATE_LIKE_FAIL,
+	CREATE_LIKE_REQUEST,
+	CREATE_LIKE_SUCCESS,
 	DELETE_FAVORITE_FAIL,
 	DELETE_FAVORITE_REQUEST,
 	DELETE_FAVORITE_SUCCESS,
+	DELETE_LIKE_FAIL,
+	DELETE_LIKE_REQUEST,
+	DELETE_LIKE_SUCCESS,
 	DELETE_USER_REQUEST,
 	DELETE_USER_RESET,
 	DELETE_USER_SUCCESS,
@@ -211,6 +217,33 @@ export const deleteFavoriteReducer = (state = { isDelete: false }, action) => {
 	}
 };
 
+export const createLikeReducer = (state = {}, action) => {
+	switch (action.type) {
+		case CREATE_LIKE_REQUEST:
+			return { loading: true };
+		case CREATE_LIKE_SUCCESS:
+			return { loading: false, success: action.payload };
+		case CREATE_LIKE_FAIL:
+			return { loading: false, error: action.payload };
+
+		default:
+			return state;
+	}
+};
+
+export const deleteLikeReducer = (state = { isDelete: false }, action) => {
+	switch (action.type) {
+		case DELETE_LIKE_REQUEST:
+			return { loading: true };
+		case DELETE_LIKE_SUCCESS:
+			return { loading: false, isDelete: true };
+		case DELETE_LIKE_FAIL:
+			return { loading: false, error: action.payload };
+
+		default:
+			return state;
+	}
+};
 export const forgotPasswordReducer = (state = {}, action) => {
 	switch (action.type) {
 		case FORGOT_PASSWORD_REQUEST:

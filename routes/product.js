@@ -8,6 +8,7 @@ const {
 	deleteReview,
 	getSellerProducts,
 	getAdminProducts,
+	getSellerProduct,
 } = require("../controllers/productControllers");
 const {
 	isAuthenticatedUser,
@@ -15,16 +16,18 @@ const {
 } = require("../utils/authenticatedUser");
 
 const router = express.Router();
+
+router.route("/products").get(getProducts);
 router
 	.route("/products/seller")
 	.get(isAuthenticatedUser, authorizeRoles("seller"), getSellerProducts);
+router.route("/products/top").get(getAdminProducts);
 
-router.route("/products").get(getProducts);
+router.route("/products/seller/:id").get(getSellerProduct);
 router.route("/products/:id").get(getSingleProduct);
 
 router.route("/review").put(isAuthenticatedUser, createProductReview);
 router.route("/reviews").get(isAuthenticatedUser, getProductReviews);
 router.route("/reviews").delete(isAuthenticatedUser, deleteReview);
-router.route("/products").get(getAdminProducts);
 
 module.exports = router;

@@ -1039,5 +1039,115 @@
     .legend {
       display: none;
     }
+
+    img {
+      width: 100% !important;
+
+    }
+  }
+}
+
+
+
+.seller_page {
+
+  $white: #FFF;
+  $gray: #888;
+  $red: indianred;
+  $blue: rgb(76, 159, 238);
+
+  #like-button {
+    color: $gray;
+    font-size: 1.5em;
+    font-family: 'Heebo', sans-serif;
+    background-color: transparent;
+    border: 0.1em solid;
+    border-radius: 1em;
+    padding: 0.333em 1em 0.25em;
+    line-height: 1.2em;
+    box-shadow: 0 0.25em 1em -0.25em;
+    cursor: pointer;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+    outline: 0;
+    margin: 15px;
+    align-items: left;
+    text-align: left;
+    justify-content: left;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+
+
+
+    &:hover {
+      color: $red;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &.selected {
+      color: $white;
+      background-color: $red;
+      border-color: $red;
+    }
+
+    .heart-icon {
+      display: inline-block;
+      fill: currentColor;
+      width: 0.8em;
+      height: 0.8em;
+      margin-right: 0.2em;
+    }
+  }
+
+  #like-button.like {
+    color: $red;
+
+  }
+
+
+  .card-body {
+    text-align: center;
+    align-items: center;
+  }
+
+
+
+
+  .card_seller:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+
+
+  }
+
+  #like {
+    color: $blue;
+    font-size: 1.5em;
+    font-family: 'Heebo', sans-serif;
+    background-color: transparent;
+    border: 0.1em solid;
+    border-radius: 1em;
+    padding: 0.333em 1em 0.25em;
+    line-height: 1.2em;
+    box-shadow: 0 0.25em 1em -0.25em;
+    cursor: pointer;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+    outline: 0;
+    margin: 15px;
+    align-items: left;
+    text-align: left;
+    justify-content: left;
+
+    .heart-icon {
+      display: inline-block;
+      fill: currentColor;
+      width: 0.8em;
+      height: 0.8em;
+      margin-right: 0.2em;
+    }
   }
 }

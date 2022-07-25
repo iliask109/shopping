@@ -32,7 +32,7 @@ export default function Sidebar() {
 	const cart = useSelector((state) => state.cart);
 	const { cartItems } = cart;
 
-	const [openCategory, setOpenCategory] = useState(false);
+	const [openCategory, setOpenCategory] = useState(true);
 
 	const dispatch = useDispatch();
 
@@ -133,9 +133,10 @@ export default function Sidebar() {
 								<>
 									{Lists.map((list, index) => (
 										<Link
+											key={index}
 											to={`search/category/${list.title}`}
 											style={{ textDecoration: "none" }}>
-											<li key={index}>
+											<li>
 												{list.icon} <span>{list.title}</span>{" "}
 											</li>{" "}
 										</Link>

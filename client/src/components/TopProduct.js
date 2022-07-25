@@ -7,23 +7,22 @@ import { Link } from "react-router-dom";
 
 export default function TopProduct() {
 	const dispatch = useDispatch();
+	const productListAdmin = useSelector((state) => state.productListAdmin);
+	const { products } = productListAdmin;
 
 	useEffect(() => {
 		dispatch(getAdminProducts());
 	}, [dispatch]);
 
-	const productListAdmin = useSelector((state) => state.productListAdmin);
-	const { products } = productListAdmin;
-
 	return (
-		<Carousel showArrows autoPlay showThumbs={false}>
+		<Carousel showArrows autoPlay showThumbs={false} infiniteLoop>
 			{products?.slice(0, 5).map((item) => (
-				<div key={item.name}>
-					<Link to={`/products/${item._id}`}>
+				<Link to={`/products/${item._id}`} key={item.name}>
+					<div>
 						<img src={item.image} alt="item_image" />
 						<p className="legend">{item.name}</p>
-					</Link>
-				</div>
+					</div>{" "}
+				</Link>
 			))}
 		</Carousel>
 	);

@@ -11,14 +11,30 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Title from "../components/Title";
 
 export default function FiltersPage() {
+	const categories = [
+		"Electronics",
+		"Cameras",
+		"Laptops",
+		"Accessories",
+		"Headphones",
+		"Food",
+		"Books",
+		"Clothes/Shoes",
+		"Beauty/Health",
+		"Sports",
+		"Outdoor",
+		"Home",
+	];
 	const { category, name } = useParams();
 
 	const [min, setMin] = useState(0);
 	const [max, setMax] = useState(0);
 	const [rating, setRating] = useState();
+	const [categoryFilter, setCategoryFilter] = useState("");
 
 	const [priceOpen, setPriceOpen] = useState(false);
 	const [ratingOpen, setRatingOpen] = useState(false);
+	const [categoryOpen, setCategoryOpen] = useState(true);
 	const [SortProducts, setSortProducts] = useState("");
 
 	const dispatch = useDispatch();
@@ -27,14 +43,23 @@ export default function FiltersPage() {
 	useEffect(() => {
 		dispatch(
 			listProducts({
-				category: category,
+				category: categoryFilter || category,
 				min: min,
 				max: max,
 				rating: rating,
 				name: name,
 			})
 		);
-	}, [dispatch, category, min, max, rating, name, SortProducts]);
+	}, [
+		dispatch,
+		category,
+		min,
+		max,
+		rating,
+		name,
+		SortProducts,
+		categoryFilter,
+	]);
 
 	const productList = useSelector((state) => state.productList);
 	const { loading, error, products } = productList;
@@ -136,7 +161,7 @@ export default function FiltersPage() {
 										</div>
 									)}
 								</div>
-								<div className="box ">
+								<div className="box border-bottom">
 									<div className="box-label text-uppercase d-flex align-items-center">
 										Ratings
 										<button
@@ -169,6 +194,44 @@ export default function FiltersPage() {
 															caption={"& up"}
 															rating={item.rating}></Rating>
 													</label>
+												</div>
+											))}
+										</div>
+									)}
+								</div>
+								<div className="box ">
+									<div className="box-label text-uppercase d-flex align-items-center">
+										Category
+										<button
+											className="btn ms-auto"
+											type="button"
+											data-bs-toggle="collapse"
+											data-bs-target="#inner-box"
+											aria-expanded="false"
+											aria-controls="inner-box">
+											<span
+												className={`fas ${
+													categoryOpen ? "fa-minus" : "fa-plus"
+												}`}
+												onClick={() =>
+													setCategoryOpen(!categoryOpen)
+												}></span>{" "}
+										</button>
+									</div>
+									{categoryOpen && (
+										<div id="inner-box" className="collapse show">
+											{categories.map((item) => (
+												<div
+													className="form-inline border rounded p-sm-1 my-2"
+													key={item.name}>
+													<input
+														type="radio"
+														name="type"
+														onChange={() => {
+															setCategoryFilter(item);
+														}}
+													/>
+													<label className="pl-1 pt-sm-2 pt-1">{item}</label>
 												</div>
 											))}
 										</div>

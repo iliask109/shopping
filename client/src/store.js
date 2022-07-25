@@ -17,6 +17,7 @@ import {
 	productDetailsReducer,
 	productListAdminReducer,
 	productListReducer,
+	productListSellerReducer,
 	productReviewsReducer,
 	productSellerListReducer,
 	productUpdateReducer,
@@ -24,7 +25,9 @@ import {
 import {
 	allUsersReducer,
 	createFavoriteReducer,
+	createLikeReducer,
 	deleteFavoriteReducer,
+	deleteLikeReducer,
 	forgotPasswordReducer,
 	userDeleteAdminReducer,
 	userDetailsAdminReducer,
@@ -84,6 +87,9 @@ const reducer = combineReducers({
 	productReviews: productReviewsReducer,
 	productSellerList: productSellerListReducer,
 	forgotPassword: forgotPasswordReducer,
+	productListSellerReducer: productListSellerReducer,
+	createLikeReducer: createLikeReducer,
+	deleteLikeReducer: deleteLikeReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

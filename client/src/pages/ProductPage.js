@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Rating from "../components/rating/Rating";
 import { TbSquareMinus, TbSquarePlus } from "react-icons/tb";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	deleteReviewAdmin,
@@ -78,7 +78,7 @@ export default function ProductPage() {
 				{loading ? (
 					<Loading />
 				) : (
-					<div className="modal-content row ">
+					<div className="modal-content container ">
 						{error && <MessageBox variant="danger">{error}</MessageBox>}
 
 						<div className="modal-header">
@@ -112,7 +112,9 @@ export default function ProductPage() {
 											<strong>Seller : </strong>
 										</td>
 										<td> </td>
-										<td className="h5">{product.seller}</td>
+										<td className="h5">
+											<Link to={`/seller/${product.user}`}>{product.seller}</Link>
+										</td>
 									</tr>
 
 									<tr>

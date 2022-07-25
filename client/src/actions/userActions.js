@@ -8,9 +8,15 @@ import {
 	CREATE_FAVORITE_FAIL,
 	CREATE_FAVORITE_REQUEST,
 	CREATE_FAVORITE_SUCCESS,
+	CREATE_LIKE_FAIL,
+	CREATE_LIKE_REQUEST,
+	CREATE_LIKE_SUCCESS,
 	DELETE_FAVORITE_FAIL,
 	DELETE_FAVORITE_REQUEST,
 	DELETE_FAVORITE_SUCCESS,
+	DELETE_LIKE_FAIL,
+	DELETE_LIKE_REQUEST,
+	DELETE_LIKE_SUCCESS,
 	DELETE_USER_FAIL,
 	DELETE_USER_REQUEST,
 	DELETE_USER_SUCCESS,
@@ -290,6 +296,56 @@ export const deleteFavoriteUser = (id) => async (dispatch, getState) => {
 	} catch (error) {
 		dispatch({
 			type: DELETE_FAVORITE_FAIL,
+			payload: error.response.data.message,
+		});
+	}
+};
+
+export const createLike = (sellerId) => async (dispatch, getState) => {
+	try {
+		dispatch({ type: CREATE_LIKE_REQUEST });
+		const {
+			userSignin: { userInfo },
+		} = getState();
+
+		const { data } = await Axios.put(
+			`/api/user/likes`,
+			{ sellerId },
+			{
+				headers: { Authorization: `Bearer ${userInfo?.token}` },
+			}
+		);
+
+		dispatch({
+			type: CREATE_LIKE_SUCCESS,
+			payload: data.success,
+		});
+	} catch (error) {
+		dispatch({
+			type: CREATE_LIKE_FAIL,
+			payload: error.response.data.message,
+		});
+	}
+};
+
+export const deleteLikeUser = (sellerId) => async (dispatch, getState) => {
+	try {
+		dispatch({ type: DELETE_LIKE_REQUEST });
+		const {
+			userSignin: { userInfo },
+		} = getState();
+
+		const { data } = await Axios.delete(`/api/user/likes/${sellerId}`, {
+			headers: { Authorization: `Bearer ${userInfo?.token}` },
+		});
+
+		dispatch({
+			type: DELETE_LIKE_SUCCESS,
+			payload: data.success,
+		});
+	} catch (error) {
+		dispatch({
+			type: DELETE_LIKE_FAIL,
 			payload: error.response.data.message,
 		});
 	}

@@ -30,6 +30,23 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			default: "user",
 		},
+		likes: [
+			{
+				user: {
+					type: mongoose.Schema.ObjectId,
+					ref: "User",
+					required: true,
+				},
+				createdAt: {
+					type: Date,
+					default: Date.now,
+				},
+			},
+		],
+		aboutMe: {
+			type: String,
+			default: "Something about me ",
+		},
 		createdAt: {
 			type: Date,
 			default: Date.now,
@@ -78,17 +95,19 @@ userSchema.methods.getJwtToken = function () {
 };
 
 userSchema.methods.getResetPasswordToken = function () {
-    // Generate token
-    const resetToken = crypto.randomBytes(20).toString('hex');
+	// Generate token
+	const resetToken = crypto.randomBytes(20).toString("hex");
 
-    // Hash and set to resetPasswordToken
-    this.resetPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex')
+	// Hash and set to resetPasswordToken
+	this.resetPasswordToken = crypto
+		.createHash("sha256")
+		.update(resetToken)
+		.digest("hex");
 
-    // Set token expire time
-    this.resetPasswordExpire = Date.now() + 30 * 60 * 1000
+	// Set token expire time
+	this.resetPasswordExpire = Date.now() + 30 * 60 * 1000;
 
-    return resetToken
-
-}
+	return resetToken;
+};
 
 module.exports = mongoose.model("User", userSchema);

@@ -44,7 +44,7 @@ export default function ProfilePage() {
 	const deleteFavoriteId = (productId) => {
 		dispatch(deleteFavoriteUser(productId));
 	};
-	
+
 	if (isDelete) window.location.reload();
 
 	return (
@@ -75,6 +75,8 @@ export default function ProfilePage() {
 											<div className="mt-3">
 												<h4>{user.user.name}</h4>
 												<p className="text-secondary mb-1">{user.user.role}</p>
+												<br />
+												{user?.user.likes.length} Likes
 											</div>
 										</div>
 									</div>
@@ -118,6 +120,15 @@ export default function ProfilePage() {
 												{(shippingAddress.address,
 												shippingAddress.city,
 												shippingAddress.country) || ""}
+											</div>
+										</div>
+										<hr />
+										<div className="row">
+											<div className="col-sm-3">
+												<h6 className="mb-0">About Me</h6>
+											</div>
+											<div className="col-sm-9 text-secondary">
+												{user.user.aboutMe}
 											</div>
 										</div>
 										<hr />

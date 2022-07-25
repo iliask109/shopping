@@ -20,6 +20,9 @@ import {
 	NEW_REVIEW_SUCCESS,
 	PRODUCT_DETAILS_FAIL,
 	PRODUCT_DETAILS_REQUEST,
+	PRODUCT_DETAILS_SELLER_FAIL,
+	PRODUCT_DETAILS_SELLER_REQUEST,
+	PRODUCT_DETAILS_SELLER_SUCCESS,
 	PRODUCT_DETAILS_SUCCESS,
 	PRODUCT_LIST_FAIL,
 	PRODUCT_LIST_REQUEST,
@@ -69,6 +72,22 @@ export const detailsProduct = (productId) => async (dispatch) => {
 	} catch (error) {
 		dispatch({
 			type: PRODUCT_DETAILS_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};
+
+export const detailsSellerProducts = (productId) => async (dispatch) => {
+	dispatch({ type: PRODUCT_DETAILS_SELLER_REQUEST, payload: productId });
+	try {
+		const { data } = await Axios.get(`/api/products/seller/${productId}`);
+		dispatch({ type: PRODUCT_DETAILS_SELLER_SUCCESS, payload: data });
+	} catch (error) {
+		dispatch({
+			type: PRODUCT_DETAILS_SELLER_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message
@@ -242,7 +261,7 @@ export const getAdminProducts = () => async (dispatch) => {
 	try {
 		dispatch({ type: ADMIN_PRODUCTS_REQUEST });
 
-		const { data } = await Axios.get(`/api/products`);
+		const { data } = await Axios.get(`/api/products/top`);
 
 		dispatch({
 			type: ADMIN_PRODUCTS_SUCCESS,

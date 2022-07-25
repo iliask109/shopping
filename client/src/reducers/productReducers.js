@@ -23,6 +23,9 @@ import {
 	NEW_REVIEW_SUCCESS,
 	PRODUCT_DETAILS_FAIL,
 	PRODUCT_DETAILS_REQUEST,
+	PRODUCT_DETAILS_SELLER_FAIL,
+	PRODUCT_DETAILS_SELLER_REQUEST,
+	PRODUCT_DETAILS_SELLER_SUCCESS,
 	PRODUCT_DETAILS_SUCCESS,
 	PRODUCT_LIST_FAIL,
 	PRODUCT_LIST_REQUEST,
@@ -57,6 +60,24 @@ export const productListReducer = (
 			return state;
 	}
 };
+export const productListSellerReducer = (
+	state = { loading: true, products: [] },
+	action
+) => {
+	switch (action.type) {
+		case PRODUCT_DETAILS_SELLER_REQUEST:
+			return { loading: true };
+		case PRODUCT_DETAILS_SELLER_SUCCESS:
+			return {
+				loading: false,
+				products: action.payload,
+			};
+		case PRODUCT_DETAILS_SELLER_FAIL:
+			return { loading: false, error: action.payload };
+		default:
+			return state;
+	}
+};
 
 export const productListAdminReducer = (
 	state = { loading: true, products: [] },
@@ -68,7 +89,7 @@ export const productListAdminReducer = (
 		case ADMIN_PRODUCTS_SUCCESS:
 			return {
 				loading: false,
-				products: action.payload.products,
+				products: action.payload,
 			};
 		case ADMIN_PRODUCTS_FAIL:
 			return { loading: false, error: action.payload };

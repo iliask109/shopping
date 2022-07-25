@@ -35,6 +35,7 @@ import ContactPage from "./pages/ContactPage";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import SalesPage from "./pages/SalesPage";
+import SellerProfile from "./pages/SellerProfile";
 function App() {
 	const sidebarReducer = useSelector((state) => state.sidebarReducer);
 	const { Blur } = sidebarReducer;
@@ -53,6 +54,7 @@ function App() {
 						style={{ filter: `${Blur ? "blur(5px)" : ""}` }}>
 						<Routes>
 							<Route path="/" expect element={<Home />} />
+							<Route path="/seller/:id"  element={<SellerProfile />} />
 							<Route path="/contact" element={<ContactPage />} />
 							<Route path="/search" element={<FiltersPage />} />
 							<Route path="/sales" element={<SalesPage />} />

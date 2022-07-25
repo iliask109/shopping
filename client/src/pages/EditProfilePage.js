@@ -32,6 +32,7 @@ export default function EditProfilePage() {
 	const [name, setName] = useState(user?.user.name || "");
 	const [email, setEmail] = useState(user?.user.email || "");
 	const [avatar, setAvatar] = useState(user?.user.avatar || "");
+	const [aboutMe, setAboutMe] = useState(user?.user.aboutMe || "");
 	const [role, setRole] = useState(user?.user.role || "");
 	const [oldPassword, setOldPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
@@ -55,6 +56,7 @@ export default function EditProfilePage() {
 					name,
 					email,
 					avatar,
+					aboutMe,
 				})
 			);
 		}
@@ -180,6 +182,16 @@ export default function EditProfilePage() {
 														className="form-control"
 														value={avatar}
 														onChange={(e) => setAvatar(e.target.value)}
+													/>
+												</div>
+												<div className="col-md-12">
+													<label className="labels">About me </label>
+													<textarea
+														required
+														type="text"
+														className="form-control"
+														value={aboutMe}
+														onChange={(e) => setAboutMe(e.target.value)}
 													/>
 												</div>
 												<div className="col-md-12">

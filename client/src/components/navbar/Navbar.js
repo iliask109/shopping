@@ -24,7 +24,6 @@ export default function Navbar() {
 
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
-	useEffect(() => {}, [cartItems]);
 
 	const handleSearch = () => {
 		if (name) {
@@ -71,7 +70,7 @@ export default function Navbar() {
 						<Link to="/cart">
 							<ShoppingCartIcon className="icon" />
 							<div className="counter">
-								{cartItems.reduce((a, c) => a + c.qty, 0)}
+								{cartItems?.reduce((a, c) => a + c.qty, 0)}
 							</div>
 						</Link>
 					</div>

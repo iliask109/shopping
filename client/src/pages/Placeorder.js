@@ -12,6 +12,8 @@ export default function Placeorder() {
 	const cart = useSelector((state) => state.cart);
 	const orderCreate = useSelector((state) => state.orderCreate);
 	const { success, order } = orderCreate;
+	const userSignin = useSelector((state) => state.userSignin);
+	const { userInfo } = userSignin;
 
 	if (!cart.paymentMethod) {
 		navigate("/payment");
@@ -55,7 +57,7 @@ export default function Placeorder() {
 								<div className="card-header px-4 py-5">
 									<h5 className="text-muted mb-0">
 										Thanks for your Order,
-										<span style={{ color: "#a8729a" }}>Ilia</span>!
+										<span style={{ color: "#a8729a" }}>{userInfo?.name}</span>!
 									</h5>
 								</div>
 								<div className="card-body p-4">

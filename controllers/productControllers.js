@@ -1,4 +1,3 @@
-const { default: mongoose } = require("mongoose");
 const Product = require("../models/ProductModel");
 const APIFeatures = require("../utils/apiFeatures");
 const catchAsyncError = require("../utils/catchAsyncError");
@@ -23,10 +22,7 @@ exports.getAdminProducts = catchAsyncError(async (req, res, next) => {
 		return b.numOfSale - a.numOfSale;
 	});
 
-	res.status(200).json({
-		success: true,
-		products,
-	});
+	res.status(200).json(sortBySale);
 });
 
 // Get all products   =>   /api/v1/products?keyword=apple
@@ -37,7 +33,6 @@ exports.getProducts = catchAsyncError(async (req, res, next) => {
 	const name = req.query.name || "";
 	const category = req.query.category || "";
 	const discount = req.query.discount || "";
-	const seller = req.query.seller || "";
 	const order = req.query.order || "";
 	const min =
 		req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
@@ -49,7 +44,6 @@ exports.getProducts = catchAsyncError(async (req, res, next) => {
 			: 0;
 
 	const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
-	const sellerFilter = seller ? { seller } : {};
 	const categoryFilter = category ? { category } : {};
 	const discountFilter = discount ? { discount: { $gte: discount } } : {};
 	const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
@@ -65,13 +59,11 @@ exports.getProducts = catchAsyncError(async (req, res, next) => {
 
 	const products = await Product.find({
 		...priceFilter,
-		...sellerFilter,
 		...nameFilter,
 		...discountFilter,
 		...categoryFilter,
 		...ratingFilter,
 	})
-		.populate("seller", "seller.name seller.logo")
 		.sort(sortOrder)
 		.skip(pageSize * (page - 1))
 		.limit(pageSize);
@@ -89,6 +81,15 @@ exports.getSingleProduct = catchAsyncError(async (req, res, next) => {
 	}
 
 	res.status(200).json(product);
+});
+
+exports.getSellerProduct = catchAsyncError(async (req, res, next) => {
+	const id = req.params.id.trim();
+	const products = await Product.find({ user: id });
+	if (!products) {
+		return next(new ErrorHandler("products not found", 404));
+	}
+	res.status(200).json(products);
 });
 
 // Update Product   =>   /api/v1/product/admin/:id
