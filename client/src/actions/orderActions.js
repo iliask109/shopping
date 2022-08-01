@@ -78,6 +78,8 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
 	}
 };
 
+//text
+
 export const allOrdersAdmin = () => async (dispatch) => {
 	try {
 		dispatch({ type: ALL_ORDERS_REQUEST });
