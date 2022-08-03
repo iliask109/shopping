@@ -15,13 +15,14 @@ import ReviewsIcon from "@mui/icons-material/Reviews";
 import { signout } from "../../actions/userActions";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import {
 	CLOSE_SIDEBAR,
 	OPEN_SIDEBAR,
 	OPEN_SIDEBAR_MOBILE,
 } from "../../constants/cartConstants";
+import useClickOutside from "../../helpers/clickOutside";
 
 export default function Sidebar() {
 	const userSignin = useSelector((state) => state.userSignin);
@@ -41,24 +42,27 @@ export default function Sidebar() {
 	useEffect(() => {
 		if (Mobile) {
 			dispatch({ type: CLOSE_SIDEBAR });
-		} else {
-			dispatch({ type: OPEN_SIDEBAR });
-		}
+		} 
 	}, [Mobile, dispatch]);
-
-	document.addEventListener("click", function (event) {
-		let width = window.innerWidth;
-		if (sidebar && width < 700) {
-			if (event.srcElement.localName === "li") {
-				dispatch({ type: CLOSE_SIDEBAR });
-			}
-		}
-	});
 
 	const signoutHandler = () => {
 		dispatch(signout());
 		navigate("/");
 	};
+
+	const sidebarRef = useRef(null);
+
+	useClickOutside(sidebarRef, () => {
+		dispatch({ type: CLOSE_SIDEBAR });
+	});
+
+	document.addEventListener("click", function (e) {
+		if (e.target.localName === "li") {
+			dispatch({ type: CLOSE_SIDEBAR });
+		} else if (e.target.localName === "span") {
+			dispatch({ type: CLOSE_SIDEBAR });
+		}
+	});
 
 	return (
 		<div>
@@ -67,7 +71,7 @@ export default function Sidebar() {
 					className="fas fa-bars"
 					onClick={() => dispatch({ type: OPEN_SIDEBAR_MOBILE })}></i>
 			) : (
-				<div className={`sidebar ${Mobile ? "mobile" : ""}`}>
+				<div className="sidebar mobile" ref={sidebarRef}>
 					<button
 						type="button"
 						className="btn-close"

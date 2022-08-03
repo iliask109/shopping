@@ -1,35 +1,45 @@
 const Order = require("../models/OrderModel");
 const Product = require("../models/ProductModel");
+const User = require("../models/UserModel");
 const catchAsyncError = require("../utils/catchAsyncError");
+const { sendVerificationEmail } = require("../utils/mailer");
 
 // Create a new order   =>  /api/order/new
 exports.newOrder = catchAsyncError(async (req, res, next) => {
-	const {
-		orderItems,
-		shippingAddress,
-		itemsPrice,
-		taxPrice,
-		shippingPrice,
-		totalPrice,
-		paymentInfo,
-	} = req.body;
+	try {
+		const {
+			orderItems,
+			shippingAddress,
+			itemsPrice,
+			taxPrice,
+			shippingPrice,
+			totalPrice,
+			paymentInfo,
+		} = req.body;
 
-	const order = await Order.create({
-		orderItems,
-		shippingAddress,
-		itemsPrice,
-		taxPrice,
-		shippingPrice,
-		totalPrice,
-		paymentInfo,
-		paidAt: Date.now(),
-		user: req.user._id,
-	});
+		const order = await Order.create({
+			orderItems,
+			shippingAddress,
+			itemsPrice,
+			taxPrice,
+			shippingPrice,
+			totalPrice,
+			paymentInfo,
+			paidAt: Date.now(),
+			user: req.user._id,
+		});
 
-	res.status(200).json({
-		success: true,
-		order,
-	});
+		const user = await User.findById(order.user);
+
+		sendVerificationEmail(order, user, "The order has been placed ");
+
+		res.status(200).json({
+			success: true,
+			order,
+		});
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
 });
 
 exports.myOrders = catchAsyncError(async (req, res, next) => {

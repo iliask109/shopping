@@ -5,6 +5,7 @@ import { listProducts } from "../actions/productActions";
 import Loading from "../components/loading/Loading";
 import MessageBox from "../components/MessageBox";
 import Product from "../components/product/Product";
+import Title from "../components/Title";
 
 export default function SalesPage() {
 	const dispatch = useDispatch();
@@ -53,6 +54,8 @@ export default function SalesPage() {
 
 	return (
 		<div className="container home col-md-12 ">
+			<Title title={"Sales"} />
+
 			{loading ? (
 				<Loading />
 			) : error ? (
@@ -61,7 +64,9 @@ export default function SalesPage() {
 				<>
 					<header className="border-bottom mb-4 pb-3 m-4">
 						<div className="form-inline">
-							<span className="mr-md-auto">{products?.length} Items found </span>
+							<span className="mr-md-auto">
+								{products?.length} Items found{" "}
+							</span>
 							<select
 								className="mr-2 form-control"
 								onChange={(e) => sortProducts(e.target.value)}>

@@ -26,12 +26,12 @@ export default function Product({ products }) {
 	const { userInfo } = userSignin;
 
 	return (
-		<div className="poduct">
+		<div className="product">
 			<div style={{ marginTop: "50px" }}>
 				<div className="row">
 					{products.map((product) => (
 						<div
-							className="col-md-4 col-sm-6 col-xl-3 poduct_card "
+							className="col-md-4 col-sm-6 col-xl-3 product_card "
 							key={product.name}>
 							<div className="card-sl ">
 								{product.discount > 0 && (

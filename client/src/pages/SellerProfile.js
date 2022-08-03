@@ -45,7 +45,7 @@ export default function SellerProfile() {
 
 	return (
 		<div className="seller_page">
-			<Title title={"Profile"} />
+			<Title title={'My Page'} />
 
 			<div className="container ">
 				{/* <button className="goBack" onClick={() => navigate(-1)}>

@@ -45,7 +45,10 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 	}
 };
 
-export const sidebarReducer = (state = { sidebar: true }, action) => {
+export const sidebarReducer = (
+	state = { sidebar: true, Blur: false },
+	action
+) => {
 	switch (action.type) {
 		case OPEN_SIDEBAR:
 			return { ...state, sidebar: true };

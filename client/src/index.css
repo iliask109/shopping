@@ -26,9 +26,9 @@ body {
 	background-color: white;
 }
 
-/* .app {
-	filter: blur(4px);
-} */
+.app {
+	margin-top: 120px;
+}
 
 @media screen and (max-width: 700px) {
 	.goBack {

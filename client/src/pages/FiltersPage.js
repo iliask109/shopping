@@ -27,8 +27,10 @@ export default function FiltersPage() {
 	];
 	const { category, name } = useParams();
 
+	const [nameFilter, setFilterName] = useState(name ? name : "");
 	const [min, setMin] = useState(0);
 	const [max, setMax] = useState(0);
+	const [price, setPrice] = useState("");
 	const [rating, setRating] = useState();
 	const [categoryFilter, setCategoryFilter] = useState("");
 
@@ -41,13 +43,14 @@ export default function FiltersPage() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		setCategoryFilter(category);
 		dispatch(
 			listProducts({
 				category: categoryFilter || category,
 				min: min,
 				max: max,
 				rating: rating,
-				name: name,
+				name: nameFilter,
 			})
 		);
 	}, [
@@ -95,6 +98,7 @@ export default function FiltersPage() {
 
 	return (
 		<div>
+			<Title title={"Search"} />
 			<header className=" p-3 border">
 				<div className="form-inline">
 					<span className="mr-md-auto">{products?.length} Items found </span>
@@ -112,11 +116,6 @@ export default function FiltersPage() {
 				</div>
 			</header>
 			<div className="container  border p-0 bg-sec-light filter_page col-12">
-				<Title title={"Search"} />
-
-				<button className="goBack" onClick={() => navigate(-1)}>
-					<ArrowBackIcon className="icon" />
-				</button>
 				{error && <MessageBox variant="danger">{error}</MessageBox>}
 
 				<div id="content">
@@ -151,6 +150,7 @@ export default function FiltersPage() {
 														onChange={() => {
 															setMin(item.min);
 															setMax(item.max);
+															setPrice(item.name);
 														}}
 													/>
 													<label className="pl-1 pt-sm-0 pt-1">
@@ -227,6 +227,7 @@ export default function FiltersPage() {
 													<input
 														type="radio"
 														name="type"
+														value={categoryFilter}
 														onChange={() => {
 															setCategoryFilter(item);
 														}}
@@ -245,7 +246,35 @@ export default function FiltersPage() {
 							<MessageBox variant="danger">{error}</MessageBox>
 						) : (
 							<div className="bg-white p-2 border col-md-12 col-sm-6 col-l-6 ">
-								<b>{products.length}</b> Products{" "}
+								<div className="filter_name">
+									{categoryFilter && (
+										<div className="item" onClick={() => setCategoryFilter("")}>
+											{categoryFilter}
+										</div>
+									)}
+									{name && (
+										<div className="item" onClick={() => setFilterName("")}>
+											{name}
+										</div>
+									)}
+									{price && (
+										<div
+											className="item"
+											onClick={() => {
+												setMin(0);
+												setMax(0);
+												setPrice("");
+											}}>
+											{price}
+										</div>
+									)}{" "}
+									{rating && (
+										<div className="item ratings" onClick={() => setRating("")}>
+											<Rating caption={"& up"} rating={rating}></Rating>
+										</div>
+									)}
+								</div>
+								<hr />
 								<Product products={SortProducts ? SortProducts : products} />
 							</div>
 						)}

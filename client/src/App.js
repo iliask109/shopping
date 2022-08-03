@@ -36,6 +36,8 @@ import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import SalesPage from "./pages/SalesPage";
 import SellerProfile from "./pages/SellerProfile";
+import NewPassword from "./components/NewPassword";
+
 function App() {
 	const sidebarReducer = useSelector((state) => state.sidebarReducer);
 	const { Blur } = sidebarReducer;
@@ -47,14 +49,13 @@ function App() {
 			<BrowserRouter>
 				<Navbar />
 				<div className="homeContainer ">
-					{Mobile && <Sidebar />}
-
 					<div
-						className="container"
-						style={{ filter: `${Blur ? "blur(5px)" : ""}` }}>
+						className="container app"
+						style={{ filter: `${Blur && !Mobile ? "blur(5px)" : ""}` }}>
 						<Routes>
 							<Route path="/" expect element={<Home />} />
-							<Route path="/seller/:id"  element={<SellerProfile />} />
+							<Route path="/password/reset/:token" element={<NewPassword />} />
+							<Route path="/seller/:id" element={<SellerProfile />} />
 							<Route path="/contact" element={<ContactPage />} />
 							<Route path="/search" element={<FiltersPage />} />
 							<Route path="/sales" element={<SalesPage />} />

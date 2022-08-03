@@ -27,6 +27,9 @@ export default function Auth(props) {
 		error: errorSignin,
 	} = userSignin;
 
+	const forgotPasswordReducer = useSelector((state) => state.forgotPassword);
+	const { message } = forgotPasswordReducer;
+
 	const dispatch = useDispatch();
 
 	function validateEmail(emailField) {
@@ -63,9 +66,12 @@ export default function Auth(props) {
 			setConfirmPassword("");
 			props.onHide();
 		}
-	}, [userInfo, userInfoSignin, props]);
+		if (message) {
+			setForgotPassword(false);
+		}
+	}, [userInfo, userInfoSignin, props, message]);
 
-	const passwordHadler = () => {
+	const passwordHandler = () => {
 		dispatch(ForgotPassword(emailPass));
 	};
 
@@ -189,7 +195,7 @@ export default function Auth(props) {
 										</Link>
 									</p>
 
-									{/* <p onClick={() => setForgotPassword(true)}>
+									<p onClick={() => setForgotPassword(true)}>
 										Forgot <Link to="#">Password</Link>
 									</p>
 									{forgotPassword && (
@@ -199,9 +205,12 @@ export default function Auth(props) {
 												className="m-2 p-1 rounded"
 												onChange={(e) => setEmailPass(e.target.value)}
 											/>
-											<Button onClick={() => passwordHadler()}>send</Button>
+											<Button onClick={() => passwordHandler()}>send</Button>
 										</div>
-									)} */}
+									)}
+									{message && (
+										<MessageBox variant="success">{message}</MessageBox>
+									)}
 								</>
 							) : (
 								<p>
