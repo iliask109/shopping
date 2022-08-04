@@ -35,7 +35,7 @@ const Widget = ({ type }) => {
 			data = {
 				title: "ORDERS",
 				isMoney: false,
-				amount: orders?.orders.length,
+				amount: orders?.orders?.length,
 				link: "View all orders",
 				to: "/admin/orders",
 
