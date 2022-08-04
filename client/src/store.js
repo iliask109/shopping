@@ -2,6 +2,13 @@ import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { cartReducer, sidebarReducer } from "./reducers/cartReducers";
 import {
+	allMessagesReducer,
+	confirmMessageReducer,
+	deleteMessageReducer,
+	messageCreateReducer,
+	singleMessageReducer,
+} from "./reducers/messageReducers";
+import {
 	allOrdersReducer,
 	deleteOrderReducer,
 	orderCreateReducer,
@@ -90,6 +97,11 @@ const reducer = combineReducers({
 	productListSellerReducer: productListSellerReducer,
 	createLikeReducer: createLikeReducer,
 	deleteLikeReducer: deleteLikeReducer,
+	messageCreate: messageCreateReducer,
+	allMessages: allMessagesReducer,
+	singleMessage: singleMessageReducer,
+	deleteMessage: deleteMessageReducer,
+	confirmMessage: confirmMessageReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

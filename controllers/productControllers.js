@@ -1,4 +1,5 @@
 const Product = require("../models/ProductModel");
+const User = require("../models/UserModel");
 const APIFeatures = require("../utils/apiFeatures");
 const catchAsyncError = require("../utils/catchAsyncError");
 const ErrorHandler = require("../utils/errorHandler");
@@ -134,8 +135,10 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
 exports.createProductReview = catchAsyncError(async (req, res, next) => {
 	const { rating, comment, productId } = req.body;
 
+
 	const review = {
 		user: req.user._id,
+		user_img: req.user.avatar,
 		name: req.user.name,
 		rating: Number(rating),
 		comment,

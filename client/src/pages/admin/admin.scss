@@ -227,3 +227,44 @@
     background-color: rgba(189, 3, 3, 0.103);
   }
 }
+
+.message {
+  margin: 10px;
+  border-radius: 20px;
+
+  .header_message {
+    padding: 20px;
+    background-color: black;
+    color: white;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .body_message {
+    padding: 20px;
+    background-color: rgb(131, 128, 128);
+    color: rgb(8, 8, 8);
+    font-weight: 500;
+    height: 250px;
+  }
+
+  .footer_message {
+    padding: 20px;
+    color: rgb(8, 8, 8);
+    font-weight: 500;
+    height: 100px;
+  }
+
+}
+
+.action_message {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  .btn {
+    width: 200px;
+  }
+}
+

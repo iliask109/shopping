@@ -128,8 +128,8 @@ export default function Navbar() {
 				<>
 					<div className="cart" ref={miniCart}>
 						<div className="cart_body container">
-							{cartItems?.map((item) => (
-								<div className="cart_single row">
+							{cartItems?.map((item, i) => (
+								<div className="cart_single row" key={i}>
 									<div className="cart_left col-sm">
 										<img src={item.image} />
 									</div>

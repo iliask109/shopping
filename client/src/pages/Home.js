@@ -1,31 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
 import Loading from "../components/loading/Loading";
 import MessageBox from "../components/MessageBox";
 import Product from "../components/product/Product";
-import Pagination from "react-js-pagination";
-import TopProduct from "../components/TopProduct";
 import Title from "../components/Title";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-	const [currentPage, setCurrentPage] = useState(1);
-
 	const dispatch = useDispatch();
+	const topSales = [];
 	useEffect(() => {
-		dispatch(listProducts({ pageNumber: currentPage, pageSize: 8 }));
-	}, [dispatch, currentPage]);
+		dispatch(listProducts({}));
+	}, [dispatch]);
 
 	const productList = useSelector((state) => state.productList);
-	const { loading, error, products, page, pageSize, productsCount } =
-		productList;
+	const { loading, error, products } = productList;
 
-	function setCurrentPageNo(pageNumber) {
-		setCurrentPage(pageNumber);
-	}
+	const TopProducts = products
+		?.sort(function (a, b) {
+			return b.numOfSale - a.numOfSale;
+		})
+		.slice(0, 4);
+
+	products?.map((item) => {
+		if (item.discount > 0) {
+			topSales.push(item);
+		}
+	});
+	var categories = products?.map((item) => item.category);
+
+	var distribution = {},
+		max = 0,
+		result = [];
+
+	categories?.forEach(function (a) {
+		distribution[a] = (distribution[a] || 0) + 1;
+		if (distribution[a] > max) {
+			max = distribution[a];
+			result = [a];
+			return;
+		}
+		if (distribution[a] === max) {
+			result.push(a);
+		}
+	});
+
 
 	return (
-		<div className="row">
+		<div className="row pt-2">
 			<Title title={"Home"} />
 
 			<div className="container home col-md-12 ">
@@ -36,25 +59,30 @@ export default function Home() {
 				) : (
 					<>
 						<h4>Top Products</h4>
-						<TopProduct />
-						<Product products={products} />
+						<Product products={TopProducts} />
+						<div className="see_more">
+							<h4>Top Sales</h4> <Link to="/sales">See More</Link>
+						</div>
+						<Product products={topSales.slice(0, 4)} />
+						<div>
+							<h4>Top Categories</h4>
+						</div>
+						<div className="categories">
+							{Object.keys(distribution)
+								?.slice(0, 5)
+								.map((item, i) => (
+									<div className="box" key={i}>
+										<Link to={`/search/category/${item}`}>{item}</Link>
+									</div>
+								))}
+						</div>
+						<div className="see_more">
+							<h4>All Products</h4> <Link to="/products">See More</Link>
+						</div>
+						<Product products={products?.slice(0, 8)} />
 					</>
 				)}
 			</div>
-			{pageSize <= productsCount && (
-				<div className="d-flex justify-content-center mt-5 col-12">
-					<Pagination
-						activePage={currentPage}
-						itemsCountPerPage={page}
-						totalItemsCount={Math.floor(productsCount / pageSize + currentPage)}
-						onChange={setCurrentPageNo}
-						nextPageText={"Next"}
-						prevPageText={"Prev"}
-						itemClass="page-item"
-						linkClass="page-link"
-					/>
-				</div>
-			)}
 		</div>
 	);
 }

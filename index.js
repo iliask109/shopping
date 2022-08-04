@@ -7,6 +7,7 @@ const adminRouter = require("./routes/admin");
 const orderRouter = require("./routes/order");
 const productRouter = require("./routes/product");
 const authRouter = require("./routes/auth");
+const messageRouter = require("./routes/message");
 
 const cookieParser = require("cookie-parser");
 const errorMiddleware = require("./utils/errorMiddleware");
@@ -33,6 +34,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/orders", orderRouter);
+app.use("/api/message", messageRouter);
 
 app.use(errorMiddleware);
 app.use(express.static(path.resolve(__dirname, "./client/build")));

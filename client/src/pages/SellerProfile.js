@@ -111,7 +111,7 @@ export default function SellerProfile() {
 									</div>
 								</div>
 							</div>
-							<div className="container  mx-auto mt-4">
+							<div className="container mt-4">
 								<hr />
 
 								{loadingProducts ? (

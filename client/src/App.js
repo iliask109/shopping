@@ -37,6 +37,8 @@ import { useMediaQuery } from "react-responsive";
 import SalesPage from "./pages/SalesPage";
 import SellerProfile from "./pages/SellerProfile";
 import NewPassword from "./components/NewPassword";
+import AllProducts from "./pages/AllProducts";
+import SingleMessage from "./pages/admin/SingleMessage";
 
 function App() {
 	const sidebarReducer = useSelector((state) => state.sidebarReducer);
@@ -59,6 +61,7 @@ function App() {
 							<Route path="/contact" element={<ContactPage />} />
 							<Route path="/search" element={<FiltersPage />} />
 							<Route path="/sales" element={<SalesPage />} />
+							<Route path="/products" element={<AllProducts />} />
 							<Route
 								path="/search/category/:category"
 								expect
@@ -203,6 +206,14 @@ function App() {
 								element={
 									<AdminRoute>
 										<ReviewsSingel />
+									</AdminRoute>
+								}
+							/>
+							<Route
+								path="/admin/message/:id"
+								element={
+									<AdminRoute>
+										<SingleMessage />
 									</AdminRoute>
 								}
 							/>

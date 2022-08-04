@@ -62,8 +62,7 @@ export const productColumns = [
 		headerName: "Discount",
 		renderCell: (params) => {
 			return (
-				<div
-					className={`status ${params.row.discount > 0 ? "inStock" : ""}`}>
+				<div className={`status ${params.row.discount > 0 ? "inStock" : ""}`}>
 					{params.row.discount}
 				</div>
 			);
@@ -220,6 +219,39 @@ export const reviewsColumns = [
 					{params.row.numOfReviews}
 				</span>
 			);
+		},
+		width: 150,
+	},
+];
+
+export const messageColumns = [
+	{
+		field: "name",
+		headerName: "Name",
+		width: 100,
+	},
+	{
+		field: "email",
+		headerName: "Email",
+
+		width: 200,
+	},
+
+	{
+		field: "phone",
+		headerName: "Phone",
+		width: 150,
+	},
+	{
+		field: "subject",
+		headerName: "Subject",
+		width: 250,
+	},
+	{
+		field: "createdAt",
+		headerName: "Created At",
+		renderCell: (params) => {
+			return <div>{params.row.createdAt.slice(0, 10)}</div>;
 		},
 		width: 150,
 	},

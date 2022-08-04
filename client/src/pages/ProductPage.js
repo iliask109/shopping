@@ -84,11 +84,11 @@ export default function ProductPage() {
 						<div className="modal-header">
 							<h4 className="modal-title" id="myModalLabel">
 								<i className="text-muted fa fa-shopping-cart"></i>
-								<strong> {product.name}</strong>
+								<strong> {product?.name}</strong>
 							</h4>
 						</div>
 						<div className="modal-body ">
-							<img src={product.image} alt="image1" />
+							<img src={product?.image} alt="image1" />
 							<table className="pull-left col-md-12 ">
 								<tbody>
 									<tr>
@@ -96,7 +96,7 @@ export default function ProductPage() {
 											<strong>Name : </strong>
 										</td>
 										<td> </td>
-										<td className="h5">{product.name}</td>
+										<td className="h5">{product?.name}</td>
 									</tr>
 
 									<tr>
@@ -104,7 +104,7 @@ export default function ProductPage() {
 											<strong>Category: </strong>
 										</td>
 										<td> </td>
-										<td className="h5">{product.category}</td>
+										<td className="h5">{product?.category}</td>
 									</tr>
 
 									<tr>
@@ -113,7 +113,9 @@ export default function ProductPage() {
 										</td>
 										<td> </td>
 										<td className="h5">
-											<Link to={`/seller/${product.user}`}>{product.seller}</Link>
+											<Link to={`/seller/${product?.user}`}>
+												{product?.seller}
+											</Link>
 										</td>
 									</tr>
 
@@ -124,8 +126,8 @@ export default function ProductPage() {
 										<td> </td>
 										<td className="h5 ratings_product">
 											<Rating
-												rating={product.ratings}
-												numReviews={product.numOfReviews}
+												rating={product?.ratings}
+												numReviews={product?.numOfReviews}
 											/>
 										</td>
 									</tr>
@@ -136,7 +138,7 @@ export default function ProductPage() {
 										</td>
 										<td> </td>
 										<td className="h5">
-											{product.stock > 0 ? (
+											{product?.stock > 0 ? (
 												<span className="text-success">In Stock</span>
 											) : (
 												<span className="text-danger">Out of Stock</span>
@@ -150,16 +152,16 @@ export default function ProductPage() {
 										</td>
 										<td> </td>
 										<td className="h5">
-											{product.discount === 0
-												? product.price
+											{product?.discount === 0
+												? product?.price
 												: (
-														product.price -
-														product.price * (product.discount / 100)
+														product?.price -
+														product?.price * (product?.discount / 100)
 												  ).toFixed(2)}
 										</td>
 									</tr>
 
-									{product.stock > 0 && (
+									{product?.stock > 0 && (
 										<tr>
 											<td className="h6">
 												<strong>Amount : </strong>
@@ -191,7 +193,7 @@ export default function ProductPage() {
 							</table>
 
 							<div className="clearfix"></div>
-							<p className="open_info hide">{product.description}</p>
+							<p className="open_info hide">{product?.description}</p>
 						</div>
 
 						<div className="modal-footer">
@@ -199,12 +201,12 @@ export default function ProductPage() {
 								<div className="text-right pull-right col-md-3">
 									Total: <br />
 									<span className="h3 text-muted">
-										<strong>${(query * product.price).toFixed(2)}</strong>
+										<strong>${(query * product?.price).toFixed(2)}</strong>
 									</span>
 								</div>
 							)}
 							<div className="text-right pull-right col-md-7">
-								{query * product.price > 0 && !addToCart && (
+								{query * product?.price > 0 && !addToCart && (
 									<button
 										className="add_to"
 										onClick={() => addCart(product._id)}>
@@ -233,7 +235,7 @@ export default function ProductPage() {
 
 			<div className="reviews row">
 				<div className="col-md-12">
-					<div className="offer-dedicated-body-left">
+					<div className="offer-dedicated-body-left border mt-4">
 						<div className="tab-content" id="pills-tabContent">
 							<div
 								className="tab-pane fade active show"
@@ -246,18 +248,19 @@ export default function ProductPage() {
 
 										{product.reviews.map((item) => (
 											<div
-												className="reviews-members pt-4 pb-4 col-xl-"
+												className="reviews-members pt-4 pb-4 border"
 												key={item._id}>
 												<div className="media">
+													{item.user === userInfo?._id && (
+														<span
+															className="delete_review btn btn-danger"
+															onClick={() => deleteReviewHandler(item._id)}>
+															X
+														</span>
+													)}
+													<img src={item.user_img} />
 													<div className="media-body">
 														<div className="reviews-members-header">
-															{item.user === userInfo?._id && (
-																<span
-																	className="delete_review btn btn-danger"
-																	onClick={() => deleteReviewHandler(item._id)}>
-																	X
-																</span>
-															)}
 															<h6 className="mb-1">{item.name}</h6>
 															<p className="text-gray">
 																{item.createdAt.slice(0, 10)}

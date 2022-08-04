@@ -72,6 +72,10 @@ const productSchema = new mongoose.Schema({
 				ref: "User",
 				required: true,
 			},
+			user_img: {
+				type: String,
+				required: true,
+			},
 			name: {
 				type: String,
 				required: true,

@@ -140,10 +140,10 @@ export default function FiltersPage() {
 									</div>
 									{priceOpen && (
 										<div id="inner-box" className="collapse show">
-											{prices.map((item) => (
+											{prices.map((item,i) => (
 												<div
 													className="form-inline border rounded p-sm-1 my-2"
-													key={item.name}>
+													key={i}>
 													<input
 														type="radio"
 														name="type"
@@ -178,10 +178,10 @@ export default function FiltersPage() {
 									</div>
 									{ratingOpen && (
 										<div id="inner-box" className="collapse show">
-											{ratings.map((item) => (
+											{ratings.map((item,i) => (
 												<div
 													className="form-inline border rounded p-sm-1 my-2"
-													key={item.name}>
+													key={i}>
 													<input
 														type="radio"
 														name="type"
@@ -220,10 +220,10 @@ export default function FiltersPage() {
 									</div>
 									{categoryOpen && (
 										<div id="inner-box" className="collapse show">
-											{categories.map((item) => (
+											{categories.map((item,i) => (
 												<div
 													className="form-inline border rounded p-sm-1 my-2"
-													key={item.name}>
+													key={i}>
 													<input
 														type="radio"
 														name="type"
