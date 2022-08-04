@@ -43,6 +43,7 @@ export default function Navbar() {
 		}
 	};
 
+
 	const Mobile = useMediaQuery({ query: "(max-width: 700px)" });
 
 	const miniCart = useRef(null);
@@ -74,6 +75,12 @@ export default function Navbar() {
 					</Link>
 				</div>
 				<div className="search">
+					{" "}
+					{name && (
+						<div className=" remove_name" onClick={() => setName("")}>
+							x
+						</div>
+					)}
 					<input
 						type="text"
 						required
