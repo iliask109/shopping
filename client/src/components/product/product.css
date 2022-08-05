@@ -148,15 +148,22 @@
 	position: relative;
 }
 
+.btn-product .MuiSvgIcon-root {
+	font-size: 50px;
+}
+.btn-product .MuiSvgIcon-root:hover {
+	fill: rgb(104, 226, 120);
+}
+
 .icon_left {
 	position: absolute;
-	left: -20px;
+	left: -40px;
 	top: 50%;
 	z-index: 111;
 }
 .icon_right {
 	position: absolute;
-	right: -20px;
+	right: -40px;
 	top: 50%;
 	z-index: 111;
 }
@@ -170,6 +177,16 @@
 @media screen and (max-width: 750px) {
 	.product_card:hover {
 		transform: none;
+	}
+}
+@media screen and (max-width: 500px) {
+	.icon_left {
+		left: -10px;
+		top: 55%;
+	}
+	.icon_right {
+		right: -10px;
+		top: 55%;
 	}
 }
 

@@ -35,7 +35,7 @@ export default function AllProducts() {
 				) : (
 					<>
 						<h4>All Products</h4>
-						<Product products={products} />
+						<Product products={products}  />
 					</>
 				)}
 			</div>

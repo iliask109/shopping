@@ -46,7 +46,6 @@ export default function Home() {
 		}
 	});
 
-
 	return (
 		<div className="row pt-2">
 			<Title title={"Home"} />
@@ -59,11 +58,11 @@ export default function Home() {
 				) : (
 					<>
 						<h4>Top Products</h4>
-						<Product products={TopProducts} />
+						<Product products={TopProducts} home={true} />
 						<div className="see_more">
 							<h4>Top Sales</h4> <Link to="/sales">See More</Link>
 						</div>
-						<Product products={topSales} />
+						<Product products={topSales} home={true} />
 						<div>
 							<h4>Top Categories</h4>
 						</div>
@@ -79,7 +78,7 @@ export default function Home() {
 						<div className="see_more">
 							<h4>All Products</h4> <Link to="/products">See More</Link>
 						</div>
-						<Product products={products} />
+						<Product products={products} home={true} />
 					</>
 				)}
 			</div>

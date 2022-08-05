@@ -32,6 +32,7 @@ export default function Auth(props) {
 
 	const dispatch = useDispatch();
 
+	// validate email
 	function validateEmail(emailField) {
 		var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
@@ -43,6 +44,7 @@ export default function Auth(props) {
 		return true;
 	}
 
+	// Login or register
 	const submitHandler = () => {
 		if (isLogin) {
 			dispatch(signin(email, password));
@@ -71,6 +73,7 @@ export default function Auth(props) {
 		}
 	}, [userInfo, userInfoSignin, props, message]);
 
+	// forgot password
 	const passwordHandler = () => {
 		dispatch(ForgotPassword(emailPass));
 	};

@@ -83,20 +83,17 @@ export default function Navbar() {
 					</Link>
 				</div>
 				<div className="search">
-					{" "}
-					{name && (
-						<div className=" remove_name" onClick={() => setName("")}>
-							x
-						</div>
-					)}
+				
+				
 					<input
-						type="text"
+						type="search"
 						required
 						placeholder="Search..."
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 					/>
 					<SearchOutlinedIcon
+						type="submit"
 						style={{ cursor: "pointer" }}
 						onClick={() => handleSearch()}
 					/>
