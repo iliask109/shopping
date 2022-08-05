@@ -201,7 +201,16 @@ export default function ProductPage() {
 								<div className="text-right pull-right col-md-3">
 									Total: <br />
 									<span className="h3 text-muted">
-										<strong>${(query * product?.price).toFixed(2)}</strong>
+										<strong>
+											$
+											{product?.discount === 0
+												? query * product?.price
+												: query *
+												  (
+														product?.price -
+														product?.price * (product?.discount / 100)
+												  ).toFixed(2)}
+										</strong>
 									</span>
 								</div>
 							)}

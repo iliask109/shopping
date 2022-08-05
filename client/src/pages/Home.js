@@ -63,7 +63,7 @@ export default function Home() {
 						<div className="see_more">
 							<h4>Top Sales</h4> <Link to="/sales">See More</Link>
 						</div>
-						<Product products={topSales.slice(0, 4)} />
+						<Product products={topSales} />
 						<div>
 							<h4>Top Categories</h4>
 						</div>
@@ -79,7 +79,7 @@ export default function Home() {
 						<div className="see_more">
 							<h4>All Products</h4> <Link to="/products">See More</Link>
 						</div>
-						<Product products={products?.slice(0, 8)} />
+						<Product products={products} />
 					</>
 				)}
 			</div>

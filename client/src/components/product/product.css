@@ -144,6 +144,29 @@
 	transform: scale(1.1);
 }
 
+.product {
+	position: relative;
+}
+
+.icon_left {
+	position: absolute;
+	left: -20px;
+	top: 50%;
+	z-index: 111;
+}
+.icon_right {
+	position: absolute;
+	right: -20px;
+	top: 50%;
+	z-index: 111;
+}
+
+@media screen and (max-width: 800px) {
+	.card-sl {
+		height: 500px;
+	}
+}
+
 @media screen and (max-width: 750px) {
 	.product_card:hover {
 		transform: none;

@@ -104,7 +104,7 @@ export default function CartPage() {
 																	/>
 																</div>
 																<div className="col-md-3 price">
-																	<span>${item.price}</span>
+																	 <span>${item.price}</span>
 																</div>
 															</div>
 														</div>

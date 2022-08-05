@@ -24,7 +24,7 @@ export default function AllProducts() {
 	}
 
 	return (
-		<div className="row">
+		<div className="row pt-4">
 			<Title title={"All Products"} />
 
 			<div className="container home col-md-12 ">

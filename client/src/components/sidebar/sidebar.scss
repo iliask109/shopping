@@ -48,8 +48,8 @@
     padding: 0;
     background: hsl(216, 100, 50);
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -83,7 +83,7 @@
 
 
   .top {
-    height: 60px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -126,13 +126,12 @@
         font-weight: bold;
         color: #999;
         margin-top: 15px;
-        margin-bottom: 5px;
       }
 
       li {
         display: flex;
         align-items: center;
-        padding: 5px;
+        padding: 3.5px 5px;
         cursor: pointer;
 
         &:hover {

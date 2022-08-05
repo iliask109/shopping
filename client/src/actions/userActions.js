@@ -1,4 +1,5 @@
 import Axios from "axios";
+import Cookies from "js-cookie";
 
 import {
 	ALL_USERS_FAIL,
@@ -92,6 +93,7 @@ export const signin = (email, password) => async (dispatch) => {
 export const signout = () => (dispatch) => {
 	localStorage.removeItem("userInfo");
 	localStorage.removeItem("shippingAddress");
+	Cookies.remove("token");
 	dispatch({ type: USER_SIGNOUT });
 };
 

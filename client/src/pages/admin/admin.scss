@@ -263,8 +263,23 @@
   display: flex;
   justify-content: space-between;
 
+  .action_message_send {
+    .btn:first-child {
+      margin-right: 5px;
+    }
+  }
+
+
   .btn {
     width: 200px;
   }
 }
 
+
+@media screen and (max-width: 750px) {
+  .action_message_send {
+    .btn:first-child {
+      margin-bottom: 5px;
+    }
+  }
+}

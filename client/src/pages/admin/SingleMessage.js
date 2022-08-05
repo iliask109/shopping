@@ -43,7 +43,7 @@ export default function SingleMessage() {
 			navigate("/admin");
 		}, 1500);
 	}
-    
+
 	if (isUpdate) {
 		setTimeout(() => {
 			navigate("/admin");
@@ -74,14 +74,14 @@ export default function SingleMessage() {
 						</div>
 
 						<div className="action_message">
-							<div>
+							<div className="action_message_send">
 								<button
 									className="btn btn-primary "
 									onClick={() => setEditor(true)}>
 									Send Message
 								</button>
 								<button
-									className="btn btn-success ml-2"
+									className="btn btn-success "
 									onClick={() => confirmHandler()}>
 									Confirm
 								</button>

@@ -10,6 +10,7 @@ import MessageBox from "../components/MessageBox";
 export default function ContactPage() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const [errorEmail, setErrorEmail] = useState(false);
 
 	const messageCreate = useSelector((state) => state.messageCreate);
 	const { loading, error, success } = messageCreate;
@@ -20,9 +21,21 @@ export default function ContactPage() {
 	const [subject, setSubject] = useState("The site is not working");
 	const [message, setMessage] = useState("");
 
+	const handleEmail = (email) => {
+		var pattern =
+			"^[-0-9A-Za-z!#$%&'*+/=?^_`{|}~.]+@[-0-9A-Za-z!#$%&'*+/=?^_`{|}~.]+";
 
+		if (email.match(pattern)) {
+			setErrorEmail(false);
+			return true;
+		} else {
+			setErrorEmail(true);
+			return false;
+		}
+	};
 	const sendMessage = () => {
-		dispatch(createMessage({ name, email, phone, subject, message }));
+		if (handleEmail(email))
+			dispatch(createMessage({ name, email, phone, subject, message }));
 	};
 
 	if (success) {
@@ -47,6 +60,9 @@ export default function ContactPage() {
 					<form>
 						<h3>Drop Us a Message</h3>
 						{error && <MessageBox variant="danger">{error}</MessageBox>}
+						{errorEmail && (
+							<MessageBox variant="danger">The email is invalid</MessageBox>
+						)}
 						{success && (
 							<MessageBox variant="success">
 								The message has been sent , Thank you
@@ -76,7 +92,7 @@ export default function ContactPage() {
 								</div>
 								<div className="form-group">
 									<input
-										type="text"
+										type="number"
 										name="txtPhone"
 										className="form-control"
 										placeholder="Your Phone *"

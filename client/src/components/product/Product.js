@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { createFavorite, deleteFavoriteUser } from "../../actions/userActions";
 import Rating from "../rating/Rating";
+import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 
 import "./product.css";
+import { useMediaQuery } from "react-responsive";
 
 export default function Product({ products }) {
+	const view1 = useMediaQuery({ query: "(max-width: 1150px)" });
+	const view2 = useMediaQuery({ query: "(max-width: 750px)" });
+	const view3 = useMediaQuery({ query: "(max-width: 500px)" });
+
+	const [number, setNumber] = useState(view3 ? 1 : view2 ? 2 : view1 ? 3 : 4);
+	const [carousel, setCarousel] = useState([0, number]);
+
+	useEffect(() => {}, [number]);
+
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -24,12 +36,30 @@ export default function Product({ products }) {
 
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
+	console.log(carousel);
 
 	return (
 		<div className="product">
 			<div style={{ marginTop: "20px" }}>
-				<div className="row">
-					{products?.map((product) => (
+				<ArrowCircleLeftIcon
+					className="icon_left"
+					type="button"
+					onClick={() => {
+						if (carousel[0] > 0)
+							setCarousel([carousel[0] - number, carousel[1] - number]);
+					}}
+				/>
+				<ArrowCircleRightIcon
+					className="icon_right"
+					type="button"
+					onClick={() => {
+						if (carousel[1] < products?.length)
+							setCarousel([carousel[0] + number, carousel[1] + number]);
+					}}
+				/>
+
+				<div className="d-flex">
+					{products?.slice(carousel[0], carousel[1]).map((product) => (
 						<div
 							className="col-md-4 col-sm-6 col-xl-3 product_card "
 							key={product.name}>
@@ -80,7 +110,7 @@ export default function Product({ products }) {
 											${" "}
 											<b>
 												{(
-													product.price -
+													product?.price -
 													product.price * (product.discount / 100)
 												).toFixed(2)}
 											</b>

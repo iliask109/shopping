@@ -16,6 +16,7 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import useClickOutside from "../../helpers/clickOutside";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
 import { removeFromCart } from "../../actions/cartActions";
 import Cookies from "js-cookie";
@@ -46,7 +47,7 @@ export default function Navbar() {
 
 	if (!Cookies.get("token")) {
 		if (userInfo) {
-			alert('The user is disconnected')
+			alert("The user is disconnected");
 			dispatch(signout());
 		}
 	}
@@ -125,7 +126,11 @@ export default function Navbar() {
 						<div className="item" onClick={() => setUserOpen(true)}>
 							<img src={userInfo.avatar} alt="" className="avatar" />
 							<div className="user">{userInfo.name}</div>
-							<ArrowDownwardIcon style={{ fontSize: "14px" }} />
+							{!userOpen ? (
+								<ArrowDownwardIcon style={{ fontSize: "14px" }} />
+							) : (
+								<ArrowUpwardIcon style={{ fontSize: "14px" }} />
+							)}
 						</div>
 					) : (
 						<>
@@ -199,41 +204,56 @@ export default function Navbar() {
 						onClick={() => setUserOpen(false)}>
 						Profile
 					</Link>
-					<Link
-						to="/admin"
-						className="item"
-						style={{ textDecoration: "none" }}
-						onClick={() => setUserOpen(false)}>
-						Dashboard
-					</Link>
-					<Link
-						to="/admin/products"
-						className="item"
-						onClick={() => setUserOpen(false)}
-						style={{ textDecoration: "none" }}>
-						Products
-					</Link>
-					<Link
-						to="/admin/users"
-						className="item"
-						onClick={() => setUserOpen(false)}
-						style={{ textDecoration: "none" }}>
-						Users
-					</Link>
-					<Link
-						to="/admin/orders"
-						className="item"
-						onClick={() => setUserOpen(false)}
-						style={{ textDecoration: "none" }}>
-						Orders
-					</Link>
-					<Link
-						to="/admin/reviews"
-						className="item"
-						onClick={() => setUserOpen(false)}
-						style={{ textDecoration: "none" }}>
-						Reviews
-					</Link>
+					{userInfo?.role === "admin" && (
+						<>
+							<Link
+								to="/admin"
+								className="item"
+								style={{ textDecoration: "none" }}
+								onClick={() => setUserOpen(false)}>
+								Dashboard
+							</Link>
+							<Link
+								to="/admin/products"
+								className="item"
+								onClick={() => setUserOpen(false)}
+								style={{ textDecoration: "none" }}>
+								Products
+							</Link>
+							<Link
+								to="/admin/users"
+								className="item"
+								onClick={() => setUserOpen(false)}
+								style={{ textDecoration: "none" }}>
+								Users
+							</Link>
+							<Link
+								to="/admin/orders"
+								className="item"
+								onClick={() => setUserOpen(false)}
+								style={{ textDecoration: "none" }}>
+								Orders
+							</Link>
+							<Link
+								to="/admin/reviews"
+								className="item"
+								onClick={() => setUserOpen(false)}
+								style={{ textDecoration: "none" }}>
+								Reviews
+							</Link>
+						</>
+					)}
+					{userInfo?.role === "seller" && (
+						<Link
+							to="/seller"
+							className="item"
+							style={{ textDecoration: "none" }}
+							onClick={() => {
+								setUserOpen(false);
+							}}>
+							Seller
+						</Link>
+					)}
 					<Link
 						to="/"
 						className="item"
