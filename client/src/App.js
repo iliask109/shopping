@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/Home";
@@ -45,6 +45,8 @@ function App() {
 	const { Blur } = sidebarReducer;
 
 	const Mobile = useMediaQuery({ query: "(min-width: 700px)" });
+
+
 
 	return (
 		<div className="main">

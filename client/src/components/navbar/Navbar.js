@@ -18,6 +18,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 import { removeFromCart } from "../../actions/cartActions";
+import Cookies from "js-cookie";
 
 import Lists from "../sidebar/list";
 import { signout } from "../../actions/userActions";
@@ -43,6 +44,12 @@ export default function Navbar() {
 		}
 	};
 
+	if (!Cookies.get("token")) {
+		if (userInfo) {
+			alert('The user is disconnected')
+			dispatch(signout());
+		}
+	}
 
 	const Mobile = useMediaQuery({ query: "(max-width: 700px)" });
 
