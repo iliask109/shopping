@@ -13,7 +13,7 @@ import "./profile.scss";
 export default function EditProfilePage() {
 	const { pathname } = useLocation();
 
-	let changePassword = pathname === "/me/updatePassowrd" ? true : false;
+	let changePassword = pathname === "/me/updatePassword" ? true : false;
 
 	const dispatch = useDispatch();
 
@@ -33,7 +33,7 @@ export default function EditProfilePage() {
 	const {
 		loading: loadingPassword,
 		error: errorPassword,
-		isUpdate: updatePassowrd,
+		isUpdate: updatePassword,
 	} = userUpdatePassword;
 	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
 	const {
@@ -47,7 +47,7 @@ export default function EditProfilePage() {
 		if (changePassword) {
 			if (newPassword === confirmPassword) {
 				dispatch(updateUserPassword({ oldPassword, newPassword }));
-				if (updatePassowrd) {
+				if (updatePassword) {
 					setOldPassword("");
 					setNewPassword("");
 					setConfirmPassword("");
@@ -90,7 +90,7 @@ export default function EditProfilePage() {
 							)}
 						</div>
 						<div className="col-md-5 ">
-							{(isUpdate || updatePassowrd) && (
+							{(isUpdate || updatePassword) && (
 								<MessageBox variant="success">
 									The update was successful
 								</MessageBox>

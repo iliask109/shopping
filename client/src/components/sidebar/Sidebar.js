@@ -27,7 +27,7 @@ export default function Sidebar() {
 	const dispatch = useDispatch();
 	const Mobile = useMediaQuery({ query: "(max-width: 700px)" });
 
-	const [openCategory, setOpenCategory] = useState(true);
+	const [openCategory, setOpenCategory] = useState(false);
 	const sidebarRef = useRef(null);
 
 	const userSignin = useSelector((state) => state.userSignin);

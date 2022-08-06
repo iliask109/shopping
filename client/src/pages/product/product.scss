@@ -192,6 +192,10 @@
             margin: 15px;
         }
     }
+
+
+
+
 }
 
 @media (max-width: 410px) {
@@ -201,5 +205,13 @@
             width: 93%;
             margin: 10px;
         }
+    }
+
+    .product_page {
+
+        .amount {
+            display: block;
+        }
+
     }
 }

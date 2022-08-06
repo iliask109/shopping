@@ -131,7 +131,7 @@ export default function ProfilePage() {
 										<hr />
 										<div className="row ">
 											<div className="col-6">
-												<Link className="btn btn-info " to="/me/updatePassowrd">
+												<Link className="btn btn-info " to="/me/updatePassword">
 													Edit Password
 												</Link>
 											</div>

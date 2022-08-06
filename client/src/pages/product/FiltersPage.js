@@ -244,7 +244,7 @@ export default function FiltersPage() {
 						) : error ? (
 							<MessageBox variant="danger">{error}</MessageBox>
 						) : (
-							<div className="bg-white p-2 border col-md-12 col-sm-6 col-l-6 ">
+							<div className="bg-white p-2 border col-md-12 col-sm-12 col-l-12 ">
 								<div className="filter_name">
 									{name && <div className="item">{name}</div>}
 									{categoryFilter && (

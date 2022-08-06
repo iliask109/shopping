@@ -36,6 +36,7 @@
 .sidebar.mobile {
   width: 60%;
   margin-left: -20px;
+  min-height: 110vh;
 
 
 
@@ -76,7 +77,6 @@
 
   border-right: 2.5px solid rgb(230, 227, 227);
   border-bottom: 2.5px solid rgb(230, 227, 227);
-  min-height: 100vh;
   background-color: white;
   width: 130px;
   z-index: 99;

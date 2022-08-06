@@ -163,7 +163,7 @@ export default function ProductPage() {
 									</tr>
 
 									{product?.stock > 0 && (
-										<tr>
+										<tr className="amount">
 											<td className="h6">
 												<strong>Amount : </strong>
 											</td>
@@ -267,7 +267,7 @@ export default function ProductPage() {
 															X
 														</span>
 													)}
-													<img src={item.user_img} alt='image_user' />
+													<img src={item.user_img} alt="image_user" />
 													<div className="media-body">
 														<div className="reviews-members-header">
 															<h6 className="mb-1">{item.name}</h6>
