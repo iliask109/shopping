@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useRef, useState } from "react";
 import { SiShopware } from "react-icons/si";
 import { Link, useNavigate } from "react-router-dom";
 import "./navbar.scss";
@@ -38,20 +38,6 @@ export default function Navbar() {
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
 
-	const handleSearch = () => {
-		if (name) {
-			navigate(`/search/name/${name}`);
-			setName("");
-		}
-	};
-
-	if (!Cookies.get("token")) {
-		if (userInfo) {
-			alert("The user is disconnected");
-			dispatch(signout());
-		}
-	}
-
 	const Mobile = useMediaQuery({ query: "(max-width: 700px)" });
 
 	const miniCart = useRef(null);
@@ -64,10 +50,28 @@ export default function Navbar() {
 		setUserOpen(false);
 	});
 
+	// search
+	const handleSearch = () => {
+		if (name) {
+			navigate(`/search/name/${name}`);
+			setName("");
+		}
+	};
+
+	// if the token Expired
+	if (!Cookies.get("token")) {
+		if (userInfo) {
+			alert("The user is disconnected");
+			dispatch(signout());
+		}
+	}
+
+	// remove item from the cart
 	const removeItem = (id) => {
 		dispatch(removeFromCart(id));
 	};
 
+	// logout
 	const signoutHandler = () => {
 		dispatch(signout());
 	};
@@ -83,8 +87,6 @@ export default function Navbar() {
 					</Link>
 				</div>
 				<div className="search">
-				
-				
 					<input
 						type="search"
 						required
@@ -111,7 +113,6 @@ export default function Navbar() {
 						className="item"
 						onClick={() => setCartOpen(true)}
 						style={{ cursor: "pointer" }}>
-						{/* <Link to="/cart"> */}
 						<ShoppingCartIcon className="icon" />
 						<div className="counter">
 							{cartItems?.reduce((a, c) => a + c.qty, 0)}
@@ -147,7 +148,7 @@ export default function Navbar() {
 							{cartItems?.map((item, i) => (
 								<div className="cart_single row" key={i}>
 									<div className="cart_left col-sm">
-										<img src={item.image} />
+										<img src={item.image} alt='image_user' />
 									</div>
 									<div className="cart_right col-sm">
 										<div className="item" style={{ fontSize: "15px" }}>

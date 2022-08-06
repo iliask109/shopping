@@ -1,52 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/navbar/Navbar";
-import Home from "./pages/Home";
-import ProductPage from "./pages/ProductPage";
-import "./app.scss";
-import CartPage from "./pages/CartPage";
-import ShippingAddressPage from "./pages/ShippingAddressPage";
-import PaymentPage from "./pages/PaymentPage";
-import Placeorder from "./pages/Placeorder";
-import ErrorPage from "./pages/ErrorPage";
-import PrivateRoute from "./components/PrivateRoute";
-import SellerRoute from "./components/SellerRoute";
-import OrderPage from "./pages/OrderPage";
-import ProfilePage from "./pages/ProfilePage";
-import MyOrder from "./pages/MyOrder";
-import EditProfilePage from "./pages/EditProfilePage";
-import DasboardAdmin from "./pages/admin/DasboardAdmin";
-import AdminRoute from "./components/AdminRoute";
-import UserAdmin from "./pages/admin/UserAdmin";
-import Sidebar from "./components/sidebar/Sidebar";
-import SingleUserAdmin from "./pages/admin/SingleUserAdmin";
-import ProductAdmin from "./pages/admin/ProductAdmin";
-import SingleProductAdmin from "./pages/admin/SingleProductAdmin";
-import CreateProduct from "./pages/admin/CreateProduct";
-import OrderAdmin from "./pages/admin/OrderAdmin";
-import SingleOrderAdmin from "./pages/admin/SingleOrderAdmin";
-import FiltersPage from "./pages/FiltersPage";
-import Footer from "./components/Footer";
-import ReviewsAdmin from "./pages/admin/ReviewsAdmin";
-import ReviewsSingel from "./pages/admin/ReviewsSingel";
-import ProductsSeller from "./pages/seller/ProductsSeller";
-import SingleProductSeller from "./pages/seller/SingelProductSeller";
-import ContactPage from "./pages/ContactPage";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-import SalesPage from "./pages/SalesPage";
-import SellerProfile from "./pages/SellerProfile";
+
+//components
+import Navbar from "./components/navbar/Navbar";
+import PrivateRoute from "./helpers/routes/PrivateRoute";
+import SellerRoute from "./helpers/routes/SellerRoute";
+import AdminRoute from "./helpers/routes/AdminRoute";
+import Footer from "./components/Footer";
 import NewPassword from "./components/NewPassword";
-import AllProducts from "./pages/AllProducts";
+
+//pages
+import Home from "./pages/Home";
+import ProductPage from "./pages/product/ProductPage";
+import CartPage from "./pages/order/CartPage";
+import ShippingAddressPage from "./pages/order/ShippingAddressPage";
+import PaymentPage from "./pages/order/PaymentPage";
+import Placeorder from "./pages/order/Placeorder";
+import ErrorPage from "./pages/ErrorPage";
+import OrderPage from "./pages/order/OrderPage";
+import ProfilePage from "./pages/profile/ProfilePage";
+import MyOrder from "./pages/order/MyOrder";
+import EditProfilePage from "./pages/profile/EditProfilePage";
+import FiltersPage from "./pages/product/FiltersPage";
+import ContactPage from "./pages/ContactPage";
+import SalesPage from "./pages/product/SalesPage";
+import SellerProfile from "./pages/profile/SellerProfile";
+import AllProducts from "./pages/product/AllProducts";
+
+//pages admin and seller
+import DasboardAdmin from "./pages/admin/DasboardAdmin";
+import UserAdmin from "./pages/admin/userAdmin/UserAdmin";
+import SingleUserAdmin from "./pages/admin/userAdmin/SingleUserAdmin";
+import ProductAdmin from "./pages/admin/productAdmin/ProductAdmin";
+import SingleProductAdmin from "./pages/admin/productAdmin/SingleProductAdmin";
+import CreateProduct from "./pages/admin/productAdmin/CreateProduct";
+import OrderAdmin from "./pages/admin/orderAdmin/OrderAdmin";
+import SingleOrderAdmin from "./pages/admin/orderAdmin/SingleOrderAdmin";
+import ReviewsAdmin from "./pages/admin/reviewsAdmin/ReviewsAdmin";
+import ReviewsSingel from "./pages/admin/reviewsAdmin/ReviewsSingel";
+import ProductsSeller from "./pages/seller/ProductsSeller";
+import SingleProductSeller from "./pages/seller/SingelProductSeller";
 import SingleMessage from "./pages/admin/SingleMessage";
+
+import "./app.scss";
 
 function App() {
 	const sidebarReducer = useSelector((state) => state.sidebarReducer);
 	const { Blur } = sidebarReducer;
 
 	const Mobile = useMediaQuery({ query: "(min-width: 700px)" });
-
-
 
 	return (
 		<div className="main">

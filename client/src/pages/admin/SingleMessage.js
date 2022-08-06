@@ -10,30 +10,32 @@ import Loading from "../../components/loading/Loading";
 import MessageBox from "../../components/MessageBox";
 
 export default function SingleMessage() {
+	const { id } = useParams();
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const [meg, setMeg] = useState("");
+	const [editor, setEditor] = useState(false);
+
 	const singleMessage = useSelector((state) => state.singleMessage);
 	const { loading, error, message } = singleMessage;
 
 	const confirmMessage = useSelector((state) => state.confirmMessage);
 	const { isUpdate } = confirmMessage;
 
-	const [meg, setMeg] = useState("");
-	const [editor, setEditor] = useState(false);
-
 	const deleteMessage = useSelector((state) => state.deleteMessage);
 	const { isDeleted } = deleteMessage;
-
-	const { id } = useParams();
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(detailsMessage(id));
 	}, [dispatch, id]);
 
+	// delete message
 	const deleteHandler = () => {
 		dispatch(deleteMessageAdmin(id));
 	};
 
+	// confirm message
 	const confirmHandler = () => {
 		dispatch(confirmMessageAdmin(id, meg));
 	};
@@ -49,6 +51,7 @@ export default function SingleMessage() {
 			navigate("/admin");
 		}, 1500);
 	}
+	
 	return (
 		<div>
 			{error && <MessageBox variant="danger"> {error}</MessageBox>}

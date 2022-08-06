@@ -1,0 +1,195 @@
+.profile_page {
+    .main-body {
+        margin-top: 15px;
+    }
+
+    .card {
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid rgba(0, 0, 0, 0.125);
+        border-radius: 0.25rem;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        min-height: 1px;
+        padding: 1rem;
+    }
+
+    .gutters-sm {
+        margin-right: -8px;
+        margin-left: -8px;
+    }
+
+    .gutters-sm>.col,
+    .gutters-sm>[class*="col-"] {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+
+    .mb-3,
+    .my-3 {
+        margin-bottom: 1rem !important;
+    }
+
+    .bg-gray-300 {
+        background-color: #e2e8f0;
+    }
+
+    .h-100 {
+        height: 100% !important;
+    }
+
+    .shadow-none {
+        box-shadow: none !important;
+    }
+
+
+}
+
+
+
+.seller_page {
+
+    $white: #FFF;
+    $gray: #888;
+    $red: indianred;
+    $blue: rgb(76, 159, 238);
+
+    #like-button {
+        color: $gray;
+        font-size: 1.5em;
+        font-family: 'Heebo', sans-serif;
+        background-color: transparent;
+        border: 0.1em solid;
+        border-radius: 1em;
+        padding: 0.333em 1em 0.25em;
+        line-height: 1.2em;
+        box-shadow: 0 0.25em 1em -0.25em;
+        cursor: pointer;
+        transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+        outline: 0;
+        margin: 15px;
+        align-items: left;
+        text-align: left;
+        justify-content: left;
+
+        position: absolute;
+        right: 0;
+        top: 0;
+
+
+
+        &:hover {
+            color: $red;
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+
+        &.selected {
+            color: $white;
+            background-color: $red;
+            border-color: $red;
+        }
+
+        .heart-icon {
+            display: inline-block;
+            fill: currentColor;
+            width: 0.8em;
+            height: 0.8em;
+            margin-right: 0.2em;
+        }
+    }
+
+    #like-button.like {
+        color: $red;
+
+    }
+
+
+    .card-body {
+        text-align: center;
+        align-items: center;
+    }
+
+
+
+
+    .card_seller:hover {
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        transform: scale(1.1);
+
+
+    }
+
+    #like {
+        color: $blue;
+        font-size: 1.5em;
+        font-family: 'Heebo', sans-serif;
+        background-color: transparent;
+        border: 0.1em solid;
+        border-radius: 1em;
+        padding: 0.333em 1em 0.25em;
+        line-height: 1.2em;
+        box-shadow: 0 0.25em 1em -0.25em;
+        cursor: pointer;
+        transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+        outline: 0;
+        margin: 15px;
+        align-items: left;
+        text-align: left;
+        justify-content: left;
+
+        .heart-icon {
+            display: inline-block;
+            fill: currentColor;
+            width: 0.8em;
+            height: 0.8em;
+            margin-right: 0.2em;
+        }
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .seller_page {
+        #like-button {
+            font-size: 1em;
+
+        }
+
+        .card_seller .card {
+            width: 17rem !important;
+        }
+    }
+
+    .edit_profile_page {
+        img {
+            display: none;
+        }
+    }
+}
+
+
+
+
+@media screen and (max-width: 500px) {
+    .seller_page #like-button {
+        font-size: 0.8em;
+
+    }
+
+    .profile_page .MuiPaper-elevation {
+        margin-left: -14px !important;
+    }
+}

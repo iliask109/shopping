@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { listProducts } from "../actions/productActions";
-import Loading from "../components/loading/Loading";
-import MessageBox from "../components/MessageBox";
-import Product from "../components/product/Product";
-import Title from "../components/Title";
+import { listProducts } from "../../actions/productActions";
+import Loading from "../../components/loading/Loading";
+import MessageBox from "../../components/MessageBox";
+import Product from "../../components/product/Product";
+import Title from "../../components/Title";
+import "./product.scss";
 
 export default function SalesPage() {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const [SortProducts, setSortProducts] = useState("");
 
 	useEffect(() => {
@@ -23,6 +22,7 @@ export default function SalesPage() {
 	const productList = useSelector((state) => state.productList);
 	const { loading, error, products } = productList;
 
+	//sort
 	const sortProducts = (value) => {
 		if (value === "Latest items") {
 			products.sort(function (a, b) {

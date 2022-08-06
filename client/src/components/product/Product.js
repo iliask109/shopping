@@ -6,7 +6,7 @@ import Rating from "../rating/Rating";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 
-import "./product.css";
+import "./product.scss";
 import { useMediaQuery } from "react-responsive";
 
 export default function Product({ products, home }) {
@@ -17,26 +17,28 @@ export default function Product({ products, home }) {
 	const [number, setNumber] = useState(view3 ? 1 : view2 ? 2 : view1 ? 3 : 4);
 	const [carousel, setCarousel] = useState([0, number]);
 
+	const userSignin = useSelector((state) => state.userSignin);
+	const { userInfo } = userSignin;
+
 	useEffect(() => {}, [number]);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
+	// navigate to the product
 	const handleCart = (productId) => {
 		navigate(`/products/${productId}`);
 	};
 
+	// add product to the favorite user
 	const favoriteHandler = (productId) => {
 		dispatch(createFavorite(productId));
 	};
 
+	// delete favorite
 	const deleteFavoriteId = (productId) => {
 		dispatch(deleteFavoriteUser(productId));
 	};
-
-	const userSignin = useSelector((state) => state.userSignin);
-	const { userInfo } = userSignin;
-	console.log(home);
 
 	return (
 		<div className="product">

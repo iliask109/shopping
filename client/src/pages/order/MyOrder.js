@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { detailsOrder } from "../actions/orderActions";
-import Loading from "../components/loading/Loading";
-import MessageBox from "../components/MessageBox";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Title from "../components/Title";
+import { Link, useParams } from "react-router-dom";
+import { detailsOrder } from "../../actions/orderActions";
+import Loading from "../../components/loading/Loading";
+import MessageBox from "../../components/MessageBox";
+import Title from "../../components/Title";
+import './order.scss'
 
 export default function MyOrder() {
 	const { id: orderId } = useParams();
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	const orderDetails = useSelector((state) => state.orderDetails);
 	const { order, loading, error } = orderDetails;
@@ -23,9 +22,6 @@ export default function MyOrder() {
 		<div>
 			<Title title={"My Order"} />
 
-			<button className="goBack" onClick={() => navigate(-1)}>
-				<ArrowBackIcon className="icon" />
-			</button>
 			<div className="container py-5 h-100 my_order_page">
 				{loading ? (
 					<Loading></Loading>

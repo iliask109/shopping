@@ -9,19 +9,17 @@ import Paper from "@mui/material/Paper";
 import {
 	deleteReviewAdmin,
 	getProductReviewsAdmin,
-} from "../../actions/productActions";
-import { useNavigate, useParams } from "react-router-dom";
+} from "../../../actions/productActions";
+import {  useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import MessageBox from "../../components/MessageBox";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Loading from "../../components/loading/Loading";
-import Title from "../../components/Title";
+import MessageBox from "../../../components/MessageBox";
+import Loading from "../../../components/loading/Loading";
+import Title from "../../../components/Title";
 
 export default function ReviewsSingel() {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
-
 	const { id } = useParams();
+
 	const productReviews = useSelector((state) => state.productReviews);
 	const { loading, reviews } = productReviews;
 	const deleteReview = useSelector((state) => state.deleteReview);
@@ -31,9 +29,11 @@ export default function ReviewsSingel() {
 		dispatch(getProductReviewsAdmin(id));
 	}, [dispatch, id]);
 
+	// delete review
 	const deleteReviewHandler = (reviewId) => {
 		dispatch(deleteReviewAdmin(reviewId, id));
 	};
+	
 	if (isDeleted) {
 		setTimeout(window.location.reload(), 1500);
 	}
@@ -42,9 +42,7 @@ export default function ReviewsSingel() {
 		<div className="reviews_admin">
 			<Title title={"admin reviews"} />
 
-			<button className="goBack" onClick={() => navigate(-1)}>
-				<ArrowBackIcon className="icon" />
-			</button>
+	
 			{isDeleted && (
 				<MessageBox variant="success">The Review Delete</MessageBox>
 			)}

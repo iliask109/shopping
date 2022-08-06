@@ -1,20 +1,34 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { updateUserPassword, updateUserProfile } from "../actions/userActions";
-import Loading from "../components/loading/Loading";
-import MessageBox from "../components/MessageBox";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Title from "../components/Title";
+import { useLocation } from "react-router-dom";
+import {
+	updateUserPassword,
+	updateUserProfile,
+} from "../../actions/userActions";
+import Loading from "../../components/loading/Loading";
+import MessageBox from "../../components/MessageBox";
+import Title from "../../components/Title";
+import "./profile.scss";
 
 export default function EditProfilePage() {
 	const { pathname } = useLocation();
-	const navigate = useNavigate();
 
 	let changePassword = pathname === "/me/updatePassowrd" ? true : false;
 
+	const dispatch = useDispatch();
+
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
+
+	const [name, setName] = useState(user?.user.name || "");
+	const [email, setEmail] = useState(user?.user.email || "");
+	const [avatar, setAvatar] = useState(user?.user.avatar || "");
+	const [aboutMe, setAboutMe] = useState(user?.user.aboutMe || "");
+	const [role, setRole] = useState(user?.user.role || "");
+	const [oldPassword, setOldPassword] = useState("");
+	const [newPassword, setNewPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
+
 	const userUpdatePassword = useSelector((state) => state.userUpdatePassword);
 	const {
 		loading: loadingPassword,
@@ -27,17 +41,8 @@ export default function EditProfilePage() {
 		loading: loadingUpdate,
 		error: errorUpdate,
 	} = userUpdateProfile;
-	const dispatch = useDispatch();
 
-	const [name, setName] = useState(user?.user.name || "");
-	const [email, setEmail] = useState(user?.user.email || "");
-	const [avatar, setAvatar] = useState(user?.user.avatar || "");
-	const [aboutMe, setAboutMe] = useState(user?.user.aboutMe || "");
-	const [role, setRole] = useState(user?.user.role || "");
-	const [oldPassword, setOldPassword] = useState("");
-	const [newPassword, setNewPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
-
+	// update user
 	const submitHandler = () => {
 		if (changePassword) {
 			if (newPassword === confirmPassword) {
@@ -66,10 +71,6 @@ export default function EditProfilePage() {
 		<div>
 			<Title title={"Edit Profile"} />
 			<div className="container edit_profile_page rounded bg-white mt-5 mb-5">
-				<button className="goBack" onClick={() => navigate(-1)}>
-					<ArrowBackIcon className="icon" />
-				</button>
-
 				{loading ? (
 					<Loading></Loading>
 				) : (

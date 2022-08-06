@@ -1,28 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
 	getUserDetailsAdmin,
 	updateUserAdmin,
-} from "../../actions/userActions";
-import Loading from "../../components/loading/Loading";
-import MessageBox from "../../components/MessageBox";
+} from "../../../actions/userActions";
+import Loading from "../../../components/loading/Loading";
+import MessageBox from "../../../components/MessageBox";
 import { Form } from "react-bootstrap";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Title from "../../components/Title";
+import Title from "../../../components/Title";
 
 export default function SingleUserAdmin() {
+	const { id } = useParams();
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [role, setRole] = useState("");
+
 	const userDetails = useSelector((state) => state.userDetailsAdmin);
 	const { loading, error, user } = userDetails;
 	const userUpdate = useSelector((state) => state.userUpdateAdmin);
 	const { isUpdate, loading: loadingUpdate } = userUpdate;
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
-
-	const { id } = useParams();
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
-	const [role, setRole] = useState("");
 
 	useEffect(() => {
 		if (!user || user._id !== id) {
@@ -34,6 +32,7 @@ export default function SingleUserAdmin() {
 		}
 	}, [dispatch, id, loading, user]);
 
+	//update user
 	const submitHandler = () => {
 		dispatch(updateUserAdmin(id, { name, email, role }));
 	};
@@ -42,9 +41,6 @@ export default function SingleUserAdmin() {
 		<div>
 			<Title title={"admin users"} />
 
-			<button className="goBack" onClick={() => navigate(-1)}>
-				<ArrowBackIcon className="icon" />
-			</button>
 			<div className="container rounded bg-white mt-5 mb-5">
 				{loading ? (
 					<Loading></Loading>

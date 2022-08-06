@@ -9,12 +9,22 @@ import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 import Title from "../../components/Title";
 
 export default function SingleProductSeller() {
+	const categories = [
+		"Electronics",
+		"Cameras",
+		"Laptops",
+		"Accessories",
+		"Headphones",
+		"Food",
+		"Books",
+		"Clothes/Shoes",
+		"Beauty/Health",
+		"Sports",
+		"Outdoor",
+		"Home",
+	];
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const productDetails = useSelector((state) => state.productDetails);
-	const { loading, error, product } = productDetails;
-	const productUpdateAdmin = useSelector((state) => state.productUpdateAdmin);
-	const { success } = productUpdateAdmin;
 
 	const { id } = useParams();
 	const [name, setName] = useState("");
@@ -24,6 +34,11 @@ export default function SingleProductSeller() {
 	const [category, setCategory] = useState("");
 	const [seller, setSeller] = useState("");
 	const [stock, setStock] = useState("");
+
+	const productDetails = useSelector((state) => state.productDetails);
+	const { loading, error, product } = productDetails;
+	const productUpdateAdmin = useSelector((state) => state.productUpdateAdmin);
+	const { isUpdate } = productUpdateAdmin;
 
 	useEffect(() => {
 		dispatch({ type: UPDATE_PRODUCT_RESET });
@@ -41,6 +56,7 @@ export default function SingleProductSeller() {
 		}
 	}, [dispatch, id, loading, product]);
 
+	// update product
 	const submitHandler = () => {
 		dispatch(
 			updateProduct(id, {
@@ -53,26 +69,12 @@ export default function SingleProductSeller() {
 				stock,
 			})
 		);
-		if (success) {
-			navigate("/seller");
-		}
 	};
 
-	const categories = [
-		"Electronics",
-		"Cameras",
-		"Laptops",
-		"Accessories",
-		"Headphones",
-		"Food",
-		"Books",
-		"Clothes/Shoes",
-		"Beauty/Health",
-		"Sports",
-		"Outdoor",
-		"Home",
-	];
-
+	if (isUpdate) {
+		navigate("/seller");
+	}
+	
 	return (
 		<div>
 			<Title title={"seller products"} />

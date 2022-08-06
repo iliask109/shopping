@@ -5,6 +5,8 @@ export default function Footer() {
 	const [emailFooter, setEmailFooter] = useState("");
 	const [errorFooter, setErrorFooter] = useState(false);
 
+
+	// valid email
 	const handleEmail = () => {
 		var pattern = "^s*[w-+_]+(.[w-+_]+)*@[w-+_]+.[w-+_]+(.[w-+_]+)*s*$";
 		if (emailFooter.match(pattern)) {

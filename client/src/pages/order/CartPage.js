@@ -2,9 +2,9 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TbSquareMinus, TbSquarePlus } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
-import { AddToCart, removeFromCart } from "../actions/cartActions";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Title from "../components/Title";
+import { AddToCart, removeFromCart } from "../../actions/cartActions";
+import Title from "../../components/Title";
+import './order.scss'
 
 export default function CartPage() {
 	const dispatch = useDispatch();
@@ -20,10 +20,12 @@ export default function CartPage() {
 	const shippingPrice = itemsPrice > 250 ? 0 : itemsPrice / 10;
 	const totalPrice = itemsPrice + shippingPrice;
 
+	// remove item form cart 
 	const removeFromCartHandler = (id) => {
 		dispatch(removeFromCart(id));
 	};
 
+	// add item to the cart 
 	const handleCart = (id, qty) => {
 		if (qty < 1) {
 			if (window.confirm("You sure want to remove the product from the list")) {
@@ -34,6 +36,7 @@ export default function CartPage() {
 		}
 	};
 
+	// check if user login 
 	const checkoutHandle = () => {
 		if (userInfo) {
 			navigate("/shipping");
@@ -45,9 +48,7 @@ export default function CartPage() {
 	return (
 		<div className="cart_page p-3">
 			<Title title={"Cart"} />
-			<button className="goBack" onClick={() => navigate(-1)}>
-				<ArrowBackIcon className="icon" />
-			</button>
+		
 			{cartItems.length > 0 ? (
 				<section className="shopping-cart ">
 					<div className="container">

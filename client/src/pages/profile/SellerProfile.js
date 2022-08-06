@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { detailsSellerProducts, listProducts } from "../actions/productActions";
+import { detailsSellerProducts } from "../../actions/productActions";
 import {
 	createLike,
 	deleteLikeUser,
 	getUserDetailsAdmin,
-} from "../actions/userActions";
-import Loading from "../components/loading/Loading";
-import MessageBox from "../components/MessageBox";
-import Rating from "../components/rating/Rating";
-import Title from "../components/Title";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+} from "../../actions/userActions";
+import Loading from "../../components/loading/Loading";
+import MessageBox from "../../components/MessageBox";
+import Rating from "../../components/rating/Rating";
+import Title from "../../components/Title";
+import "./profile.scss";
 
 export default function SellerProfile() {
 	const { id } = useParams();
@@ -33,6 +33,7 @@ export default function SellerProfile() {
 		dispatch(detailsSellerProducts(id));
 	}, [dispatch, id]);
 
+	// create like or remove like
 	const likeHandler = () => {
 		if (user?.likes?.find((i) => i.user === userInfo._id)) {
 			dispatch(deleteLikeUser(id));
@@ -45,12 +46,9 @@ export default function SellerProfile() {
 
 	return (
 		<div className="seller_page">
-			<Title title={'My Page'} />
+			<Title title={"My Page"} />
 
 			<div className="container ">
-				{/* <button className="goBack" onClick={() => navigate(-1)}>
-					<ArrowBackIcon className="icon" />
-				</button> */}
 				{loading ? (
 					<Loading />
 				) : error ? (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Rating from "../components/rating/Rating";
+import Rating from "../../components/rating/Rating";
 import { TbSquareMinus, TbSquarePlus } from "react-icons/tb";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,22 +7,22 @@ import {
 	deleteReviewAdmin,
 	detailsProduct,
 	newReviewAdmin,
-} from "../actions/productActions";
-import Loading from "../components/loading/Loading";
-import { AddToCart } from "./../actions/cartActions";
-import MessageBox from "../components/MessageBox";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Title from "../components/Title";
+} from "../../actions/productActions";
+import Loading from "../../components/loading/Loading";
+import { AddToCart } from "../../actions/cartActions";
+import MessageBox from "../../components/MessageBox";
+import Title from "../../components/Title";
+import "./product.scss";
 
 export default function ProductPage() {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	const [query, setQuery] = useState(0);
 	const [rating, setRating] = useState(0);
 	const [comment, setComment] = useState("");
-
 	const [addToCart, setAddToCart] = useState(false);
 	const { id } = useParams();
-	const navigate = useNavigate();
-	const dispatch = useDispatch();
 
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
@@ -37,7 +37,8 @@ export default function ProductPage() {
 		dispatch(detailsProduct(id));
 	}, [dispatch, id]);
 
-	const addCart = (productId, value) => {
+	// add to cart
+	const addCart = (productId) => {
 		dispatch(AddToCart(productId, query));
 		setAddToCart(true);
 	};
@@ -52,9 +53,12 @@ export default function ProductPage() {
 		navigate("/");
 	};
 
+	// new review
 	const reviewHandler = (productId) => {
 		dispatch(newReviewAdmin({ rating, comment, productId }));
 	};
+
+	// delete review
 	const deleteReviewHandler = (reviewId) => {
 		dispatch(deleteReviewAdmin(reviewId, id));
 	};
@@ -68,13 +72,10 @@ export default function ProductPage() {
 	}
 
 	return (
-		<div>
+		<div className="product_page">
 			<Title title={"Product"} />
 
-			<button className="goBack" onClick={() => navigate(-1)}>
-				<ArrowBackIcon className="icon" />
-			</button>
-			<div className="product_page col-xl-12  ">
+			<div className=" col-xl-12  ">
 				{loading ? (
 					<Loading />
 				) : (
@@ -174,7 +175,6 @@ export default function ProductPage() {
 													}}
 												/>
 												<input
-													type="number"
 													value={query}
 													onChange={() => {}}
 													min="0"
@@ -267,7 +267,7 @@ export default function ProductPage() {
 															X
 														</span>
 													)}
-													<img src={item.user_img} />
+													<img src={item.user_img} alt='image_user' />
 													<div className="media-body">
 														<div className="reviews-members-header">
 															<h6 className="mb-1">{item.name}</h6>

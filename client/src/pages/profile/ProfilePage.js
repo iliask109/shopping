@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { listOrderMine } from "../actions/orderActions";
-import { deleteFavoriteUser, detailsUser } from "../actions/userActions";
-import Loading from "../components/loading/Loading";
-import MessageBox from "../components/MessageBox";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Link } from "react-router-dom";
+import { listOrderMine } from "../../actions/orderActions";
+import { deleteFavoriteUser, detailsUser } from "../../actions/userActions";
+import Loading from "../../components/loading/Loading";
+import MessageBox from "../../components/MessageBox";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -16,10 +15,13 @@ import Paper from "@mui/material/Paper";
 import {
 	USER_UPDATE_PASSWORD_RESET,
 	USER_UPDATE_PROFILE_RESET,
-} from "../constants/userConstants";
-import Title from "../components/Title";
+} from "../../constants/userConstants";
+import Title from "../../components/Title";
+import "./profile.scss";
 
 export default function ProfilePage() {
+	const dispatch = useDispatch();
+
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
 	const cart = useSelector((state) => state.cart);
@@ -30,9 +32,6 @@ export default function ProfilePage() {
 	const { orders } = orderMineList;
 	const deleteFavorite = useSelector((state) => state.deleteFavorite);
 	const { isDelete } = deleteFavorite;
-	const navigate = useNavigate();
-
-	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(detailsUser(userInfo._id));
@@ -41,6 +40,7 @@ export default function ProfilePage() {
 		dispatch({ type: USER_UPDATE_PROFILE_RESET });
 	}, [dispatch, userInfo._id]);
 
+	// delete favorite
 	const deleteFavoriteId = (productId) => {
 		dispatch(deleteFavoriteUser(productId));
 	};
@@ -52,9 +52,6 @@ export default function ProfilePage() {
 			<Title title={"Profile"} />
 
 			<div className="container profile_page">
-				<button className="goBack" onClick={() => navigate(-1)}>
-					<ArrowBackIcon className="icon" />
-				</button>
 				{loading ? (
 					<Loading />
 				) : (

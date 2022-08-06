@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import Loading from "../../components/loading/Loading";
-import MessageBox from "../../components/MessageBox";
+import { useParams } from "react-router-dom";
+import Loading from "../../../components/loading/Loading";
+import MessageBox from "../../../components/MessageBox";
 import { Form } from "react-bootstrap";
-import { detailsProduct, updateProduct } from "../../actions/productActions";
-import "./admin.scss";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Title from "../../components/Title";
+import { detailsProduct, updateProduct } from "../../../actions/productActions";
+import Title from "../../../components/Title";
 
 export default function SingleProductAdmin() {
+	const categories = [
+		"Electronics",
+		"Cameras",
+		"Laptops",
+		"Accessories",
+		"Headphones",
+		"Food",
+		"Books",
+		"Clothes/Shoes",
+		"Beauty/Health",
+		"Sports",
+		"Outdoor",
+		"Home",
+	];
+
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const productDetails = useSelector((state) => state.productDetails);
-	const { loading, error, product } = productDetails;
-	const productUpdateAdmin = useSelector((state) => state.productUpdateAdmin);
-	const { isUpdate } = productUpdateAdmin;
 
 	const { id } = useParams();
 	const [name, setName] = useState("");
@@ -26,6 +35,10 @@ export default function SingleProductAdmin() {
 	const [category, setCategory] = useState("");
 	const [seller, setSeller] = useState("");
 	const [stock, setStock] = useState("");
+
+	const { loading, error, product } = productDetails;
+	const productUpdateAdmin = useSelector((state) => state.productUpdateAdmin);
+	const { isUpdate } = productUpdateAdmin;
 
 	useEffect(() => {
 		if (!product || product._id !== id) {
@@ -42,6 +55,7 @@ export default function SingleProductAdmin() {
 		}
 	}, [dispatch, id, loading, product]);
 
+	// update product
 	const submitHandler = (e) => {
 		e.preventDefault();
 		dispatch(
@@ -58,28 +72,10 @@ export default function SingleProductAdmin() {
 		);
 	};
 
-	const categories = [
-		"Electronics",
-		"Cameras",
-		"Laptops",
-		"Accessories",
-		"Headphones",
-		"Food",
-		"Books",
-		"Clothes/Shoes",
-		"Beauty/Health",
-		"Sports",
-		"Outdoor",
-		"Home",
-	];
-
 	return (
 		<div>
 			<Title title={"admin products"} />
 
-			<button className="goBack" onClick={() => navigate(-1)}>
-				<ArrowBackIcon className="icon" />
-			</button>
 			<div className=" container product_admin rounded bg-white mt-5 mb-5 ">
 				{loading ? (
 					<Loading></Loading>

@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import Loading from "../../components/loading/Loading";
-import MessageBox from "../../components/MessageBox";
+import { useParams } from "react-router-dom";
+import Loading from "../../../components/loading/Loading";
+import MessageBox from "../../../components/MessageBox";
 import { Form } from "react-bootstrap";
-import { detailsOrder, updateOrderAdmin } from "../../actions/orderActions";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Title from "../../components/Title";
+import { detailsOrder, updateOrderAdmin } from "../../../actions/orderActions";
+import Title from "../../../components/Title";
 
 export default function SingleOrderAdmin() {
+	const dispatch = useDispatch();
+
+	const { id } = useParams();
+
 	const orderDetails = useSelector((state) => state.orderDetails);
 	const { order = {}, loading, error } = orderDetails;
 	const updateOrder = useSelector((state) => state.updateOrder);
 	const { isUpdate } = updateOrder;
+	const [status, setStatus] = useState("");
 
 	const {
 		shippingAddress,
@@ -23,16 +27,11 @@ export default function SingleOrderAdmin() {
 		totalPrice,
 	} = order;
 
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-
-	const { id } = useParams();
-	const [status, setStatus] = useState(order.orderStatus);
-
 	useEffect(() => {
 		dispatch(detailsOrder(id));
 	}, [dispatch, id]);
 
+	// update order
 	const submitHandler = () => {
 		dispatch(
 			updateOrderAdmin(id, {
@@ -46,13 +45,11 @@ export default function SingleOrderAdmin() {
 			})
 		);
 	};
+
 	return (
 		<div>
 			<Title title={"admin orders"} />
 
-			<button className="goBack" onClick={() => navigate(-1)}>
-				<ArrowBackIcon className="icon" />
-			</button>
 			<div className="container rounded bg-white mt-5 mb-5">
 				{loading ? (
 					<Loading></Loading>
@@ -77,7 +74,7 @@ export default function SingleOrderAdmin() {
 										<input
 											type="text"
 											className="form-control"
-											value={order._id}
+											value={order?._id}
 											disabled
 										/>
 									</div>
@@ -86,7 +83,7 @@ export default function SingleOrderAdmin() {
 										<input
 											type="text"
 											className="form-control"
-											value={order.user.name}
+											value={order?.user?.name}
 											disabled
 										/>
 									</div>
@@ -95,7 +92,7 @@ export default function SingleOrderAdmin() {
 										<input
 											type="text"
 											className="form-control"
-											value={order.paidAt.slice(0, 10)}
+											value={order?.paidAt?.slice(0, 10)}
 											disabled
 										/>
 									</div>
@@ -104,7 +101,7 @@ export default function SingleOrderAdmin() {
 										<input
 											type="text"
 											className="form-control"
-											value={order.itemsPrice}
+											value={order?.itemsPrice}
 											disabled
 										/>
 									</div>
@@ -113,7 +110,7 @@ export default function SingleOrderAdmin() {
 										<input
 											type="text"
 											className="form-control"
-											value={order.taxPrice}
+											value={order?.taxPrice}
 											disabled
 										/>
 									</div>
@@ -122,7 +119,7 @@ export default function SingleOrderAdmin() {
 										<input
 											type="text"
 											className="form-control"
-											value={order.shippingPrice}
+											value={order?.shippingPrice}
 											disabled
 										/>
 									</div>
@@ -131,18 +128,18 @@ export default function SingleOrderAdmin() {
 										<input
 											type="text"
 											className="form-control"
-											value={order.totalPrice}
+											value={order?.totalPrice}
 											disabled
 										/>
 									</div>
 									<div className="col-md-12">
-										<label className="labels">Category</label>
+										<label className="labels">Status</label>
 
 										<Form.Select
-											value={status}
+											value={order?.orderStatus}
 											className="form-control"
 											onChange={(e) => setStatus(e.target.value)}
-											disabled={order.orderStatus === "Delivered"}>
+											disabled={order?.orderStatus === "Delivered"}>
 											<option value="Processing">Processing</option>
 											<option value="Shipped">Shipped</option>
 											<option value="Delivered">Delivered</option>
@@ -154,7 +151,7 @@ export default function SingleOrderAdmin() {
 									<button
 										className="btn btn-primary profile-button"
 										type="button"
-										disabled={order.orderStatus === "Delivered"}
+										disabled={order?.orderStatus === "Delivered"}
 										onClick={() => submitHandler()}>
 										Update
 									</button>

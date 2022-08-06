@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useNavigate } from "react-router-dom";
 import Title from "../components/Title";
 import { createMessage } from "../actions/messageActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,19 +6,19 @@ import Loading from "../components/loading/Loading";
 import MessageBox from "../components/MessageBox";
 
 export default function ContactPage() {
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
 	const [errorEmail, setErrorEmail] = useState(false);
-
-	const messageCreate = useSelector((state) => state.messageCreate);
-	const { loading, error, success } = messageCreate;
-
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
 	const [subject, setSubject] = useState("The site is not working");
 	const [message, setMessage] = useState("");
 
+	const messageCreate = useSelector((state) => state.messageCreate);
+	const { loading, error, success } = messageCreate;
+
+	// valid email
 	const handleEmail = (email) => {
 		var pattern =
 			"^[-0-9A-Za-z!#$%&'*+/=?^_`{|}~.]+@[-0-9A-Za-z!#$%&'*+/=?^_`{|}~.]+";
@@ -33,6 +31,8 @@ export default function ContactPage() {
 			return false;
 		}
 	};
+
+	// send message
 	const sendMessage = () => {
 		if (handleEmail(email))
 			dispatch(createMessage({ name, email, phone, subject, message }));
@@ -43,6 +43,7 @@ export default function ContactPage() {
 			window.location.reload();
 		}, 2000);
 	}
+
 	return (
 		<div className="contact_page">
 			<Title title={"Contact"} />

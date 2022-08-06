@@ -1,18 +1,16 @@
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { allOrdersAdmin, deleteOrderAdmin } from "../../actions/orderActions";
-import Loading from "../../components/loading/Loading";
-import { UPDATE_ORDER_RESET } from "../../constants/orderConstants";
-import { orderColumns } from "./datatablesource";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import MessageBox from "../../components/MessageBox";
-import Title from "../../components/Title";
+import { Link } from "react-router-dom";
+import { allOrdersAdmin, deleteOrderAdmin } from "../../../actions/orderActions";
+import Loading from "../../../components/loading/Loading";
+import { UPDATE_ORDER_RESET } from "../../../constants/orderConstants";
+import { orderColumns } from "../datatablesource";
+import MessageBox from "../../../components/MessageBox";
+import Title from "../../../components/Title";
 
 export default function OrderAdmin() {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	const allOrders = useSelector((state) => state.allOrders);
 	const { orders, loading } = allOrders;
@@ -25,14 +23,17 @@ export default function OrderAdmin() {
 		dispatch({ type: UPDATE_ORDER_RESET });
 	}, [dispatch]);
 
+	// delete user
 	const handleDelete = (id) => {
 		if (window.confirm("Are you sure you want to delete this user?")) {
 			dispatch(deleteOrderAdmin(id));
 		}
 	};
+
 	if (isDeleted) {
 		setTimeout(window.location.reload(), 1500);
 	}
+	
 	const actionColumn = [
 		{
 			field: "action",
@@ -71,9 +72,7 @@ export default function OrderAdmin() {
 						{isDeleted && (
 							<MessageBox variant="success">The Order Delete</MessageBox>
 						)}
-						<button className="goBack" onClick={() => navigate(-1)}>
-							<ArrowBackIcon className="icon" />
-						</button>
+				
 						<div className="datatableTitle">Orders </div>
 
 						<DataGrid

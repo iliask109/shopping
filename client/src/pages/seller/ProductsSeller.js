@@ -1,17 +1,15 @@
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { deleteProduct, getProductsSeller } from "../../actions/productActions";
 import Loading from "../../components/loading/Loading";
 import { productColumns } from "../admin/datatablesource";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MessageBox from "../../components/MessageBox";
 import Title from "../../components/Title";
 
 export default function ProductsSeller() {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	const productSellerList = useSelector((state) => state.productSellerList);
 	const { loading, products } = productSellerList;
@@ -23,8 +21,9 @@ export default function ProductsSeller() {
 		dispatch(getProductsSeller());
 	}, [dispatch]);
 
+// delete product 
 	const handleDelete = (id) => {
-		if (window.confirm("Are you sure you want to delete this user?")) {
+		if (window.confirm("Are you sure you want to delete this product?")) {
 			dispatch(deleteProduct(id));
 		}
 	};
@@ -71,9 +70,7 @@ export default function ProductsSeller() {
 						{isDeleted && (
 							<MessageBox variant="success">The Product Delete</MessageBox>
 						)}
-						<button className="goBack" onClick={() => navigate(-1)}>
-							<ArrowBackIcon className="icon" />
-						</button>
+						
 						<div className="datatableTitle">
 							Products{" "}
 							<Link to="/seller/products/new" className="link">

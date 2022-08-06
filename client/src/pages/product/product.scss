@@ -1,0 +1,205 @@
+.product_page {
+
+    .modal-header {
+        button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+    }
+
+    .modal-content {
+        margin-top: 5px;
+    }
+
+    .modal-body img {
+        max-width: 550px;
+        max-height: 350px;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 20px;
+        border-radius: 3px;
+    }
+
+    td {
+        padding: 5px;
+    }
+
+    .open_info {
+        margin-top: 10px;
+    }
+
+    .add_to {
+        background: green;
+        color: #ffffff !important;
+        display: inline-block;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 20px;
+        line-height: 0.8;
+        justify-content: center;
+        text-align: center;
+        text-transform: capitalize;
+        border-radius: 1px;
+        letter-spacing: 0.5px;
+        border: 0px !important;
+        border-radius: 100px;
+        margin: 2px;
+    }
+
+    .reviews {
+        h5 {
+            text-decoration: underline;
+        }
+
+        .delete_review {
+            position: relative;
+            left: 80%;
+            top: 40px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .restaurant-detailed-ratings-and-reviews hr {
+            margin: 0 -24px;
+        }
+
+        .reviews-members .media .mr-3 {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+        }
+
+        .media {
+            height: 140px;
+
+            img {
+                width: 50px;
+                height: 50px;
+                margin: 0px 20px;
+            }
+        }
+    }
+}
+
+.filter_page {
+    position: relative;
+    min-height: 100vh;
+    margin-bottom: 5px;
+    overflow-y: auto;
+
+    #filter {
+        width: 230px;
+    }
+
+    .container::-webkit-scrollbar {
+        width: 6px;
+        border-radius: 3px;
+    }
+
+    .container::-webkit-scrollbar-thumb {
+        background-color: #ffa500;
+        border-radius: 3px;
+    }
+
+    .container.bg-sec-light {
+        background-color: #e7e7e7;
+    }
+
+    #content {
+        float: right;
+        width: 82%;
+    }
+
+    a {
+        text-decoration: none;
+        color: #222;
+    }
+
+    #content .user-select-none {
+        user-select: none;
+    }
+
+    .box {
+        padding: 10px;
+    }
+
+    .btn:focus {
+        box-shadow: none;
+    }
+
+    .box-label {
+        color: #11698e;
+        font-size: 0.9rem;
+        font-weight: 800;
+    }
+
+    .box-label .btn {
+        padding: 0;
+        font-size: 0.8rem;
+    }
+
+    label {
+        cursor: pointer;
+    }
+
+    .filter_name {
+        display: flex;
+
+        .item {
+            text-align: center;
+            border: 2px solid black;
+            width: 150px;
+            height: 40px;
+            margin-right: 15px;
+            cursor: pointer;
+            font-weight: 500;
+
+        }
+
+        .item:hover {
+            background-color: red;
+        }
+
+        .ratings {
+
+            width: 200px;
+        }
+
+    }
+
+
+
+}
+
+
+
+@media (max-width: 1399.5px) {
+
+    .filter_page {
+        #content {
+            float: none;
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 575.5px) {
+
+    .filter_page {
+        #filter {
+            width: 95%;
+            margin: 15px;
+        }
+    }
+}
+
+@media (max-width: 410px) {
+
+    .filter_page {
+        #filter {
+            width: 93%;
+            margin: 10px;
+        }
+    }
+}

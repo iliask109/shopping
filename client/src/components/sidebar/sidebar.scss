@@ -73,13 +73,13 @@
 }
 
 .sidebar {
+
   border-right: 2.5px solid rgb(230, 227, 227);
   border-bottom: 2.5px solid rgb(230, 227, 227);
   min-height: 100vh;
   background-color: white;
   width: 130px;
   z-index: 99;
-
 
 
   .top {
@@ -125,13 +125,13 @@
         font-size: 10px;
         font-weight: bold;
         color: #999;
-        margin-top: 15px;
+        margin-top: 5px;
       }
 
       li {
         display: flex;
         align-items: center;
-        padding: 3.5px 5px;
+        padding: 2.5px 5px;
         cursor: pointer;
 
         &:hover {
@@ -153,32 +153,6 @@
     }
   }
 
-  .bottom {
-    display: flex;
-    align-items: center;
-    margin: 10px;
-
-    .colorOption {
-      width: 20px;
-      height: 20px;
-      border-radius: 5px;
-      border: 1px solid #7451f8;
-      cursor: pointer;
-      margin: 5px;
-
-      &:nth-child(1) {
-        background-color: whitesmoke;
-      }
-
-      &:nth-child(2) {
-        background-color: #333;
-      }
-
-      &:nth-child(3) {
-        background-color: darkblue;
-      }
-    }
-  }
 
   .category {
     display: flex;
@@ -188,7 +162,7 @@
     .icon {
       font-size: 20px;
       position: relative;
-      bottom: -12px;
+      bottom: -5px;
       left: -25px;
       cursor: pointer;
     }
@@ -201,6 +175,14 @@
 
 
 }
+
+.fa-bars {
+  cursor: pointer;
+  font-size: 30px;
+  margin-right: 20px;
+  margin-top: 5px;
+}
+
 
 @media screen and (max-width: 700px) {
   .sidebar.mobile {

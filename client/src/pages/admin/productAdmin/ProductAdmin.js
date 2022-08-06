@@ -1,21 +1,19 @@
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { deleteProduct, listProducts } from "../../actions/productActions";
-import Loading from "../../components/loading/Loading";
-import { productColumns } from "./datatablesource";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Link } from "react-router-dom";
+import { deleteProduct, listProducts } from "../../../actions/productActions";
+import Loading from "../../../components/loading/Loading";
+import { productColumns } from "../datatablesource";
 import {
 	NEW_PRODUCT_RESET,
 	UPDATE_PRODUCT_RESET,
-} from "../../constants/productConstants";
-import MessageBox from "../../components/MessageBox";
-import Title from "../../components/Title";
+} from "../../../constants/productConstants";
+import MessageBox from "../../../components/MessageBox";
+import Title from "../../../components/Title";
 
 export default function ProductAdmin() {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	const productList = useSelector((state) => state.productList);
 	const { loading, error, products } = productList;
@@ -29,14 +27,17 @@ export default function ProductAdmin() {
 		dispatch({ type: NEW_PRODUCT_RESET });
 	}, [dispatch]);
 
+	// delete product
 	const handleDelete = (id) => {
-		if (window.confirm("Are you sure you want to delete this user?")) {
+		if (window.confirm("Are you sure you want to delete this product?")) {
 			dispatch(deleteProduct(id));
 		}
 	};
+
 	if (isDeleted) {
 		setTimeout(window.location.reload(), 1500);
 	}
+	
 	const actionColumn = [
 		{
 			field: "action",
@@ -76,9 +77,7 @@ export default function ProductAdmin() {
 							<MessageBox variant="success">The Product Delete</MessageBox>
 						)}
 						{error && <MessageBox variant="danger">{error}</MessageBox>}
-						<button className="goBack" onClick={() => navigate(-1)}>
-							<ArrowBackIcon className="icon" />
-						</button>
+
 						<div className="datatableTitle">
 							Products{" "}
 							<Link to="/admin/products/new" className="link">

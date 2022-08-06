@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createOrder } from "../actions/orderActions";
-import CheckoutSteps from "../components/checkoutSteps/CheckoutSteps";
-import { ORDER_CREATE_RESET } from "../constants/orderConstants";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Title from "../components/Title";
+import { createOrder } from "../../actions/orderActions";
+import CheckoutSteps from "../../components/checkoutSteps/CheckoutSteps";
+import { ORDER_CREATE_RESET } from "../../constants/orderConstants";
+import Title from "../../components/Title";
+import './order.scss'
 
 export default function Placeorder() {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	const cart = useSelector((state) => state.cart);
+
 	const orderCreate = useSelector((state) => state.orderCreate);
 	const { success, order } = orderCreate;
 	const userSignin = useSelector((state) => state.userSignin);
@@ -19,7 +22,8 @@ export default function Placeorder() {
 		navigate("/payment");
 	}
 
-	const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
+	const toPrice = (num) => Number(num.toFixed(2));
+
 	cart.itemsPrice = toPrice(
 		cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
 	);
@@ -28,8 +32,8 @@ export default function Placeorder() {
 	cart.totalPrice = toPrice(
 		cart.itemsPrice + cart.shippingPrice + cart.taxPrice
 	);
-	const dispatch = useDispatch();
 
+	// create order
 	const placeOrderHandler = () => {
 		dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
 	};
@@ -45,9 +49,6 @@ export default function Placeorder() {
 		<div className="placeorder_page">
 			<Title title={"Order"} />
 
-			<button className="goBack" onClick={() => navigate(-1)}>
-				<ArrowBackIcon className="icon" />
-			</button>
 			<div className="h-100 gradient-custom">
 				<CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
 				<div className="container py-5 h-100">

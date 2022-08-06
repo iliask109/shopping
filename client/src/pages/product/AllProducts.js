@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listProducts } from "../actions/productActions";
-import Loading from "../components/loading/Loading";
-import MessageBox from "../components/MessageBox";
-import Product from "../components/product/Product";
+import { listProducts } from "../../actions/productActions";
+import Loading from "../../components/loading/Loading";
+import MessageBox from "../../components/MessageBox";
+import Product from "../../components/product/Product";
 import Pagination from "react-js-pagination";
-import Title from "../components/Title";
+import Title from "../../components/Title";
+import "./product.scss";
 
 export default function AllProducts() {
-	const [currentPage, setCurrentPage] = useState(1);
-
 	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(listProducts({ pageNumber: currentPage, pageSize: 8 }));
-	}, [dispatch, currentPage]);
+
+	const [currentPage, setCurrentPage] = useState(1);
 
 	const productList = useSelector((state) => state.productList);
 	const { loading, error, products, page, pageSize, productsCount } =
 		productList;
 
+	useEffect(() => {
+		dispatch(listProducts({ pageNumber: currentPage, pageSize: 8 }));
+	}, [dispatch, currentPage]);
+
+	// change pagination
 	function setCurrentPageNo(pageNumber) {
 		setCurrentPage(pageNumber);
 	}
@@ -35,7 +38,7 @@ export default function AllProducts() {
 				) : (
 					<>
 						<h4>All Products</h4>
-						<Product products={products}  />
+						<Product products={products} />
 					</>
 				)}
 			</div>

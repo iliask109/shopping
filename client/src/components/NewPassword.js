@@ -15,18 +15,14 @@ export default function NewPassword() {
 	const { error, success } = useSelector((state) => state.forgotPassword);
 
 	useEffect(() => {
-		// if (error) {
-		// 	alert.error(error);
-		// 	dispatch(clearErrors());
-		// }
-
 		if (success) {
 			setTimeout(() => {
 				navigate("/");
 			}, 2000);
 		}
-	}, [dispatch, alert, success, navigate]);
+	}, [dispatch, success, navigate]);
 
+	// reset password
 	const submitHandler = (e) => {
 		e.preventDefault();
 

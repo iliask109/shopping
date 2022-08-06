@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { listProducts } from "../actions/productActions";
-import Loading from "../components/loading/Loading";
-import MessageBox from "../components/MessageBox";
-import Product from "../components/product/Product";
-import Rating from "../components/rating/Rating";
-import { prices, ratings } from "../utils";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Title from "../components/Title";
+import { useParams } from "react-router-dom";
+import { listProducts } from "../../actions/productActions";
+import Loading from "../../components/loading/Loading";
+import MessageBox from "../../components/MessageBox";
+import Product from "../../components/product/Product";
+import Rating from "../../components/rating/Rating";
+import { prices, ratings } from "../../helpers/utils";
+import Title from "../../components/Title";
+import "./product.scss";
 
 export default function FiltersPage() {
 	const categories = [
@@ -26,8 +26,8 @@ export default function FiltersPage() {
 		"Home",
 	];
 	const { category, name } = useParams();
+	const dispatch = useDispatch();
 
-	const [nameFilter, setFilterName] = useState(name ? name : "");
 	const [min, setMin] = useState(0);
 	const [max, setMax] = useState(0);
 	const [price, setPrice] = useState("");
@@ -39,9 +39,6 @@ export default function FiltersPage() {
 	const [categoryOpen, setCategoryOpen] = useState(true);
 	const [SortProducts, setSortProducts] = useState("");
 
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-
 	useEffect(() => {
 		setCategoryFilter(category);
 		dispatch(
@@ -50,7 +47,7 @@ export default function FiltersPage() {
 				min: min,
 				max: max,
 				rating: rating,
-				name: nameFilter,
+				name: name,
 			})
 		);
 	}, [
@@ -64,9 +61,11 @@ export default function FiltersPage() {
 		categoryFilter,
 	]);
 
+
 	const productList = useSelector((state) => state.productList);
 	const { loading, error, products } = productList;
 
+	// sort
 	const sortProducts = (value) => {
 		if (value === "Latest items") {
 			products.sort(function (a, b) {
@@ -140,7 +139,7 @@ export default function FiltersPage() {
 									</div>
 									{priceOpen && (
 										<div id="inner-box" className="collapse show">
-											{prices.map((item,i) => (
+											{prices.map((item, i) => (
 												<div
 													className="form-inline border rounded p-sm-1 my-2"
 													key={i}>
@@ -178,7 +177,7 @@ export default function FiltersPage() {
 									</div>
 									{ratingOpen && (
 										<div id="inner-box" className="collapse show">
-											{ratings.map((item,i) => (
+											{ratings.map((item, i) => (
 												<div
 													className="form-inline border rounded p-sm-1 my-2"
 													key={i}>
@@ -220,7 +219,7 @@ export default function FiltersPage() {
 									</div>
 									{categoryOpen && (
 										<div id="inner-box" className="collapse show">
-											{categories.map((item,i) => (
+											{categories.map((item, i) => (
 												<div
 													className="form-inline border rounded p-sm-1 my-2"
 													key={i}>
@@ -247,14 +246,10 @@ export default function FiltersPage() {
 						) : (
 							<div className="bg-white p-2 border col-md-12 col-sm-6 col-l-6 ">
 								<div className="filter_name">
+									{name && <div className="item">{name}</div>}
 									{categoryFilter && (
 										<div className="item" onClick={() => setCategoryFilter("")}>
 											{categoryFilter}
-										</div>
-									)}
-									{name && (
-										<div className="item" onClick={() => setFilterName("")}>
-											{name}
 										</div>
 									)}
 									{price && (

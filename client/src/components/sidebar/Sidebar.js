@@ -19,12 +19,17 @@ import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import {
 	CLOSE_SIDEBAR,
-	OPEN_SIDEBAR,
 	OPEN_SIDEBAR_MOBILE,
 } from "../../constants/cartConstants";
 import useClickOutside from "../../helpers/clickOutside";
 
 export default function Sidebar() {
+	const dispatch = useDispatch();
+	const Mobile = useMediaQuery({ query: "(max-width: 700px)" });
+
+	const [openCategory, setOpenCategory] = useState(true);
+	const sidebarRef = useRef(null);
+
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
 	const navigate = useNavigate();
@@ -33,25 +38,19 @@ export default function Sidebar() {
 	const cart = useSelector((state) => state.cart);
 	const { cartItems } = cart;
 
-	const [openCategory, setOpenCategory] = useState(true);
-
-	const dispatch = useDispatch();
-
-	const Mobile = useMediaQuery({ query: "(max-width: 700px)" });
-
 	useEffect(() => {
 		if (Mobile) {
 			dispatch({ type: CLOSE_SIDEBAR });
-		} 
+		}
 	}, [Mobile, dispatch]);
 
+	// logout
 	const signoutHandler = () => {
 		dispatch(signout());
 		navigate("/");
 	};
 
-	const sidebarRef = useRef(null);
-
+	// close sidebar
 	useClickOutside(sidebarRef, () => {
 		dispatch({ type: CLOSE_SIDEBAR });
 	});

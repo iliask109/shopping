@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { savePaymentMethod } from "../actions/cartActions";
-import CheckoutSteps from "../components/checkoutSteps/CheckoutSteps";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Title from "../components/Title";
+import { savePaymentMethod } from "../../actions/cartActions";
+import CheckoutSteps from "../../components/checkoutSteps/CheckoutSteps";
+import Title from "../../components/Title";
+import './order.scss'
 
 export default function PaymentPage() {
 	const cart = useSelector((state) => state.cart);
 	const [paymentMethod, setPaymentMethod] = useState("PayPal");
+	
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const sumbitHandler = (e) => {
+	const submitHandler = (e) => {
 		dispatch(savePaymentMethod(paymentMethod));
 		navigate("/placeorder");
 	};
@@ -25,9 +26,7 @@ export default function PaymentPage() {
 		<div>
 			<Title title={"Payment"} />
 
-			<button className="goBack" onClick={() => navigate(-1)}>
-				<ArrowBackIcon className="icon" />
-			</button>
+			
 			<div>
 				<CheckoutSteps step1 step2 step3></CheckoutSteps>
 
@@ -133,7 +132,7 @@ export default function PaymentPage() {
 									<button
 										className="subscribe btn btn-primary btn-block"
 										type="button"
-										onClick={() => sumbitHandler()}>
+										onClick={() => submitHandler()}>
 										Confirm
 									</button>
 								</form>
@@ -153,7 +152,7 @@ export default function PaymentPage() {
 								<button
 									className="subscribe btn btn-primary btn-block"
 									type="button"
-									onClick={() => sumbitHandler()}>
+									onClick={() => submitHandler()}>
 									Confirm
 								</button>
 							</div>

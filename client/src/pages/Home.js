@@ -23,7 +23,7 @@ export default function Home() {
 		})
 		.slice(0, 4);
 
-	products?.map((item) => {
+	products?.forEach((item) => {
 		if (item.discount > 0) {
 			topSales.push(item);
 		}

@@ -2,7 +2,7 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import { useSelector } from "react-redux";
-import Loading from "../../../components/loading/Loading";
+import Loading from "../../components/loading/Loading";
 import { Link } from "react-router-dom";
 
 const Widget = ({ type }) => {

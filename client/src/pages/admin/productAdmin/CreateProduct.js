@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../components/loading/Loading";
-import MessageBox from "../../components/MessageBox";
+import Loading from "../../../components/loading/Loading";
+import MessageBox from "../../../components/MessageBox";
 import { Form } from "react-bootstrap";
-import { clearErrors, newProductAdmin } from "../../actions/productActions";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Title from "../../components/Title";
+import { clearErrors, newProductAdmin } from "../../../actions/productActions";
+import Title from "../../../components/Title";
 
 export default function CreateProduct() {
 	const categories = [
@@ -39,6 +38,8 @@ export default function CreateProduct() {
 	const [seller, setSeller] = useState(userInfo?.name);
 	const [stock, setStock] = useState("");
 
+
+	// create product
 	const submitHandler = (e) => {
 		e.preventDefault();
 		dispatch(
@@ -73,10 +74,7 @@ export default function CreateProduct() {
 	return (
 		<div>
 			<Title title={"new product"} />
-
-			<button className="goBack" onClick={() => navigate(-1)}>
-				<ArrowBackIcon className="icon" />
-			</button>
+		
 			<div className="container create_product rounded bg-white mt-5 mb-5">
 				{loading ? (
 					<Loading></Loading>
