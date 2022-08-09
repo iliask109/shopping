@@ -22,7 +22,7 @@ export default function EditProfilePage() {
 
 	const [name, setName] = useState(user?.user.name || "");
 	const [email, setEmail] = useState(user?.user.email || "");
-	const [avatar, setAvatar] = useState(user?.user.avatar || "");
+	const [avatar, setAvatar] = useState(user?.user.avatar.url || "");
 	const [aboutMe, setAboutMe] = useState(user?.user.aboutMe || "");
 	const [role, setRole] = useState(user?.user.role || "");
 	const [oldPassword, setOldPassword] = useState("");

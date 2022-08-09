@@ -95,6 +95,10 @@
 
       }
 
+      .item:hover a{
+        color: orange !important;
+      }
+
       .login {
         color: rgb(247, 247, 247) !important;
         background: transparent;
@@ -150,7 +154,6 @@
     .cart_left {
 
       img {
-        margin: 20px;
         width: 100px;
         height: 150px;
       }
@@ -166,6 +169,8 @@
       .item {
         margin-bottom: 15px;
       }
+
+
 
     }
 
@@ -298,7 +303,7 @@
 }
 
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 800px) {
   .navbar {
     box-shadow: 1px 8px 15px -7px black;
 

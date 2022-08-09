@@ -7,7 +7,6 @@ const {
 	getProductReviews,
 	deleteReview,
 	getSellerProducts,
-	getAdminProducts,
 	getSellerProduct,
 } = require("../controllers/productControllers");
 const {
@@ -21,7 +20,6 @@ router.route("/products").get(getProducts);
 router
 	.route("/products/seller")
 	.get(isAuthenticatedUser, authorizeRoles("seller"), getSellerProducts);
-router.route("/products/top").get(getAdminProducts);
 
 router.route("/products/seller/:id").get(getSellerProduct);
 router.route("/products/:id").get(getSingleProduct);

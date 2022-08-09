@@ -10,7 +10,6 @@ const sendToken = (user, statusCode, res) => {
 		),
 	};
 
-	console.log(options);
 
 	res.status(statusCode).cookie("token", token, options).json(user);
 };

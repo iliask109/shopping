@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 export default function Footer() {
 	const [emailFooter, setEmailFooter] = useState("");
 	const [errorFooter, setErrorFooter] = useState(false);
 
-
 	// valid email
 	const handleEmail = () => {
-		var pattern = "^s*[w-+_]+(.[w-+_]+)*@[w-+_]+.[w-+_]+(.[w-+_]+)*s*$";
+		var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 		if (emailFooter.match(pattern)) {
 			setErrorFooter(false);
 			window.location.reload();
@@ -54,6 +52,10 @@ export default function Footer() {
 						</div>
 					</form>
 				</section>
+				<div className="footer_contact ">
+					<Link to="/contact"> contact with us</Link>
+					<Link to="/about"> about us</Link>
+				</div>
 			</div>
 
 			<div
@@ -63,6 +65,7 @@ export default function Footer() {
 				<Link className="text-white" to="/">
 					Ilia Shkliar
 				</Link>
+				<p>email: iliask109@Gmail.com</p>
 			</div>
 		</footer>
 	);

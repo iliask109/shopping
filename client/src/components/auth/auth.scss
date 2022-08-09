@@ -2,13 +2,16 @@
   .container {
     text-align: center;
   }
+
   body {
     padding: 70px;
   }
+
   h1 {
     margin: auto;
     text-align: center;
   }
+
   .row {
     margin-left: 2px;
     border-radius: 5px;
@@ -24,4 +27,9 @@
   .input-group-text {
     width: 40px;
   }
+
+  .form-control.error {
+    border-color: red !important;
+  }
+
 }

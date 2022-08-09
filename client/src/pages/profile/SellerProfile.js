@@ -80,12 +80,11 @@ export default function SellerProfile() {
 												</button>
 											)}
 											<img
-												src={
-													"https://cdn.pixabay.com/photo/2013/07/13/13/38/man-161282__340.png"
-												}
+												src={user?.avatar?.url}
 												alt="Admin"
 												className="rounded-circle"
 												width="150"
+												height="150"
 											/>
 											<div className="mt-3">
 												<h4>{user?.name}</h4>
@@ -122,9 +121,9 @@ export default function SellerProfile() {
 												style={{ textDecoration: "none" }}
 												key={item.name}>
 												<div className="m-3 card_seller">
-													<div className=" card  " style={{ width: "20rem" }}>
+													<div className="card">
 														<img
-															src={item.image}
+															src={item.images[0].url}
 															className="card-img-top"
 															alt="..."
 														/>

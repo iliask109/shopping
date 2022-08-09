@@ -31,7 +31,9 @@ export default function SingleProductAdmin() {
 	const [price, setPrice] = useState("");
 	const [discount, setDiscount] = useState(0);
 	const [description, setDescription] = useState("");
-	const [image, setImage] = useState("");
+	const [images, setImages] = useState([]);
+	const [oldImages, setOldImages] = useState([]);
+	const [imagesPreview, setImagesPreview] = useState([]);
 	const [category, setCategory] = useState("");
 	const [seller, setSeller] = useState("");
 	const [stock, setStock] = useState("");
@@ -47,7 +49,7 @@ export default function SingleProductAdmin() {
 			setName(product?.name);
 			setPrice(product?.price);
 			setDescription(product?.description);
-			setImage(product?.image);
+			setOldImages(product?.images);
 			setCategory(product?.category);
 			setSeller(product?.seller);
 			setStock(product?.stock);
@@ -64,13 +66,36 @@ export default function SingleProductAdmin() {
 				price,
 				discount,
 				description,
-				image,
+				images,
 				category,
 				seller,
 				stock,
 			})
 		);
 	};
+
+	const onChange = (e) => {
+		const files = Array.from(e.target.files);
+
+		setImagesPreview([]);
+		setImages([]);
+		setOldImages([]);
+
+		files.forEach((file) => {
+			const reader = new FileReader();
+
+			reader.onload = () => {
+				if (reader.readyState === 2) {
+					setImagesPreview((oldArray) => [...oldArray, reader.result]);
+					setImages((oldArray) => [...oldArray, reader.result]);
+				}
+			};
+
+			reader.readAsDataURL(file);
+		});
+	};
+
+	console.log(images);
 
 	return (
 		<div>
@@ -83,17 +108,7 @@ export default function SingleProductAdmin() {
 					<div className="row">
 						{error && <MessageBox variant="danger">{error}</MessageBox>}
 
-						<div className="col-md-4 border-right ">
-							{image && (
-								<img
-									src={image || ""}
-									alt={image ? "image_product" : ""}
-									width={"300px"}
-									height={"300px"}
-									className="mt-5 "
-								/>
-							)}
-						</div>
+						<div className="col-md-4 border-right "></div>
 						<div className="col-md-5 ">
 							{isUpdate && (
 								<MessageBox variant="success">
@@ -137,14 +152,44 @@ export default function SingleProductAdmin() {
 									</div>
 
 									<div className="col-md-12">
-										<label className="labels">Image (url)</label>
-										<input
-											type="text"
-											className="form-control"
-											value={image}
-											required
-											onChange={(e) => setImage(e.target.value)}
-										/>
+										<label>Images</label>
+
+										<div className="custom-file">
+											<input
+												type="file"
+												name="product_images"
+												className="custom-file-input"
+												id="customFile"
+												onChange={onChange}
+												multiple
+											/>
+											<label className="custom-file-label" htmlFor="customFile">
+												Choose Images
+											</label>
+										</div>
+
+										{oldImages &&
+											oldImages.map((img, i) => (
+												<img
+													key={i}
+													src={img.url}
+													alt={img.url}
+													className="mt-3 mr-2"
+													width="55"
+													height="52"
+												/>
+											))}
+
+										{imagesPreview.map((img, i) => (
+											<img
+												src={img}
+												key={i}
+												alt="Images Preview"
+												className="mt-3 mr-2"
+												width="55"
+												height="52"
+											/>
+										))}
 									</div>
 									<div className="col-md-12">
 										<label className="labels">Category</label>

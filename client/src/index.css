@@ -11,9 +11,21 @@ body {
 	display: flex;
 }
 
-
 .app {
 	margin-top: 120px;
 }
 
+.carousel-indicators {
+	display: none !important;
+}
 
+.visually-hidden
+ {
+	color: black !important;
+	font-weight: 900;
+}
+
+.carousel-control-next-icon{
+	display: none !important;
+
+}

@@ -28,6 +28,7 @@ import ContactPage from "./pages/ContactPage";
 import SalesPage from "./pages/product/SalesPage";
 import SellerProfile from "./pages/profile/SellerProfile";
 import AllProducts from "./pages/product/AllProducts";
+import About from "./pages/About";
 
 //pages admin and seller
 import DasboardAdmin from "./pages/admin/DasboardAdmin";
@@ -65,6 +66,7 @@ function App() {
 							<Route path="/password/reset/:token" element={<NewPassword />} />
 							<Route path="/seller/:id" element={<SellerProfile />} />
 							<Route path="/contact" element={<ContactPage />} />
+							<Route path="/about" element={<About />} />
 							<Route path="/search" element={<FiltersPage />} />
 							<Route path="/sales" element={<SalesPage />} />
 							<Route path="/products" element={<AllProducts />} />
@@ -126,7 +128,7 @@ function App() {
 								}
 							/>
 							<Route
-								path="/me/updatePassowrd"
+								path="/me/updatePassword"
 								element={
 									<PrivateRoute>
 										<EditProfilePage />

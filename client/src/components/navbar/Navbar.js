@@ -1,4 +1,4 @@
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { SiShopware } from "react-icons/si";
 import { Link, useNavigate } from "react-router-dom";
 import "./navbar.scss";
@@ -58,6 +58,12 @@ export default function Navbar() {
 		}
 	};
 
+	function handle(e) {
+		if (e.key === "Enter") {
+			handleSearch();
+		}
+	}
+
 	// if the token Expired
 	if (!Cookies.get("token")) {
 		if (userInfo) {
@@ -93,6 +99,7 @@ export default function Navbar() {
 						placeholder="Search..."
 						value={name}
 						onChange={(e) => setName(e.target.value)}
+						onKeyPress={(e) => handle(e)}
 					/>
 					<SearchOutlinedIcon
 						type="submit"
@@ -101,6 +108,13 @@ export default function Navbar() {
 					/>
 				</div>
 				<div className="items">
+					<div className="item">
+						<Link to="/about" style={{ textDecoration: "none" }}>
+							{" "}
+							About
+						</Link>
+					</div>
+
 					<div className="item">
 						<BorderColorIcon className="icon" />
 						<Link to="/contact" style={{ textDecoration: "none" }}>
@@ -122,7 +136,7 @@ export default function Navbar() {
 
 					{userInfo ? (
 						<div className="item" onClick={() => setUserOpen(true)}>
-							<img src={userInfo.avatar} alt="" className="avatar" />
+							<img src={userInfo?.avatar.url} alt="" className="avatar" />
 							<div className="user">{userInfo.name}</div>
 							{!userOpen ? (
 								<ArrowDownwardIcon style={{ fontSize: "14px" }} />
@@ -147,8 +161,8 @@ export default function Navbar() {
 						<div className="cart_body container">
 							{cartItems?.map((item, i) => (
 								<div className="cart_single row" key={i}>
-									<div className="cart_left col-sm">
-										<img src={item.image} alt='image_user' />
+									<div className="cart_left  col-sm">
+										<img src={item.images} alt="image_user" />
 									</div>
 									<div className="cart_right col-sm">
 										<div className="item" style={{ fontSize: "15px" }}>

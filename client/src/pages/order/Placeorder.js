@@ -5,7 +5,7 @@ import { createOrder } from "../../actions/orderActions";
 import CheckoutSteps from "../../components/checkoutSteps/CheckoutSteps";
 import { ORDER_CREATE_RESET } from "../../constants/orderConstants";
 import Title from "../../components/Title";
-import './order.scss'
+import "./order.scss";
 
 export default function Placeorder() {
 	const navigate = useNavigate();
@@ -68,7 +68,7 @@ export default function Placeorder() {
 												<div className="row">
 													<div className="col-md-2">
 														<img
-															src={item.image}
+															src={item.images}
 															className="img-fluid"
 															alt="Phone"
 														/>

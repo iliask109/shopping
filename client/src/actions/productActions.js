@@ -1,8 +1,6 @@
 import Axios from "axios";
 import {
-	ADMIN_PRODUCTS_FAIL,
-	ADMIN_PRODUCTS_REQUEST,
-	ADMIN_PRODUCTS_SUCCESS,
+
 	DELETE_PRODUCT_FAIL,
 	DELETE_PRODUCT_REQUEST,
 	DELETE_PRODUCT_SUCCESS,
@@ -207,7 +205,6 @@ export const deleteReviewAdmin = (id, productId) => async (dispatch) => {
 			payload: data.success,
 		});
 	} catch (error) {
-		console.log(error.response);
 
 		dispatch({
 			type: DELETE_REVIEW_FAIL,
@@ -257,23 +254,7 @@ export const getProductsSeller = () => async (dispatch, getState) => {
 	}
 };
 
-export const getAdminProducts = () => async (dispatch) => {
-	try {
-		dispatch({ type: ADMIN_PRODUCTS_REQUEST });
 
-		const { data } = await Axios.get(`/api/products/top`);
-
-		dispatch({
-			type: ADMIN_PRODUCTS_SUCCESS,
-			payload: data,
-		});
-	} catch (error) {
-		dispatch({
-			type: ADMIN_PRODUCTS_FAIL,
-			payload: error.response.data.message,
-		});
-	}
-};
 
 export const clearErrors = () => async (dispatch) => {
 	dispatch({

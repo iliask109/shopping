@@ -51,13 +51,14 @@ import {
 	USER_UPDATE_PROFILE_SUCCESS,
 } from "../constants/userConstants";
 
-export const register = (name, email, password) => async (dispatch) => {
+export const register = (name, email, password, avatar) => async (dispatch) => {
 	dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
 	try {
 		const { data } = await Axios.post("/api/auth/register", {
 			name,
 			email,
 			password,
+			avatar,
 		});
 		dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
 		dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });

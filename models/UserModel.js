@@ -22,9 +22,14 @@ const userSchema = new mongoose.Schema(
 			select: false,
 		},
 		avatar: {
-			type: String,
-			default:
-				"https://cdn.pixabay.com/photo/2016/04/15/18/05/computer-1331579_960_720.png",
+			public_id: {
+				type: String,
+			},
+			url: {
+				type: String,
+				default:
+					"https://cdn.pixabay.com/photo/2016/04/15/18/05/computer-1331579_960_720.png",
+			},
 		},
 		role: {
 			type: String,

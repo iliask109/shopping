@@ -1,7 +1,5 @@
 import {
-	ADMIN_PRODUCTS_FAIL,
-	ADMIN_PRODUCTS_REQUEST,
-	ADMIN_PRODUCTS_SUCCESS,
+
 	DELETE_PRODUCT_FAIL,
 	DELETE_PRODUCT_REQUEST,
 	DELETE_PRODUCT_RESET,
@@ -79,24 +77,7 @@ export const productListSellerReducer = (
 	}
 };
 
-export const productListAdminReducer = (
-	state = { loading: true, products: [] },
-	action
-) => {
-	switch (action.type) {
-		case ADMIN_PRODUCTS_REQUEST:
-			return { loading: true };
-		case ADMIN_PRODUCTS_SUCCESS:
-			return {
-				loading: false,
-				products: action.payload,
-			};
-		case ADMIN_PRODUCTS_FAIL:
-			return { loading: false, error: action.payload };
-		default:
-			return state;
-	}
-};
+
 
 export const productSellerListReducer = (
 	state = { loading: true, products: [] },

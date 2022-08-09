@@ -8,14 +8,20 @@ import MessageBox from "../MessageBox";
 import Loading from "../loading/Loading";
 
 import "./auth.scss";
+import {
+	USER_REGISTER_RESET,
+	USER_SIGNIN_RESET,
+} from "../../constants/userConstants";
 export default function Auth(props) {
 	const [isLogin, setIsLogin] = useState(true);
 	const [fullName, setFullName] = useState("");
 	const [email, setEmail] = useState("");
+	const [avatar, setAvatar] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [forgotPassword, setForgotPassword] = useState(false);
 	const [emailPass, setEmailPass] = useState("");
+	const [errorBorder, setErrorBorder] = useState("");
 
 	const userRegister = useSelector((state) => state.userRegister);
 	const { userInfo, loading, error } = userRegister;
@@ -53,7 +59,7 @@ export default function Auth(props) {
 				alert("Password and confirm password are not match");
 			} else {
 				if (validateEmail(email)) {
-					dispatch(register(fullName, email, password));
+					dispatch(register(fullName, email, password, avatar));
 				}
 			}
 		}
@@ -109,21 +115,38 @@ export default function Auth(props) {
 						<br />
 						<br />
 						{!isLogin && (
-							<div className="input-group">
-								<div className="input-group-prepend">
-									<span className="input-group-text">
-										<i className="fa fa-user icon"></i>
-									</span>
+							<>
+								<div className="input-group">
+									<div className="input-group-prepend">
+										<span className="input-group-text">
+											<i className="fa fa-user icon"></i>
+										</span>
+									</div>
+									<input
+										type="text"
+										name="fullName"
+										className="form-control"
+										placeholder="full name"
+										value={fullName}
+										onChange={(e) => setFullName(e.target.value)}
+									/>
 								</div>
-								<input
-									type="text"
-									name="fullName"
-									className="form-control"
-									placeholder="full name"
-									value={fullName}
-									onChange={(e) => setFullName(e.target.value)}
-								/>
-							</div>
+								<div className="input-group">
+									<div className="input-group-prepend">
+										<span className="input-group-text">
+											<i className="fa fa-user icon"></i>
+										</span>
+									</div>
+									<input
+										type="text"
+										name="avatar"
+										className="form-control"
+										placeholder="Avatar image"
+										value={avatar}
+										onChange={(e) => setAvatar(e.target.value)}
+									/>
+								</div>
+							</>
 						)}
 						<div className="input-group">
 							<div className="input-group-prepend">
@@ -134,7 +157,9 @@ export default function Auth(props) {
 							<input
 								type="text"
 								name="email"
-								className="form-control"
+								className={`form-control ${
+									errorSignin === "Invalid Email" ? "error" : ""
+								}`}
 								placeholder="email"
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
@@ -149,7 +174,9 @@ export default function Auth(props) {
 							<input
 								type="Password"
 								name="password"
-								className="form-control"
+								className={`form-control ${
+									errorSignin === "Invalid Password" ? "error" : ""
+								}`}
 								placeholder="password"
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
@@ -193,7 +220,12 @@ export default function Auth(props) {
 								<>
 									<p>
 										Don't have an Account!{" "}
-										<Link to="#" onClick={() => setIsLogin(false)}>
+										<Link
+											to="#"
+											onClick={() => {
+												dispatch({ type: USER_SIGNIN_RESET });
+												setIsLogin(false);
+											}}>
 											Sign Up Here
 										</Link>
 									</p>
@@ -218,7 +250,12 @@ export default function Auth(props) {
 							) : (
 								<p>
 									If you have an Account?
-									<Link to="#" onClick={() => setIsLogin(true)}>
+									<Link
+										to="#"
+										onClick={() => {
+											dispatch({ type: USER_REGISTER_RESET });
+											setIsLogin(true);
+										}}>
 										Login Here
 									</Link>
 								</p>

@@ -13,12 +13,13 @@ import { AddToCart } from "../../actions/cartActions";
 import MessageBox from "../../components/MessageBox";
 import Title from "../../components/Title";
 import "./product.scss";
+import { Carousel } from "react-bootstrap";
 
 export default function ProductPage() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const [query, setQuery] = useState(0);
+	const [query, setQuery] = useState(1);
 	const [rating, setRating] = useState(0);
 	const [comment, setComment] = useState("");
 	const [addToCart, setAddToCart] = useState(false);
@@ -89,7 +90,28 @@ export default function ProductPage() {
 							</h4>
 						</div>
 						<div className="modal-body ">
-							<img src={product?.image} alt="image1" />
+							<div className="col-12 col-lg-5 img-fluid  " id="product_image">
+								{product.images && product.images.length > 1 ? (
+									<Carousel>
+										{product.images &&
+											product.images.map((image) => (
+												<Carousel.Item key={image.public_id}>
+													<img
+														className="d-block w-100"
+														src={image.url}
+														
+													/>
+												</Carousel.Item>
+											))}
+									</Carousel>
+								) : (
+									<img
+										className="d-block w-100"
+										src={product.images && product.images[0].url}
+										alt={product.title}
+									/>
+								)}
+							</div>
 							<table className="pull-left col-md-12 ">
 								<tbody>
 									<tr>
@@ -171,7 +193,7 @@ export default function ProductPage() {
 												<TbSquarePlus
 													className="card_icon plus"
 													onClick={() => {
-														if (query < 100) setQuery(query + 1);
+														if (query < product?.stock) setQuery(query + 1);
 													}}
 												/>
 												<input
@@ -183,7 +205,7 @@ export default function ProductPage() {
 												<TbSquareMinus
 													className="card_icon minus"
 													onClick={() => {
-														if (query > 0) setQuery(query - 1);
+														if (query > 1) setQuery(query - 1);
 													}}
 												/>
 											</td>
@@ -204,24 +226,26 @@ export default function ProductPage() {
 										<strong>
 											$
 											{product?.discount === 0
-												? query * product?.price
-												: query *
-												  (
-														product?.price -
-														product?.price * (product?.discount / 100)
+												? (query * product?.price).toFixed(2)
+												: (
+														query *
+														(product?.price -
+															product?.price * (product?.discount / 100))
 												  ).toFixed(2)}
 										</strong>
 									</span>
 								</div>
 							)}
 							<div className="text-right pull-right col-md-7">
-								{query * product?.price > 0 && !addToCart && (
-									<button
-										className="add_to"
-										onClick={() => addCart(product._id)}>
-										Add to cart
-									</button>
-								)}
+								{query * product?.price > 0 &&
+									!addToCart &&
+									product?.stock > 0 && (
+										<button
+											className="add_to"
+											onClick={() => addCart(product._id)}>
+											Add to cart
+										</button>
+									)}
 								{addToCart && (
 									<>
 										<button
@@ -332,7 +356,10 @@ export default function ProductPage() {
 											</form>
 										</>
 									) : (
-										<div>Login</div>
+										<div>
+											You need to Login or Register. <br />
+											If you want to write a review
+										</div>
 									)}
 								</div>
 							</div>

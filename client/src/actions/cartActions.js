@@ -16,7 +16,7 @@ export const AddToCart = (productId, qty) => async (dispatch, getState) => {
 		type: CART_ADD_ITEM,
 		payload: {
 			name: data.name,
-			image: data.image,
+			images: data.images[0].url,
 			price:
 				data.discount > 0
 					? (data.price - data.price * (data.discount / 100)).toFixed(2)

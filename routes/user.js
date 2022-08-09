@@ -22,6 +22,5 @@ router.route("/favorite/:id").delete(isAuthenticatedUser, deleteFavorite);
 router.route("/likes").put(isAuthenticatedUser, createLikes);
 router.route("/likes/:id").delete(isAuthenticatedUser, deleteLikes);
 
-router.route("/logout").get(logout);
 
 module.exports = router;

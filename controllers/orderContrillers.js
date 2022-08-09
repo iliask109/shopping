@@ -4,7 +4,7 @@ const User = require("../models/UserModel");
 const catchAsyncError = require("../utils/catchAsyncError");
 const { sendVerificationEmail } = require("../utils/mailer");
 
-// Create a new order   =>  /api/order/new
+//post   =>  /api/orders
 exports.newOrder = catchAsyncError(async (req, res, next) => {
 	try {
 		const {
@@ -16,7 +16,9 @@ exports.newOrder = catchAsyncError(async (req, res, next) => {
 			totalPrice,
 			paymentInfo,
 		} = req.body;
+		console.log(orderItems);
 
+		// create new order
 		const order = await Order.create({
 			orderItems,
 			shippingAddress,
@@ -31,6 +33,7 @@ exports.newOrder = catchAsyncError(async (req, res, next) => {
 
 		const user = await User.findById(order.user);
 
+		// send order details to user email
 		sendVerificationEmail(order, user, "The order has been placed ");
 
 		res.status(200).json({
@@ -42,11 +45,13 @@ exports.newOrder = catchAsyncError(async (req, res, next) => {
 	}
 });
 
+//get   =>  /api/orders/mine
 exports.myOrders = catchAsyncError(async (req, res, next) => {
 	const orders = await Order.find({ user: req.user.id });
 	res.send(orders);
 });
 
+//get   =>  /api/orders/:id
 exports.getSingleOrder = catchAsyncError(async (req, res, next) => {
 	const order = await Order.findById(req.params.id).populate(
 		"user",
@@ -60,9 +65,11 @@ exports.getSingleOrder = catchAsyncError(async (req, res, next) => {
 	res.status(200).json(order);
 });
 
+//get   =>  /api/admin/orders
 exports.allOrders = catchAsyncError(async (req, res, next) => {
 	const orders = await Order.find();
 
+	// Total bought from the site
 	let totalAmount = 0;
 
 	orders.forEach((order) => {
@@ -75,12 +82,15 @@ exports.allOrders = catchAsyncError(async (req, res, next) => {
 	});
 });
 
+//put   =>  /api/admin/orders/:id
 exports.updateOrder = catchAsyncError(async (req, res, next) => {
 	const order = await Order.findById(req.params.id);
+
 	if (order.orderStatus === "Delivered") {
 		return next(new ErrorHandler("You have already delivered this order", 400));
 	}
 
+	// How many did you buy in total from that product
 	order.orderItems.forEach(async (item) => {
 		const product = await Product.findById(item.product.toString());
 		product.numOfSale = product.numOfSale + item.qty;
@@ -88,6 +98,12 @@ exports.updateOrder = catchAsyncError(async (req, res, next) => {
 		await product.save({ validateBeforeSave: false });
 	});
 
+	//update stock
+	order.orderItems.forEach(async (item) => {
+		await updateStock(item.product, item.qty);
+	});
+
+	// change status order
 	order.orderStatus = req.body.status;
 	order.deliveredAt = Date.now();
 
@@ -98,6 +114,15 @@ exports.updateOrder = catchAsyncError(async (req, res, next) => {
 	});
 });
 
+async function updateStock(id, quantity) {
+	const product = await Product.findById(id);
+
+	product.stock = product.stock - quantity;
+
+	await product.save({ validateBeforeSave: false });
+}
+
+//delete   =>  /api/admin/orders/:id
 exports.deleteOrder = catchAsyncError(async (req, res, next) => {
 	const order = await Order.findById(req.params.id);
 

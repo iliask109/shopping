@@ -33,26 +33,47 @@ export default function CreateProduct() {
 	const [name, setName] = useState("");
 	const [price, setPrice] = useState("");
 	const [description, setDescription] = useState("");
-	const [image, setImage] = useState("");
+	const [images, setImages] = useState([]);
+	const [imagesPreview, setImagesPreview] = useState([]);
 	const [category, setCategory] = useState(categories[0]);
 	const [seller, setSeller] = useState(userInfo?.name);
 	const [stock, setStock] = useState("");
 
-
 	// create product
 	const submitHandler = (e) => {
 		e.preventDefault();
+
 		dispatch(
 			newProductAdmin({
 				name,
 				price,
 				description,
-				image,
+				images,
 				category,
 				seller,
 				stock,
 			})
 		);
+	};
+
+	const onChange = (e) => {
+		const files = Array.from(e.target.files);
+
+		setImagesPreview([]);
+		setImages([]);
+
+		files.forEach((file) => {
+			const reader = new FileReader();
+
+			reader.onload = () => {
+				if (reader.readyState === 2) {
+					setImagesPreview((oldArray) => [...oldArray, reader.result]);
+					setImages((oldArray) => [...oldArray, reader.result]);
+				}
+			};
+
+			reader.readAsDataURL(file);
+		});
 	};
 
 	useEffect(() => {
@@ -74,7 +95,7 @@ export default function CreateProduct() {
 	return (
 		<div>
 			<Title title={"new product"} />
-		
+
 			<div className="container create_product rounded bg-white mt-5 mb-5">
 				{loading ? (
 					<Loading></Loading>
@@ -83,15 +104,7 @@ export default function CreateProduct() {
 						{error && <MessageBox variant="danger">{error}</MessageBox>}
 						<div className="row">
 							<div className="col-md-4 border-right">
-								{image && (
-									<img
-										src={image || ""}
-										alt={image ? "image_product" : ""}
-										width={"300px"}
-										height={"300px"}
-										className="mt-5"
-									/>
-								)}
+								
 							</div>
 							<div className="col-md-5 border-right">
 								<form className="p-3 py-5" onSubmit={submitHandler}>
@@ -125,17 +138,37 @@ export default function CreateProduct() {
 												onChange={(e) => setPrice(e.target.value)}
 											/>
 										</div>
-
 										<div className="col-md-12">
-											<label className="labels">Image (url)</label>
-											<input
-												type="text"
-												required
-												className="form-control"
-												value={image}
-												onChange={(e) => setImage(e.target.value)}
-											/>
+										
+											<label>Images</label>
+											<div className="custom-file">
+												<input
+													type="file"
+													name="product_images"
+													className="custom-file-input"
+													id="customFile"
+													onChange={onChange}
+													multiple
+													required
+												/>
+												<label
+													className="custom-file-label"
+													htmlFor="customFile">
+													Choose Images
+												</label>
+											</div>
+											{imagesPreview.map((img) => (
+												<img
+													src={img}
+													key={img}
+													alt="Images Preview"
+													className="mt-3 mr-2"
+													width="55"
+													height="52"
+												/>
+											))}
 										</div>
+
 										<div className="col-md-12">
 											<label className="labels">Category</label>
 

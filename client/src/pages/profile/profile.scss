@@ -121,10 +121,27 @@
     .card-body {
         text-align: center;
         align-items: center;
+
     }
 
 
+    .card_seller {
+        display: flex;
+        flex-wrap: wrap;
 
+        .card-img-top {
+            width: 200px;
+            height: 200px;
+            padding: auto;
+        }
+
+        .card {
+            justify-content: center;
+            text-align: center;
+            width: 230px;
+            height: 400px;
+        }
+    }
 
     .card_seller:hover {
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -189,7 +206,7 @@
     .profile_page {
         .btn {
             height: 60px;
-      
+
         }
     }
 

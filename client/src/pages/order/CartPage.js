@@ -4,7 +4,7 @@ import { TbSquareMinus, TbSquarePlus } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { AddToCart, removeFromCart } from "../../actions/cartActions";
 import Title from "../../components/Title";
-import './order.scss'
+import "./order.scss";
 
 export default function CartPage() {
 	const dispatch = useDispatch();
@@ -20,12 +20,12 @@ export default function CartPage() {
 	const shippingPrice = itemsPrice > 250 ? 0 : itemsPrice / 10;
 	const totalPrice = itemsPrice + shippingPrice;
 
-	// remove item form cart 
+	// remove item form cart
 	const removeFromCartHandler = (id) => {
 		dispatch(removeFromCart(id));
 	};
 
-	// add item to the cart 
+	// add item to the cart
 	const handleCart = (id, qty) => {
 		if (qty < 1) {
 			if (window.confirm("You sure want to remove the product from the list")) {
@@ -36,7 +36,7 @@ export default function CartPage() {
 		}
 	};
 
-	// check if user login 
+	// check if user login
 	const checkoutHandle = () => {
 		if (userInfo) {
 			navigate("/shipping");
@@ -48,7 +48,7 @@ export default function CartPage() {
 	return (
 		<div className="cart_page p-3">
 			<Title title={"Cart"} />
-		
+
 			{cartItems.length > 0 ? (
 				<section className="shopping-cart ">
 					<div className="container">
@@ -62,7 +62,7 @@ export default function CartPage() {
 													<div className="col-md-3">
 														<img
 															className="img-fluid mx-auto d-block image"
-															src={item.image}
+															src={item.images}
 															alt="image_product"
 														/>
 													</div>
@@ -105,7 +105,7 @@ export default function CartPage() {
 																	/>
 																</div>
 																<div className="col-md-3 price">
-																	 <span>${item.price}</span>
+																	<span>${item.price}</span>
 																</div>
 															</div>
 														</div>

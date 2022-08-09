@@ -64,7 +64,7 @@ export default function ProfilePage() {
 									<div className="card-body">
 										<div className="d-flex flex-column align-items-center text-center">
 											<img
-												src={user.user.avatar}
+												src={user?.user.avatar.url}
 												alt="Admin"
 												className="rounded-circle"
 												width="150"

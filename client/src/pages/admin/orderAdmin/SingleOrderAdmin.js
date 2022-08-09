@@ -136,7 +136,7 @@ export default function SingleOrderAdmin() {
 										<label className="labels">Status</label>
 
 										<Form.Select
-											value={order?.orderStatus}
+											value={status}
 											className="form-control"
 											onChange={(e) => setStatus(e.target.value)}
 											disabled={order?.orderStatus === "Delivered"}>

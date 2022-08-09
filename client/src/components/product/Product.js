@@ -14,16 +14,18 @@ export default function Product({ products, home }) {
 	const view2 = useMediaQuery({ query: "(max-width: 750px)" });
 	const view3 = useMediaQuery({ query: "(max-width: 500px)" });
 
-	const [number, setNumber] = useState(view3 ? 1 : view2 ? 2 : view1 ? 3 : 4);
-	const [carousel, setCarousel] = useState([0, number]);
+	const max = view3 ? 1 : view2 ? 2 : view1 ? 3 : 4;
+	const [carousel, setCarousel] = useState([0, max]);
 
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
 
-	useEffect(() => {}, [number]);
-
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		setCarousel([0, max]);
+	}, [max]);
 
 	// navigate to the product
 	const handleCart = (productId) => {
@@ -50,7 +52,7 @@ export default function Product({ products, home }) {
 								className="icon_left"
 								type="button"
 								onClick={() => {
-									setCarousel([carousel[0] - number, carousel[1] - number]);
+									setCarousel([carousel[0] - max, carousel[1] - max]);
 								}}
 							/>
 						)}
@@ -59,7 +61,7 @@ export default function Product({ products, home }) {
 								className="icon_right"
 								type="button"
 								onClick={() => {
-									setCarousel([carousel[0] + number, carousel[1] + number]);
+									setCarousel([carousel[0] + max, carousel[1] + max]);
 								}}
 							/>
 						)}
@@ -80,7 +82,7 @@ export default function Product({ products, home }) {
 									)}
 
 									<div className="card-image">
-										<img src={product.image} alt="img" />
+										<img src={product.images[0].url} alt="img" />
 									</div>
 
 									{userInfo && (

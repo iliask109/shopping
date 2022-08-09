@@ -3,8 +3,9 @@ const User = require("../models/UserModel");
 const catchAsyncError = require("../utils/catchAsyncError");
 const ErrorHandler = require("../utils/errorHandler");
 const sendToken = require("../utils/JwtToken");
+const cloudinary = require("cloudinary");
 
-// Get currently logged in user details   =>   /api/v1/user/me
+//get   /api/user/:id
 exports.getUserProfile = catchAsyncError(async (req, res, next) => {
 	const user = await User.findById(req.user.id);
 
@@ -14,7 +15,7 @@ exports.getUserProfile = catchAsyncError(async (req, res, next) => {
 	});
 });
 
-// Update / Change password   =>  /api/v1/user/password/update
+//put   /api/user/password/update
 exports.updatePassword = catchAsyncError(async (req, res, next) => {
 	const user = await User.findById(req.user.id).select("+password");
 
@@ -30,14 +31,32 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
 	sendToken(user, 200, res);
 });
 
-// Update user profile   =>   /api/v1/user/update
+//put   /api/user/update
 exports.updateProfile = catchAsyncError(async (req, res, next) => {
 	const newUserData = {
 		name: req.body.name,
 		email: req.body.email,
-		avatar: req.body.avatar,
 		aboutMe: req.body.aboutMe,
 	};
+
+	// Update avatar
+	if (req.body.avatar !== "") {
+		const user = await User.findById(req.user.id);
+
+		const image_id = user.avatar.public_id;
+		const res = await cloudinary.v2.uploader.destroy(image_id);
+
+		const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+			folder: "avatars",
+			width: 150,
+			crop: "scale",
+		});
+
+		newUserData.avatar = {
+			public_id: result.public_id,
+			url: result.secure_url,
+		};
+	}
 
 	const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
 		new: true,
@@ -48,22 +67,9 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
 	res.status(200).json(user);
 });
 
-// Logout user   =>   /api/v1/user/logout
-exports.logout = catchAsyncError(async (req, res, next) => {
-	res.cookie("token", null, {
-		expires: new Date(Date.now()),
-		httpOnly: true,
-	});
-
-	res.status(200).json({
-		success: true,
-		message: "Logged out",
-	});
-});
-
 // Admin Routes
 
-// Get all users   =>   /api/v1/admin/users
+//get   /api/admin/users
 exports.allUsers = catchAsyncError(async (req, res, next) => {
 	const users = await User.find();
 
@@ -73,7 +79,7 @@ exports.allUsers = catchAsyncError(async (req, res, next) => {
 	});
 });
 
-// Get user details   =>   /api/v1/admin/user/:id
+//get   /api/admin/user/:id
 exports.getUserDetails = catchAsyncError(async (req, res, next) => {
 	const user = await User.findById(req.params.id);
 
@@ -89,7 +95,7 @@ exports.getUserDetails = catchAsyncError(async (req, res, next) => {
 	});
 });
 
-// Update user profile   =>   /api/v1/admin/user/:id
+//put   /api/admin/user/:id
 exports.updateUser = catchAsyncError(async (req, res, next) => {
 	const newUserData = {
 		name: req.body.name,
@@ -108,7 +114,7 @@ exports.updateUser = catchAsyncError(async (req, res, next) => {
 	});
 });
 
-// Delete user   =>   /api/v1/admin/user/:id
+//delete   /api/admin/user/:id
 exports.deleteUser = catchAsyncError(async (req, res, next) => {
 	const user = await User.findById(req.params.id);
 
@@ -118,6 +124,10 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
 		);
 	}
 
+	// Remove avatar from cloudinary
+	const image_id = user.avatar.public_id;
+	await cloudinary.v2.uploader.destroy(image_id);
+
 	await user.remove();
 
 	res.status(200).json({
@@ -125,6 +135,7 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
 	});
 });
 
+//put  /api/user/favorite
 exports.createProductFavorite = catchAsyncError(async (req, res, next) => {
 	const { productId } = req.body;
 
@@ -149,6 +160,7 @@ exports.createProductFavorite = catchAsyncError(async (req, res, next) => {
 	res.status(200).json(user);
 });
 
+//delete   /api/user/favorite/:id
 exports.deleteFavorite = catchAsyncError(async (req, res, next) => {
 	const favorite = req.params.id;
 	const user = await User.findById(req.user.id);
@@ -165,6 +177,7 @@ exports.deleteFavorite = catchAsyncError(async (req, res, next) => {
 	});
 });
 
+//put  /api/user/likes
 exports.createLikes = catchAsyncError(async (req, res, next) => {
 	const { sellerId } = req.body;
 
@@ -186,6 +199,7 @@ exports.createLikes = catchAsyncError(async (req, res, next) => {
 	res.status(200).json(user);
 });
 
+//delete   /api/user/likes
 exports.deleteLikes = catchAsyncError(async (req, res, next) => {
 	const sellerId = req.params.id;
 

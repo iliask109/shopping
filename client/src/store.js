@@ -22,7 +22,6 @@ import {
 	newReviewReducer,
 	productDeleteReducer,
 	productDetailsReducer,
-	productListAdminReducer,
 	productListReducer,
 	productListSellerReducer,
 	productReviewsReducer,
@@ -66,7 +65,6 @@ const initialState = {
 const reducer = combineReducers({
 	sidebarReducer: sidebarReducer,
 	productList: productListReducer,
-	productListAdmin: productListAdminReducer,
 	productDetails: productDetailsReducer,
 	cart: cartReducer,
 	userRegister: userRegisterReducer,
