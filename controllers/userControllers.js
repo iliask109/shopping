@@ -145,6 +145,9 @@ exports.createProductFavorite = catchAsyncError(async (req, res, next) => {
 	const favorite = {
 		product: productId,
 		name: product.name,
+		price: product.price,
+		image: product.images[0].url,
+		stock: product.stock,
 	};
 
 	const isFavorite = user.favorites.find(

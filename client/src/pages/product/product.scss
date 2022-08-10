@@ -1,5 +1,16 @@
 .product_page {
 
+    .go_back {
+        margin-bottom: 10px;
+
+        a {
+            margin-right: 5px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+    }
+
     .modal-header {
         button {
             position: absolute;
@@ -22,6 +33,17 @@
 
     .open_info {
         margin-top: 10px;
+    }
+
+    .btn_action {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+
+        button {
+            margin: 10px;
+
+        }
     }
 
     .add_to {
@@ -73,6 +95,25 @@
                 height: 50px;
                 margin: 0px 20px;
             }
+        }
+    }
+
+    .top_products {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+
+        .card {
+            margin-right: 55px;
+            min-width: 230px;
+            height: 450px;
+        }
+
+        img {
+            padding: 5px;
+            width: 100%;
+            height: 200px;
+            max-width: 200px;
         }
     }
 }
@@ -174,11 +215,64 @@
 
 
 @media (max-width: 1399.5px) {
-
     .filter_page {
         #content {
             float: none;
             width: 100%;
+        }
+    }
+
+}
+
+@media (max-width: 1200px) {
+
+    .product_page {
+        .top_products {
+            width: 80%;
+
+            .card {
+                margin-right: 30px;
+                min-width: 200px;
+                height: 450px;
+            }
+
+            img {
+                width: 80%;
+                height: 200px;
+                max-width: 200px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+
+    .product_page {
+        .top_products {
+            width: 80%;
+            font-size: 14px;
+
+            .card {
+                margin-right: 30px;
+                min-width: 140px;
+                height: 500px;
+            }
+
+            img {
+                width: 80%;
+                height: 200px;
+                max-width: 200px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+
+    .product_page {
+        .top_products {
+
+            display: none;
         }
     }
 }

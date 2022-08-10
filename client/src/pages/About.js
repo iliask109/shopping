@@ -21,6 +21,8 @@ export default function About() {
 				<h2>We hope you enjoy the site and the products </h2>
 			</div>
 
+		
+
 			<h2>Our Team</h2>
 			<div class="row">
 				<div class="column">

@@ -12,6 +12,7 @@ import { useMediaQuery } from "react-responsive";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import useClickOutside from "../../helpers/clickOutside";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -22,13 +23,14 @@ import { removeFromCart } from "../../actions/cartActions";
 import Cookies from "js-cookie";
 
 import Lists from "../sidebar/list";
-import { signout } from "../../actions/userActions";
+import { deleteFavoriteUser, signout } from "../../actions/userActions";
 
 export default function Navbar() {
 	const [modalShow, setModalShow] = useState(false);
 	const [name, setName] = useState("");
 	const [cartOpen, setCartOpen] = useState(false);
 	const [userOpen, setUserOpen] = useState(false);
+	const [favoriteOpen, setFavoriteOpen] = useState(false);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -42,12 +44,16 @@ export default function Navbar() {
 
 	const miniCart = useRef(null);
 	const dropUser = useRef(null);
+	const dropFavorite = useRef(null);
 
 	useClickOutside(miniCart, () => {
 		setCartOpen(false);
 	});
 	useClickOutside(dropUser, () => {
 		setUserOpen(false);
+	});
+	useClickOutside(dropFavorite, () => {
+		setFavoriteOpen(false);
 	});
 
 	// search
@@ -80,6 +86,11 @@ export default function Navbar() {
 	// logout
 	const signoutHandler = () => {
 		dispatch(signout());
+	};
+
+	// delete favorite
+	const deleteFavoriteId = (productId) => {
+		dispatch(deleteFavoriteUser(productId));
 	};
 
 	return (
@@ -124,14 +135,22 @@ export default function Navbar() {
 					</div>
 
 					<div
-						className="item"
+						className="item item_mobile"
 						onClick={() => setCartOpen(true)}
 						style={{ cursor: "pointer" }}>
 						<ShoppingCartIcon className="icon" />
 						<div className="counter">
 							{cartItems?.reduce((a, c) => a + c.qty, 0)}
 						</div>
-						{/* </Link> */}
+					</div>
+					<div
+						className="item item_mobile"
+						onClick={() =>
+							userInfo?.favorites.length > 0 && setFavoriteOpen(true)
+						}
+						style={{ cursor: "pointer" }}>
+						<FavoriteBorderIcon className="icon" />
+						<div className="counter">{userInfo?.favorites.length}</div>
 					</div>
 
 					{userInfo ? (
@@ -157,54 +176,65 @@ export default function Navbar() {
 			</div>{" "}
 			{cartOpen && (
 				<>
-					<div className="cart" ref={miniCart}>
-						<div className="cart_body container">
-							{cartItems?.map((item, i) => (
-								<div className="cart_single row" key={i}>
-									<div className="cart_left  col-sm">
-										<img src={item.images} alt="image_user" />
-									</div>
-									<div className="cart_right col-sm">
-										<div className="item" style={{ fontSize: "15px" }}>
-											{item.name}
+					{cartItems.length > 0 ? (
+						<div className="cart" ref={miniCart}>
+							<div className="cart_top">
+								<div>Image</div>
+								<div>Details</div>
+								<div>Action</div>
+							</div>
+							<div className="cart_body container">
+								{cartItems?.map((item, i) => (
+									<div className="cart_single row" key={i}>
+										<div className="cart_left  col-sm">
+											<img src={item.images} alt="image_user" />
 										</div>
-										<div className="item">qty : {item.qty}</div>
-										<div className="item" style={{ marginTop: "40px" }}>
-											${item.price}
+										<div className="cart_right col-sm">
+											<div className="item" style={{ fontSize: "15px" }}>
+												{item.name}
+											</div>
+											<div className="item">qty : {item.qty}</div>
+											<div className="item" style={{ marginTop: "40px" }}>
+												price : ${item.price}
+											</div>
+										</div>
+										<div className="delete_item col-1">
+											<DeleteIcon onClick={() => removeItem(item.product)} />
 										</div>
 									</div>
-									<div className="delete_item col-1">
-										<DeleteIcon onClick={() => removeItem(item.product)} />
-									</div>
-								</div>
-							))}{" "}
-						</div>
+								))}{" "}
+							</div>
 
-						<div className="cart_footer">
-							<div className="cart_sub">
-								Subtotal:{" "}
-								<span>
-									${cartItems.reduce((a, c) => a + c.qty * c.price, 0)}
-								</span>
-							</div>
-							<div className="cart_button">
-								<button
-									onClick={() => {
-										setCartOpen(false);
-										navigate("/shipping");
-									}}>
-									checkout
-								</button>
-								<button
-									onClick={() => {
-										setCartOpen(false);
-										navigate("/cart");
-									}}>
-									view and edit cart
-								</button>
+							<div className="cart_footer">
+								<div className="cart_sub">
+									Subtotal:{" "}
+									<span>
+										${cartItems.reduce((a, c) => a + c.qty * c.price, 0)}
+									</span>
+								</div>
+								<div className="cart_button">
+									<button
+										onClick={() => {
+											setCartOpen(false);
+											navigate("/shipping");
+										}}>
+										checkout
+									</button>
+									<button
+										onClick={() => {
+											setCartOpen(false);
+											navigate("/cart");
+										}}>
+										view and edit cart
+									</button>
+								</div>
 							</div>
 						</div>
-					</div>
+					) : (
+						<div className="cart d-flex justify-content-center " ref={miniCart}>
+							<h3 className="m-auto ">Empty cart</h3>
+						</div>
+					)}
 				</>
 			)}
 			{userOpen && (
@@ -276,6 +306,46 @@ export default function Navbar() {
 						}}>
 						Logout
 					</Link>
+				</div>
+			)}
+			{favoriteOpen && (
+				<div
+					ref={dropFavorite}
+					className={`favorite_cart ${
+						userInfo?.favorites.length > 3 && "scroll"
+					}`}>
+					{userInfo?.favorites.map((item) => (
+						<div className="fav_cart">
+							<div className="left">
+								<img src={item.image} />
+							</div>
+							<div className="center">
+								<div>{item.name}</div>
+								<div>price : ${item.price}</div>
+							</div>
+							<div className="right">
+								{" "}
+								<div>
+									{item.stock > 0 ? (
+										<span className="text-success font-weight-bold">
+											inStock
+										</span>
+									) : (
+										<span className="text-danger font-weight-bold">
+											outStock
+										</span>
+									)}
+								</div>
+								<div>
+									<div className="delete_favorite ">
+										<DeleteIcon
+											onClick={() => deleteFavoriteId(item.product)}
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+					))}
 				</div>
 			)}
 			<div className="list_navbar">

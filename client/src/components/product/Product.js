@@ -82,7 +82,7 @@ export default function Product({ products, home }) {
 									)}
 
 									<div className="card-image">
-										<img src={product.images[0].url} alt="img" />
+										<img src={product?.images[0]?.url} alt="img" />
 									</div>
 
 									{userInfo && (
