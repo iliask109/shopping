@@ -3,7 +3,7 @@ import React from "react";
 export default function About() {
 	return (
 		<div className="about_page">
-			<div class="about-section">
+			<div className="about-section">
 				<h1 style={{ color: "gold" }}>About Us</h1>
 				<p>Shopping, virtual store </p>
 				<p>
@@ -24,17 +24,17 @@ export default function About() {
 		
 
 			<h2>Our Team</h2>
-			<div class="row">
-				<div class="column">
-					<div class="card">
+			<div className="row">
+				<div className="column">
+					<div className="card">
 						<img
 							src="https://scontent.fsdv1-2.fna.fbcdn.net/v/t1.6435-9/31275700_1087892948016186_3112127912497643520_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=5FOBHlm9eZQAX8WwAZl&tn=k6Z29xHlS5pm-D1G&_nc_ht=scontent.fsdv1-2.fna&oh=00_AT_eseu30OBm5Jpxl06SZrNdZ-NDDA-krdcG9CGpcvJA2g&oe=631550DB"
 							alt="ilia"
 							style={{ width: "100%" }}
 						/>
-						<div class="container">
+						<div className="container">
 							<h2>Ilia Shkliar</h2>
-							<p class="title">Owner & Developer</p>
+							<p className="title">Owner & Developer</p>
 							<p>26 years old, studying programming</p>
 							<p>iliask109@gmail.com</p>
 						</div>

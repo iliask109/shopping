@@ -19,6 +19,12 @@
         }
     }
 
+
+
+    .modal-footer {
+        border: 1px solid #dee2e6;
+    }
+
     .modal-content {
         margin-top: 5px;
     }
@@ -115,6 +121,10 @@
             height: 200px;
             max-width: 200px;
         }
+    }
+
+    .carousel .visually-hidden {
+        display: none !important;
     }
 }
 
@@ -245,27 +255,6 @@
     }
 }
 
-@media (max-width: 1000px) {
-
-    .product_page {
-        .top_products {
-            width: 80%;
-            font-size: 14px;
-
-            .card {
-                margin-right: 30px;
-                min-width: 140px;
-                height: 500px;
-            }
-
-            img {
-                width: 80%;
-                height: 200px;
-                max-width: 200px;
-            }
-        }
-    }
-}
 
 @media (max-width: 1000px) {
 
@@ -274,6 +263,18 @@
 
             display: none;
         }
+
+        .modal-body {
+            img {
+                width: 80% !important;
+                height: 300px;
+            }
+        }
+
+        .modal-content {
+            margin-bottom: 20px;
+        }
+
     }
 }
 

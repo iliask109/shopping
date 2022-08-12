@@ -40,16 +40,6 @@ export default function Home() {
 		}
 	});
 
-	const topProducts = () => {
-		products
-			?.sort(function (a, b) {
-				return b.numOfSale - a.numOfSale;
-			})
-			.slice(0, 4);
-
-		return products;
-	};
-
 	return (
 		<div className="row pt-2">
 			<Title title={"Home"} />
@@ -62,7 +52,7 @@ export default function Home() {
 				) : (
 					<>
 						<h4>Top Products</h4>
-						<Product products={topProducts()} home={true} />
+						<Product products={products} />
 						<div className="see_more">
 							<h4>Top Sales</h4> <Link to="/sales">See More</Link>
 						</div>

@@ -102,17 +102,6 @@ export default function ContactPage() {
 									/>
 								</div>
 								<div className="form-group">
-									<input
-										type="button"
-										name="btnSubmit"
-										className="btnContact"
-										value="Send Message"
-										onClick={() => sendMessage()}
-									/>
-								</div>
-							</div>
-							<div className="col-md-6">
-								<div className="form-group">
 									<select
 										className="form-control"
 										aria-label="Default select example"
@@ -131,7 +120,9 @@ export default function ContactPage() {
 										</option>
 										<option value="Other ...">Other ...</option>
 									</select>
-								</div>
+								</div>{" "}
+							</div>
+							<div className="col-md-6">
 								<div className="form-group">
 									<textarea
 										name="txtMsg"
@@ -140,6 +131,15 @@ export default function ContactPage() {
 										value={message}
 										onChange={(e) => setMessage(e.target.value)}
 										style={{ width: "100%", height: "150px" }}></textarea>
+								</div>
+								<div className="form-group">
+									<input
+										type="button"
+										name="btnSubmit"
+										className="btnContact"
+										value="Send Message"
+										onClick={() => sendMessage()}
+									/>
 								</div>
 							</div>
 						</div>

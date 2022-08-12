@@ -40,7 +40,7 @@ export default function SingleProductAdmin() {
 
 	const { loading, error, product } = productDetails;
 	const productUpdateAdmin = useSelector((state) => state.productUpdateAdmin);
-	const { isUpdate } = productUpdateAdmin;
+	const { isUpdate, error: errorUpdate } = productUpdateAdmin;
 
 	useEffect(() => {
 		if (!product || product._id !== id) {
@@ -60,18 +60,32 @@ export default function SingleProductAdmin() {
 	// update product
 	const submitHandler = (e) => {
 		e.preventDefault();
-		dispatch(
-			updateProduct(id, {
-				name,
-				price,
-				discount,
-				description,
-				images,
-				category,
-				seller,
-				stock,
-			})
-		);
+		if (images) {
+			dispatch(
+				updateProduct(id, {
+					name,
+					price,
+					discount,
+					description,
+					images,
+					category,
+					seller,
+					stock,
+				})
+			);
+		}else{
+			dispatch(
+				updateProduct(id, {
+					name,
+					price,
+					discount,
+					description,
+					category,
+					seller,
+					stock,
+				})
+			);
+		}
 	};
 
 	const onChange = (e) => {
@@ -95,8 +109,6 @@ export default function SingleProductAdmin() {
 		});
 	};
 
-	console.log(images);
-
 	return (
 		<div>
 			<Title title={"admin products"} />
@@ -106,10 +118,14 @@ export default function SingleProductAdmin() {
 					<Loading></Loading>
 				) : (
 					<div className="row">
-						{error && <MessageBox variant="danger">{error}</MessageBox>}
-
 						<div className="col-md-4 border-right "></div>
 						<div className="col-md-5 ">
+							{error && <MessageBox variant="danger">{error}</MessageBox>}
+
+							{errorUpdate && (
+								<MessageBox variant="danger">{errorUpdate}</MessageBox>
+							)}
+
 							{isUpdate && (
 								<MessageBox variant="success">
 									The update was successful

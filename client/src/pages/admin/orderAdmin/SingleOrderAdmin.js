@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loading from "../../../components/loading/Loading";
 import MessageBox from "../../../components/MessageBox";
 import { Form } from "react-bootstrap";
@@ -53,11 +53,34 @@ export default function SingleOrderAdmin() {
 			<div className="container rounded bg-white mt-5 mb-5">
 				{loading ? (
 					<Loading></Loading>
+				) : error ? (
+					<MessageBox variant="danger">{error}</MessageBox>
 				) : (
 					<div className="row">
-						{error && <MessageBox variant="danger">{error}</MessageBox>}
-						<div className="col-md-3 "></div>
-						<div className="col-md-5 ">
+						<div className="col-md-4 ">
+							{order?.orderItems.map((item, i) => (
+								<Link
+									to={`/products/${item.product}`}
+									key={i}
+									style={{ textDecoration: "none" }}>
+									<div className="orderDetails border">
+										<img src={item.image} />
+										<div className="itemsOrder">
+											<div className="itemOrder">
+												<b>name</b> : {item.name}
+											</div>
+											<div className="itemOrder">
+												<b>price</b> : {item.price}
+											</div>
+											<div className="itemOrder">
+												<b>qty</b> : {item.qty}
+											</div>
+										</div>
+									</div>
+								</Link>
+							))}
+						</div>
+						<div className="col-md-5 order_admin">
 							{isUpdate && (
 								<MessageBox variant="success">
 									The update was successful

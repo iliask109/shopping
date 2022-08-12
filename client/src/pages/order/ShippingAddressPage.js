@@ -4,7 +4,7 @@ import CheckoutSteps from "../../components/checkoutSteps/CheckoutSteps";
 import { useNavigate } from "react-router-dom";
 import { saveShippingAddress } from "../../actions/cartActions";
 import Title from "../../components/Title";
-import './order.scss'
+import "./order.scss";
 
 export default function ShippingAddressPage() {
 	const navigate = useNavigate();
@@ -12,7 +12,7 @@ export default function ShippingAddressPage() {
 
 	const cart = useSelector((state) => state.cart);
 	const { shippingAddress } = cart;
-	
+
 	const [fullName, setFullName] = useState(shippingAddress.fullName || "");
 	const [address, setAddress] = useState(shippingAddress.address || "");
 	const [city, setCity] = useState(shippingAddress.city || "");
@@ -21,7 +21,6 @@ export default function ShippingAddressPage() {
 		shippingAddress.postalCode || ""
 	);
 	const [country, setCountry] = useState(shippingAddress.country || "");
-
 
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
@@ -32,17 +31,21 @@ export default function ShippingAddressPage() {
 	// save address
 	const submitHandler = (e) => {
 		e.preventDefault();
-		dispatch(
-			saveShippingAddress({
-				fullName,
-				address,
-				city,
-				postalCode,
-				country,
-				phone,
-			})
-		);
-		navigate("/payment");
+		if (phone.length === 10) {
+			dispatch(
+				saveShippingAddress({
+					fullName,
+					address,
+					city,
+					postalCode,
+					country,
+					phone,
+				})
+			);
+			navigate("/payment");
+		} else {
+			alert("The phone number must be valid, 10 numbers ");
+		}
 	};
 
 	return (
@@ -92,9 +95,7 @@ export default function ShippingAddressPage() {
 									<i className="fa fa-phone"></i>{" "}
 								</span>
 							</div>
-							<select className="custom-select" style={{ maxWidth: "120px" }}>
-								<option defaultValue="+972">+972</option>
-							</select>
+
 							<input
 								type="number"
 								id="phone"

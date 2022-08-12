@@ -143,18 +143,20 @@ export default function Navbar() {
 							{cartItems?.reduce((a, c) => a + c.qty, 0)}
 						</div>
 					</div>
-					<div
-						className="item item_mobile"
-						onClick={() =>
-							userInfo?.favorites.length > 0 && setFavoriteOpen(true)
-						}
-						style={{ cursor: "pointer" }}>
-						<FavoriteBorderIcon className="icon" />
-						<div className="counter">{userInfo?.favorites.length}</div>
-					</div>
+					{userInfo && (
+						<div
+							className="item item_mobile"
+							onClick={() =>
+								userInfo?.favorites.length > 0 && setFavoriteOpen(true)
+							}
+							style={{ cursor: "pointer" }}>
+							<FavoriteBorderIcon className="icon" />
+							<div className="counter">{userInfo?.favorites.length}</div>
+						</div>
+					)}
 
 					{userInfo ? (
-						<div className="item" onClick={() => setUserOpen(true)}>
+						<div className="item item_mobile_user" onClick={() => setUserOpen(true)}>
 							<img src={userInfo?.avatar.url} alt="" className="avatar" />
 							<div className="user">{userInfo.name}</div>
 							{!userOpen ? (
@@ -314,8 +316,8 @@ export default function Navbar() {
 					className={`favorite_cart ${
 						userInfo?.favorites.length > 3 && "scroll"
 					}`}>
-					{userInfo?.favorites.map((item) => (
-						<div className="fav_cart">
+					{userInfo?.favorites.map((item, i) => (
+						<div className="fav_cart" key={i}>
 							<div className="left">
 								<img src={item.image} />
 							</div>
