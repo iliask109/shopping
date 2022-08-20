@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
 //components
@@ -46,16 +46,38 @@ import SingleProductSeller from "./pages/seller/SingelProductSeller";
 import SingleMessage from "./pages/admin/SingleMessage";
 
 import "./app.scss";
+import { getCoupons } from "./actions/productActions";
 
 function App() {
+	const dispatch = useDispatch();
+
 	const sidebarReducer = useSelector((state) => state.sidebarReducer);
 	const { Blur } = sidebarReducer;
+	const getCouponReducer = useSelector((state) => state.getCouponReducer);
+	const { coupon } = getCouponReducer;
+
+	const [couponShow, setCouponShow] = useState(true);
 
 	const Mobile = useMediaQuery({ query: "(min-width: 700px)" });
+
+	useEffect(() => {
+		dispatch(getCoupons());
+	}, []);
 
 	return (
 		<div className="main">
 			<BrowserRouter>
+				{couponShow && coupon?.discountCoupons && (
+					<div className="coupon">
+						Get {coupon?.discountCoupons}% off with the code{" "}
+						<span>{coupon?.nameCoupon}</span>
+						<label
+							className="remove_coupon"
+							onClick={() => setCouponShow(false)}>
+							X
+						</label>
+					</div>
+				)}
 				<Navbar />
 				<div className="homeContainer ">
 					<div

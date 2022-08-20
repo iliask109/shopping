@@ -6,6 +6,7 @@ import MessageBox from "../components/MessageBox";
 import Product from "../components/product/Product";
 import Title from "../components/Title";
 import { Link } from "react-router-dom";
+import Lists from "../components/sidebar/list";
 
 export default function Home() {
 	const dispatch = useDispatch();
@@ -22,23 +23,13 @@ export default function Home() {
 			topSales.push(item);
 		}
 	});
-	var categories = products?.map((item) => item.category);
 
-	var distribution = {},
-		max = 0,
-		result = [];
+	const numOfCategories = (category) => {
+		let sum = 0;
+		products?.map((item) => item.category === category && (sum = sum + 1));
 
-	categories?.forEach(function (a) {
-		distribution[a] = (distribution[a] || 0) + 1;
-		if (distribution[a] > max) {
-			max = distribution[a];
-			result = [a];
-			return;
-		}
-		if (distribution[a] === max) {
-			result.push(a);
-		}
-	});
+		return sum;
+	};
 
 	return (
 		<div className="row pt-2">
@@ -51,24 +42,35 @@ export default function Home() {
 					<MessageBox variant="danger">{error}</MessageBox>
 				) : (
 					<>
+						<div className="categories" id="scrollbar">
+							<div className="boxes">
+								{Lists.map((item) => (
+									<div className="box" key={item.index}>
+										<div className="icon"> {item.icon}</div>
+										<div className="name">
+											{" "}
+											<span>{item.title}</span>
+											<br />
+											<Link
+												to={`/search/category/${item.title}`}
+												className="show">
+												Show All
+											</Link>
+										</div>
+										<div className="number">
+											(<span>{numOfCategories(item.title)}</span>)
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
 						<h4>Top Products</h4>
-						<Product products={products} />
+						<Product products={products} home={true} />
 						<div className="see_more">
 							<h4>Top Sales</h4> <Link to="/sales">See More</Link>
 						</div>
 						<Product products={topSales} home={true} />
-						<div>
-							<h4>Top Categories</h4>
-						</div>
-						<div className="categories">
-							{Object.keys(distribution)
-								?.slice(0, 5)
-								.map((item, i) => (
-									<div className="box" key={i}>
-										<Link to={`/search/category/${item}`}>{item}</Link>
-									</div>
-								))}
-						</div>
+
 						<div className="see_more">
 							<h4>All Products</h4> <Link to="/products">See More</Link>
 						</div>

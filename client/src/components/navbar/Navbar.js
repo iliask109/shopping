@@ -95,7 +95,9 @@ export default function Navbar() {
 
 	return (
 		<div className="navbar col-lg-12">
+			
 			<div className="wrapper ">
+				
 				{Mobile && <Sidebar />}
 				<div className="logo ">
 					<Link to="/" style={{ textDecoration: "none" }}>
@@ -350,18 +352,7 @@ export default function Navbar() {
 					))}
 				</div>
 			)}
-			<div className="list_navbar">
-				{Lists.map((list, index) => (
-					<Link
-						key={index}
-						to={`search/category/${list.title}`}
-						style={{ textDecoration: "none" }}>
-						<span>
-							{list.icon} <span>{list.title}</span>{" "}
-						</span>{" "}
-					</Link>
-				))}
-			</div>
+			
 		</div>
 	);
 }

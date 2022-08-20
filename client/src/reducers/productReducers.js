@@ -1,5 +1,4 @@
 import {
-
 	DELETE_PRODUCT_FAIL,
 	DELETE_PRODUCT_REQUEST,
 	DELETE_PRODUCT_RESET,
@@ -8,6 +7,9 @@ import {
 	DELETE_REVIEW_REQUEST,
 	DELETE_REVIEW_RESET,
 	DELETE_REVIEW_SUCCESS,
+	GET_COUPON_FAIL,
+	GET_COUPON_REQUEST,
+	GET_COUPON_SUCCESS,
 	GET_REVIEWS_FAIL,
 	GET_REVIEWS_REQUEST,
 	GET_REVIEWS_SUCCESS,
@@ -76,8 +78,6 @@ export const productListSellerReducer = (
 			return state;
 	}
 };
-
-
 
 export const productSellerListReducer = (
 	state = { loading: true, products: [] },
@@ -243,6 +243,31 @@ export const productReviewsReducer = (state = { review: [] }, action) => {
 			};
 
 		case GET_REVIEWS_FAIL:
+			return {
+				...state,
+				error: action.payload,
+			};
+
+		default:
+			return state;
+	}
+};
+
+export const getCouponReducer = (state = {}, action) => {
+	switch (action.type) {
+		case GET_COUPON_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+
+		case GET_COUPON_SUCCESS:
+			return {
+				loading: false,
+				coupon: action.payload,
+			};
+
+		case GET_COUPON_FAIL:
 			return {
 				...state,
 				error: action.payload,

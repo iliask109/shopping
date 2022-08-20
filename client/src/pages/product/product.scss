@@ -19,7 +19,12 @@
         }
     }
 
-
+    .modal-body {
+        img {
+            max-height: 300px;
+            margin: 10px;
+        }
+    }
 
     .modal-footer {
         border: 1px solid #dee2e6;
@@ -264,10 +269,17 @@
             display: none;
         }
 
-        .modal-body {
+        .modal-content .modal-body {
             img {
                 width: 80% !important;
                 height: 300px;
+            }
+        }
+        .reviews .media {
+            img {
+                width: 50px !important;
+                height:  50px;
+             
             }
         }
 
@@ -276,6 +288,7 @@
         }
 
     }
+
 }
 
 @media (max-width: 575.5px) {
@@ -289,8 +302,22 @@
 
     .product_page {
 
+        .reviews .media {
+            img {
+            display: none;
+             
+            }
+        }
+
         #product_image {
             margin: 0px;
+        }
+
+        .modal-body {
+            img {
+                height: 230px;
+                margin: 10px;
+            }
         }
     }
 

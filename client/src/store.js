@@ -18,6 +18,7 @@ import {
 } from "./reducers/orderReducers";
 import {
 	deleteReviewReducer,
+	getCouponReducer,
 	newProductReducer,
 	newReviewReducer,
 	productDeleteReducer,
@@ -100,6 +101,7 @@ const reducer = combineReducers({
 	singleMessage: singleMessageReducer,
 	deleteMessage: deleteMessageReducer,
 	confirmMessage: confirmMessageReducer,
+	getCouponReducer:getCouponReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

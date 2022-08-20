@@ -4,6 +4,10 @@
 
     }
 
+    img {
+        padding: 10px;
+    }
+
     .shopping-cart {
         padding-bottom: 50px;
         font-family: 'Montserrat', sans-serif;
@@ -227,7 +231,8 @@
             font-size: 11px;
             margin: 5px 0px;
         }
-    } 
+    }
+
     .removeCart {
         display: none;
     }

@@ -1,12 +1,14 @@
 import Axios from "axios";
 import {
-
 	DELETE_PRODUCT_FAIL,
 	DELETE_PRODUCT_REQUEST,
 	DELETE_PRODUCT_SUCCESS,
 	DELETE_REVIEW_FAIL,
 	DELETE_REVIEW_REQUEST,
 	DELETE_REVIEW_SUCCESS,
+	GET_COUPON_FAIL,
+	GET_COUPON_REQUEST,
+	GET_COUPON_SUCCESS,
 	GET_REVIEWS_FAIL,
 	GET_REVIEWS_REQUEST,
 	GET_REVIEWS_SUCCESS,
@@ -205,7 +207,6 @@ export const deleteReviewAdmin = (id, productId) => async (dispatch) => {
 			payload: data.success,
 		});
 	} catch (error) {
-
 		dispatch({
 			type: DELETE_REVIEW_FAIL,
 			payload: error.response.data.message,
@@ -254,7 +255,15 @@ export const getProductsSeller = () => async (dispatch, getState) => {
 	}
 };
 
-
+export const getCoupons = () => async (dispatch) => {
+	try {
+		dispatch({ type: GET_COUPON_REQUEST });
+		const { data } = await Axios.get("/api/coupons");
+		dispatch({ type: GET_COUPON_SUCCESS, payload: data });
+	} catch (error) {
+		dispatch({ type: GET_COUPON_FAIL });
+	}
+};
 
 export const clearErrors = () => async (dispatch) => {
 	dispatch({

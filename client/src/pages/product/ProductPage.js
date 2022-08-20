@@ -15,6 +15,8 @@ import MessageBox from "../../components/MessageBox";
 import Title from "../../components/Title";
 import "./product.scss";
 import { Carousel } from "react-bootstrap";
+import ClearIcon from "@mui/icons-material/Clear";
+import CheckIcon from "@mui/icons-material/Check";
 
 export default function ProductPage() {
 	const navigate = useNavigate();
@@ -22,11 +24,13 @@ export default function ProductPage() {
 
 	const [openDescription, setOpenDescription] = useState(true);
 	const [query, setQuery] = useState(1);
+	const [couponConfirm, setCouponConfirm] = useState(false);
+	const [couponBtn, setCouponBtn] = useState(false);
 	const [rating, setRating] = useState(0);
 	const [comment, setComment] = useState("");
 	const [addToCart, setAddToCart] = useState(false);
-	const { id } = useParams();
 
+	const { id } = useParams();
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
 	const productDetails = useSelector((state) => state.productDetails);
@@ -41,6 +45,8 @@ export default function ProductPage() {
 		error: errorProducts,
 		products,
 	} = productList;
+	const getCouponReducer = useSelector((state) => state.getCouponReducer);
+	const { coupon } = getCouponReducer;
 
 	useEffect(() => {
 		dispatch(detailsProduct(id));
@@ -48,7 +54,9 @@ export default function ProductPage() {
 	}, [dispatch, id]);
 	// add to cart
 	const addCart = (productId) => {
-		dispatch(AddToCart(productId, query));
+		dispatch(
+			AddToCart(productId, query, couponConfirm && coupon?.discountCoupons)
+		);
 		setAddToCart(true);
 	};
 
@@ -192,12 +200,18 @@ export default function ProductPage() {
 												{product?.discount > 1 && (
 													<del className="mr-4">{product?.price}</del>
 												)}
-												{product?.discount === 0
-													? product?.price
-													: (
-															product?.price -
-															product?.price * (product?.discount / 100)
-													  ).toFixed(2)}
+												{couponConfirm && product?.discount === 0
+													? product?.price -
+													  product?.price * (coupon?.discountCoupons / 100)
+													: couponConfirm && product?.discount > 0
+													? product?.price -
+													  product?.price *
+															((coupon?.discountCoupons + product?.discount) /
+																100)
+													: product?.discount > 0
+													? product?.price -
+													  product?.price * (product?.discount / 100)
+													: product?.price}
 											</td>
 										</tr>
 
@@ -228,6 +242,28 @@ export default function ProductPage() {
 												</td>
 											</tr>
 										)}
+										<tr>
+											<td className="h6">
+												<strong>Coupon : </strong>
+											</td>
+											<td>
+												<input
+													onChange={(e) => {
+														if (e.target.value === coupon?.nameCoupon) {
+															setCouponConfirm(true);
+															setCouponBtn(true);
+														}
+													}}
+													disabled={couponBtn}
+												/>
+												{!couponConfirm && (
+													<ClearIcon style={{ color: "red" }} />
+												)}
+												{couponConfirm && (
+													<CheckIcon style={{ color: "green" }} />
+												)}
+											</td>
+										</tr>
 									</tbody>
 								</table>
 								<div className="modal-footer mt-3">
@@ -237,13 +273,18 @@ export default function ProductPage() {
 											<span className="h3 text-muted">
 												<strong>
 													$
-													{product?.discount === 0
-														? (query * product?.price).toFixed(2)
-														: (
-																query *
-																(product?.price -
-																	product?.price * (product?.discount / 100))
-														  ).toFixed(2)}
+													{couponConfirm && product?.discount === 0
+														? product?.price -
+														  product?.price * (coupon?.discountCoupons / 100)
+														: couponConfirm && product?.discount > 0
+														? product?.price -
+														  product?.price *
+																((coupon?.discountCoupons + product?.discount) /
+																	100)
+														: product?.discount > 0
+														? product?.price -
+														  product?.price * (product?.discount / 100)
+														: product?.price}
 												</strong>
 											</span>
 										</div>
