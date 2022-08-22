@@ -17,7 +17,7 @@
     border-radius: 5px;
     height: 90px;
     width: 100%;
-    background-color: paleturquoise;
+    background-color: var(--color-blue-light);
   }
 
   .input-group {
@@ -29,7 +29,72 @@
   }
 
   .form-control.error {
-    border-color: red !important;
+    border-color: var(--color-red-bold) !important;
+  }
+
+  .validation {
+    background: var(--color-blue-light);
+    padding: 10px;
+    margin-top: 30px;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow)
+  }
+
+  .validation ul {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .validation ul li {
+    position: relative;
+    list-style: none;
+    color: var(--color-white);
+    font-size: 0.85em;
+    transition: 0.5s;
+  }
+
+  .validation ul li.valid {
+    color: var(--color-grey);
+  }
+
+  .validation ul li::before {
+    content: "\f192";
+    font-family: fontAwesome;
+    width: 20px;
+    height: 10px;
+    display: inline-flex;
+  }
+
+  .validation ul li.valid::before {
+    content: "\f00c";
+    font-family: fontAwesome;
+    color: #0f0;
+  }
+
+  #toggleBtn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #toggleBtn::before {
+    content: "\f06e";
+    font-family: fontAwesome;
+  }
+
+  #toggleBtn.hide::before {
+    content: "\f070";
+    font-family: fontAwesome;
   }
 
 }

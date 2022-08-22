@@ -25,6 +25,16 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
 		return next(new ErrorHandler("Old password is incorrect"));
 	}
 
+	const regex = new RegExp(
+		"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!+-@#$%^&*])(?=.{6,})"
+	);
+
+	if (regex.test(req.body.newPassword) === false) {
+		throw new Error(
+			"Your password must contain at least 6 characters: At least one number,at least one lower case letter, at least one upper case letter and at least one special character, like a fullstop."
+		);
+	}
+
 	user.password = req.body.newPassword;
 	await user.save();
 
@@ -42,20 +52,22 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
 	// Update avatar
 	if (req.body.avatar !== "") {
 		const user = await User.findById(req.user.id);
+		if (req.body.avatar !== user.avatar.url) {
+			const image_id = user.avatar.public_id;
 
-		const image_id = user.avatar.public_id;
-		const res = await cloudinary.v2.uploader.destroy(image_id);
+			const res = await cloudinary.v2.uploader.destroy(image_id);
 
-		const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-			folder: "avatars",
-			width: 150,
-			crop: "scale",
-		});
+			const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+				folder: "avatars",
+				width: 150,
+				crop: "scale",
+			});
 
-		newUserData.avatar = {
-			public_id: result.public_id,
-			url: result.secure_url,
-		};
+			newUserData.avatar = {
+				public_id: result.public_id,
+				url: result.secure_url,
+			};
+		}
 	}
 
 	const user = await User.findByIdAndUpdate(req.user.id, newUserData, {

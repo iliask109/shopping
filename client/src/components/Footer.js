@@ -65,7 +65,7 @@ export default function Footer() {
 				<Link className="text-white" to="/">
 					Ilia Shkliar
 				</Link>
-				<p>email: iliask109@Gmail.com</p>
+				<p>Email: iliask109@Gmail.com</p>
 			</div>
 		</footer>
 	);

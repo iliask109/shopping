@@ -1,5 +1,5 @@
 .rating span:last-child {
-	color: #404040;
+	color: rgb(94, 92, 92);
 }
 
 .rating {
@@ -10,4 +10,3 @@
 	color: #f0c040;
 	margin-left: 0.1rem;
 }
-

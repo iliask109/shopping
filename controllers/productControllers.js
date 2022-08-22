@@ -113,8 +113,7 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
 	if (!product) {
 		return next(new ErrorHandler("Product not found", 404));
 	}
-
-	console.log(req.body.images);
+	console.log(req.body);
 	if (
 		req.user.role === "admin" ||
 		req.user._id.toString() === product.user.toString()
@@ -133,9 +132,7 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
 					product.images[i].public_id
 				);
 			}
-
 			let imagesLinks = [];
-
 			for (let i = 0; i < images.length; i++) {
 				const result = await cloudinary.v2.uploader.upload(images[i], {
 					folder: "products",
@@ -149,14 +146,13 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
 
 			req.body.images = imagesLinks;
 		}
-
-		product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-			new: true,
-			runValidators: true,
-			useFindAndModify: false,
-		});
 	}
 
+	product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+		new: true,
+		runValidators: true,
+		useFindAndModify: false,
+	});
 	res.status(200).json({
 		success: true,
 		product,
@@ -280,7 +276,6 @@ exports.getSellerProducts = catchAsyncError(async (req, res, next) => {
 // get /api/products/coupons
 
 exports.getCoupons = catchAsyncError(async (req, res, next) => {
-
 	const nameCoupon = "NEWshopping1";
 	const discountCoupons = 20;
 

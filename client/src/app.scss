@@ -22,7 +22,7 @@
   }
 
   .card_icon.minus:hover {
-    color: red;
+    color: var(--color-red-bold);
   }
 }
 
@@ -33,7 +33,7 @@
 
 .contact_page {
   .contact-form {
-    background: #fff;
+    background: var(--color-white);
     margin-top: 10%;
     margin-bottom: 5%;
     width: 70%;
@@ -66,7 +66,7 @@
     margin-bottom: 8%;
     margin-top: -10%;
     text-align: center;
-    color: #0062cc;
+    color: var(--color-blue-light);
   }
 
   .contact-form .btnContact {
@@ -74,9 +74,9 @@
     border: none;
     border-radius: 1rem;
     padding: 1.5%;
-    background: #dc3545;
+    background: var(--color-red-bold);
     font-weight: 600;
-    color: #fff;
+    color: var(--color-white);
     cursor: pointer;
   }
 
@@ -84,8 +84,8 @@
     width: 50%;
     border-radius: 1rem;
     padding: 1.5%;
-    color: #fff;
-    background-color: #0062cc;
+    color: var(--color-white);
+    background-color: var(--color-blue-light);
     border: none;
     cursor: pointer;
   }
@@ -107,18 +107,18 @@
 
   ::-webkit-scrollbar {
     width: 10px;
-    background-color: #f5f5f5;
+    background-color: var(--color-white);
   }
 
   ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #f5f5f5;
+    background-color: var(--color-white);
     border-radius: 10px;
   }
 
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: #fff;
+    background-color: var(--color-white);
     background-image: -webkit-gradient(linear,
         40% 0%,
         75% 84%,
@@ -137,7 +137,7 @@
     .box {
       min-width: 200px !important;
       height: 70px;
-      border: 2px solid grey;
+      border: 2px solid gray;
       display: flex;
       justify-content: space-between;
 
@@ -161,10 +161,11 @@
         }
 
       }
-      .number span{
-        
-font-weight: bold;
-color: blue;
+
+      .number span {
+
+        font-weight: bold;
+        color: var(--color-blue-bold);
       }
     }
   }
@@ -182,7 +183,7 @@ color: blue;
     color: #B88846;
     margin: 10px;
     padding: 10px;
-    border: 2px solid white;
+    border: var(--border-white);
     border-radius: 50px;
   }
 
@@ -198,15 +199,15 @@ color: blue;
   }
 
   .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow);
     margin: 8px;
   }
 
   .about-section {
     padding: 50px;
     text-align: center;
-    background-color: #474e5d;
-    color: white;
+    background-color: var(--color-grey);
+    color: var(--color-white);
   }
 
   .container {
@@ -221,7 +222,7 @@ color: blue;
   }
 
   .title {
-    color: grey;
+    color: var(--color-grey);
   }
 
   .button {
@@ -229,15 +230,15 @@ color: blue;
     outline: 0;
     display: inline-block;
     padding: 8px;
-    color: white;
-    background-color: #000;
+    color: var(--color-red-bold);
+    background-color: var(--color-black);
     text-align: center;
     cursor: pointer;
     width: 100%;
   }
 
   .button:hover {
-    background-color: #555;
+    background-color: var(--color-grey);
   }
 
   @media screen and (max-width: 650px) {
@@ -257,12 +258,12 @@ color: blue;
   z-index: 999;
   text-align: center;
   font-size: 20px;
-  color: white;
+  color: var(--color-white);
 
   .remove_coupon {
     position: absolute;
     right: 10px;
-    color: red;
+    color: var(--color-red-bold);
     cursor: pointer;
   }
 
@@ -276,5 +277,134 @@ color: blue;
     font-size: 15px;
 
 
+  }
+}
+
+.cardWeek {
+  border: 2px dashed var(--color-black);
+  width: 100%;
+  height: 400px;
+  margin-bottom: 20px;
+  padding: 10px;
+  display: flex;
+  box-shadow: var(--box-shadow);
+
+  img {
+    margin-left: 20%;
+    width: 100%;
+    min-width: 300px;
+    height: 380px;
+  }
+
+  .right {
+    margin-left: 20%;
+    font-weight: bold;
+
+    .rating {
+      font-size: 30px;
+    }
+
+    .description {
+      margin: 10px 0px;
+      font-weight: normal;
+    }
+
+    .price {
+      color: var(--color-red-light);
+      font-size: 40px;
+
+      del {
+        margin-left: 10%;
+      }
+    }
+
+    .btn {
+      position: relative;
+      top: 15%;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .cardWeek {
+    img {
+      min-width: 250px;
+    }
+
+    .right {
+      .price {
+        font-size: 20px;
+      }
+
+      .btn {
+        top: 5%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .cardWeek {
+    img {
+      min-width: 150px;
+    }
+
+
+    .right {
+
+      .rating {
+        font-size: 15px;
+      }
+
+      .price {
+        font-size: 20px;
+      }
+
+      .btn {
+        top: 5%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cardWeek {
+
+
+
+    .right {
+
+      .description {
+        font-size: 10px;
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .cardWeek {
+    margin-left: 2%;
+
+    img {
+      min-width: 100px;
+      height: 200px;
+    }
+
+    width: 95% !important;
+
+    .right {
+
+      .description {
+        font-size: 10px;
+      }
+
+      .btn {
+        width: 80%;
+        top: 0px;
+        right: 80%;
+      }
+    }
   }
 }

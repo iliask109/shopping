@@ -242,8 +242,8 @@ export default function ProductPage() {
 												</td>
 											</tr>
 										)}
-										<tr>
-											<td className="h6">
+										<tr className="couponText">
+											<td className="h6 ">
 												<strong>Coupon : </strong>
 											</td>
 											<td>
@@ -273,18 +273,22 @@ export default function ProductPage() {
 											<span className="h3 text-muted">
 												<strong>
 													$
-													{couponConfirm && product?.discount === 0
-														? product?.price -
-														  product?.price * (coupon?.discountCoupons / 100)
-														: couponConfirm && product?.discount > 0
-														? product?.price -
-														  product?.price *
-																((coupon?.discountCoupons + product?.discount) /
-																	100)
-														: product?.discount > 0
-														? product?.price -
-														  product?.price * (product?.discount / 100)
-														: product?.price}
+													{(
+														query *
+														(couponConfirm && product?.discount === 0
+															? product?.price -
+															  product?.price * (coupon?.discountCoupons / 100)
+															: couponConfirm && product?.discount > 0
+															? product?.price -
+															  product?.price *
+																	((coupon?.discountCoupons +
+																		product?.discount) /
+																		100)
+															: product?.discount > 0
+															? product?.price -
+															  product?.price * (product?.discount / 100)
+															: product?.price)
+													).toFixed(2)}
 												</strong>
 											</span>
 										</div>
@@ -450,7 +454,7 @@ export default function ProductPage() {
 					<div className="top_products mt-3">
 						<h5>Recommended products</h5>
 						<div className="m-3 d-flex flex-nowrap same_category_card">
-							{products?.map((item, i) => (
+							{products?.slice(0, 4).map((item, i) => (
 								<div className="card " key={i}>
 									<img
 										src={item.images[0].url}

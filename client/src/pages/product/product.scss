@@ -1,15 +1,8 @@
 .product_page {
 
-    .go_back {
-        margin-bottom: 10px;
 
-        a {
-            margin-right: 5px;
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-        }
-    }
+
+
 
     .modal-header {
         button {
@@ -27,7 +20,7 @@
     }
 
     .modal-footer {
-        border: 1px solid #dee2e6;
+        border: 1px solid var(--color-grey);
     }
 
     .modal-content {
@@ -59,7 +52,7 @@
 
     .add_to {
         background: green;
-        color: #ffffff !important;
+        color: var(--color-white) !important;
         display: inline-block;
         font-size: 15px;
         font-weight: 500;
@@ -121,6 +114,7 @@
         }
 
         img {
+            margin-left: 10%;
             padding: 5px;
             width: 100%;
             height: 200px;
@@ -154,7 +148,7 @@
     }
 
     .container.bg-sec-light {
-        background-color: #e7e7e7;
+        background-color: var(--color-grey);
     }
 
     #content {
@@ -164,7 +158,7 @@
 
     a {
         text-decoration: none;
-        color: #222;
+        color: var(--color-black);
     }
 
     #content .user-select-none {
@@ -199,7 +193,7 @@
 
         .item {
             text-align: center;
-            border: 2px solid black;
+            border: var(--border-black);
             width: 150px;
             height: 40px;
             margin-right: 15px;
@@ -209,7 +203,7 @@
         }
 
         .item:hover {
-            background-color: red;
+            background-color: var(--color-red-bold);
         }
 
         .ratings {
@@ -266,7 +260,34 @@
     .product_page {
         .top_products {
 
-            display: none;
+            .card {
+                height: 270px;
+                min-width: 140px;
+
+            }
+
+            img {
+                width: 80%;
+                height: 150px;
+                max-width: 100px;
+            }
+
+            .card-body {
+
+                h5 {
+                    font-size: 15px;
+                }
+
+                .card-text {
+                    display: none;
+                }
+            }
+        }
+
+        .couponText {
+            input {
+                width: 60%;
+            }
         }
 
         .modal-content .modal-body {
@@ -275,11 +296,12 @@
                 height: 300px;
             }
         }
+
         .reviews .media {
             img {
                 width: 50px !important;
-                height:  50px;
-             
+                height: 50px;
+
             }
         }
 
@@ -287,6 +309,19 @@
             margin-bottom: 20px;
         }
 
+    }
+
+}
+
+@media (max-width: 770px) {
+
+    .product_page {
+        .top_products {
+            width: 100%;
+            .same_category_card {
+                overflow-x: scroll;
+            }
+        }
     }
 
 }
@@ -302,16 +337,37 @@
 
     .product_page {
 
+        .modal-body {
+            padding: 10px;
+
+
+        }
+
+        td.h5 {
+            font-size: 16px !important;
+        }
+
         .reviews .media {
             img {
-            display: none;
-             
+                display: none;
+
             }
         }
 
         #product_image {
             margin: 0px;
         }
+
+        .couponText {
+            td {
+                display: flex;
+            }
+
+            input {
+                width: 100%;
+            }
+        }
+
 
         .modal-body {
             img {

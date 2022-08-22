@@ -28,6 +28,7 @@ exports.sendVerificationEmail = (order, user, subject, message) => {
 			accessToken,
 		},
 	});
+
 	const mailOptions = {
 		from: "Shopping",
 		to: order ? order.shippingAddress.address : user.email,

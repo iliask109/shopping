@@ -60,7 +60,8 @@ export default function SingleProductAdmin() {
 	// update product
 	const submitHandler = (e) => {
 		e.preventDefault();
-		if (images) {
+
+		if (images.length > 0) {
 			dispatch(
 				updateProduct(id, {
 					name,
@@ -73,7 +74,7 @@ export default function SingleProductAdmin() {
 					stock,
 				})
 			);
-		}else{
+		} else {
 			dispatch(
 				updateProduct(id, {
 					name,
@@ -160,9 +161,10 @@ export default function SingleProductAdmin() {
 									<div className="col-md-12">
 										<label className="labels">Discount</label>
 										<input
-											type="text"
+											type="number"
 											className="form-control"
 											value={discount}
+											max="90"
 											onChange={(e) => setDiscount(e.target.value)}
 										/>
 									</div>
@@ -190,7 +192,7 @@ export default function SingleProductAdmin() {
 													key={i}
 													src={img.url}
 													alt={img.url}
-													className="mt-3 mr-2"
+													className="mt-3 mr-2 mb-3"
 													width="55"
 													height="52"
 												/>
@@ -201,7 +203,7 @@ export default function SingleProductAdmin() {
 												src={img}
 												key={i}
 												alt="Images Preview"
-												className="mt-3 mr-2"
+												className="mt-3 mr-2 mb-3"
 												width="55"
 												height="52"
 											/>

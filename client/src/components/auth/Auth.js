@@ -21,7 +21,47 @@ export default function Auth(props) {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [forgotPassword, setForgotPassword] = useState(false);
 	const [emailPass, setEmailPass] = useState("");
-	const [errorBorder, setErrorBorder] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
+
+	let lowerCase = document.getElementById("lower");
+	let upperCase = document.getElementById("upper");
+	let numberCase = document.getElementById("number");
+	let specialCase = document.getElementById("special");
+	let lengthCase = document.getElementById("length");
+
+	function checkPassword(data) {
+		const lower = new RegExp("(?=.*[a-z])");
+		const upper = new RegExp("(?=.*[A-Z])");
+		const number = new RegExp("(?=.*[0-9])");
+		const special = new RegExp("(?=.*[!@#$%^&*+])");
+		const length = new RegExp("(?=.{6,})");
+
+		if (lower.test(data)) {
+			lowerCase.classList.add("valid");
+		} else {
+			lowerCase.classList.remove("valid");
+		}
+		if (upper.test(data)) {
+			upperCase.classList.add("valid");
+		} else {
+			upperCase.classList.remove("valid");
+		}
+		if (number.test(data)) {
+			numberCase.classList.add("valid");
+		} else {
+			numberCase.classList.remove("valid");
+		}
+		if (special.test(data)) {
+			specialCase.classList.add("valid");
+		} else {
+			specialCase.classList.remove("valid");
+		}
+		if (length.test(data)) {
+			lengthCase.classList.add("valid");
+		} else {
+			lengthCase.classList.remove("valid");
+		}
+	}
 
 	const userRegister = useSelector((state) => state.userRegister);
 	const { userInfo, loading, error } = userRegister;
@@ -83,6 +123,7 @@ export default function Auth(props) {
 	const passwordHandler = () => {
 		dispatch(ForgotPassword(emailPass));
 	};
+
 
 	return (
 		<Modal
@@ -172,7 +213,7 @@ export default function Auth(props) {
 								</span>
 							</div>
 							<input
-								type="Password"
+								type={`${showPassword ? "text" : "password"}`}
 								name="password"
 								className={`form-control ${
 									errorSignin === "Invalid Password" ? "error" : ""
@@ -180,24 +221,43 @@ export default function Auth(props) {
 								placeholder="password"
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
+								onKeyUp={() => !isLogin && checkPassword(password)}
 							/>
+							<span
+								id="toggleBtn"
+								className={`${showPassword ? "hide" : ""}`}
+								onClick={() => setShowPassword(!showPassword)}></span>
 						</div>
+
 						{!isLogin && (
-							<div className="input-group">
-								<div className="input-group-prepend">
-									<span className="input-group-text">
-										<i className="fa-solid fa-lock"></i>{" "}
-									</span>
+							<>
+								<div className="input-group">
+									<div className="input-group-prepend">
+										<span className="input-group-text">
+											<i className="fa-solid fa-lock"></i>{" "}
+										</span>
+									</div>
+									<input
+										type="password"
+										name="confirmPassword"
+										className="form-control"
+										placeholder="confirm password"
+										value={confirmPassword}
+										onChange={(e) => setConfirmPassword(e.target.value)}
+									/>
 								</div>
-								<input
-									type="Password"
-									name="confirmPassword"
-									className="form-control"
-									placeholder="confirm password"
-									value={confirmPassword}
-									onChange={(e) => setConfirmPassword(e.target.value)}
-								/>
-							</div>
+								<div className="checkPassword mb-4">
+									<div className="validation">
+										<ul>
+											<li id="lower">At least one lowercase character</li>
+											<li id="upper">At least one uppercase character</li>
+											<li id="number">At least one number</li>
+											<li id="special">At least one special character</li>
+											<li id="length">At least 6 characters</li>
+										</ul>
+									</div>
+								</div>
+							</>
 						)}
 
 						<button

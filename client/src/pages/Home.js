@@ -7,10 +7,13 @@ import Product from "../components/product/Product";
 import Title from "../components/Title";
 import { Link } from "react-router-dom";
 import Lists from "../components/sidebar/list";
+import Rating from "../components/rating/Rating";
+import Feature from "../components/feature/Feature";
 
 export default function Home() {
 	const dispatch = useDispatch();
 	const topSales = [];
+	let dealWeek = "";
 	useEffect(() => {
 		dispatch(listProducts({}));
 	}, [dispatch]);
@@ -31,11 +34,16 @@ export default function Home() {
 		return sum;
 	};
 
+	dealWeek = topSales.sort((a, b) => {
+		return b.discount - a.discount;
+	})[0];
+
+
 	return (
 		<div className="row pt-2">
 			<Title title={"Home"} />
 
-			<div className="container home col-md-12 ">
+			<div className="container  col-md-12 ">
 				{loading ? (
 					<Loading />
 				) : error ? (
@@ -64,17 +72,49 @@ export default function Home() {
 								))}
 							</div>
 						</div>
-						<h4>Top Products</h4>
+						<h4 className="mt-3">Top Products</h4>
+						<hr />
 						<Product products={products} home={true} />
 						<div className="see_more">
 							<h4>Top Sales</h4> <Link to="/sales">See More</Link>
-						</div>
+						</div>{" "}
+						<hr />
 						<Product products={topSales} home={true} />
-
 						<div className="see_more">
 							<h4>All Products</h4> <Link to="/products">See More</Link>
 						</div>
+						<hr />
 						<Product products={products} home={true} />
+						<h5>Deal of The Week</h5>
+						<hr />
+						{dealWeek && (
+							<div className="cardWeek">
+								<div className="left">
+									<img src={dealWeek.images[0].url} />
+								</div>
+								<div className="right">
+									<div className="rating">
+										<Rating
+											rating={dealWeek.ratings}
+											numReviews={dealWeek.numOfReviews}
+										/>
+									</div>
+									<div>{dealWeek.name}</div>
+									<div className="description">
+										{dealWeek.description.slice(0, 200)}...
+									</div>
+									<div className="price">
+										$
+										{dealWeek.price -
+											dealWeek.price * (dealWeek.discount / 100)}{" "}
+										<del>${dealWeek.price}</del>
+									</div>
+
+									<button className="btn btn-success">ADD TO CART</button>
+								</div>
+							</div>
+						)}
+						<Feature />
 					</>
 				)}
 			</div>

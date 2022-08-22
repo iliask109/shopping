@@ -42,7 +42,7 @@
     }
 
     .bg-gray-300 {
-        background-color: #e2e8f0;
+        background-color: var(--color-grey);
     }
 
     .h-100 {
@@ -144,7 +144,7 @@
     }
 
     .card_seller:hover {
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--box-shadow);
         transform: scale(1.1);
 
 

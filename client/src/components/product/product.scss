@@ -22,9 +22,9 @@
 		display: block;
 		width: 225px;
 		padding: 15px 0;
-		background-color: red;
-		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-		color: #fff;
+		background-color: var(--color-red-bold);
+		box-shadow: var(--box-shadow);
+		color: var(--color-white);
 		font: 700 18px/1 "Lato", sans-serif;
 		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 		text-transform: uppercase;
@@ -65,6 +65,7 @@
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		margin-bottom: 30px;
 		height: 470px;
+		color: black !important ;
 	}
 
 	.card-image img {
@@ -81,8 +82,8 @@
 		margin-top: -25px;
 		margin-right: 20px;
 		z-index: 2;
-		color: #111111 !important;
-		background: #fff;
+		color: var(--color-black) !important;
+		background: var(--color-white);
 		border-radius: 100%;
 		padding: 15px;
 		font-size: 15px;
@@ -90,27 +91,27 @@
 	}
 
 	.card-action.love {
-		color: #ff0505 !important;
+		color: var(--color-red-bold) !important;
 	}
 
 	.card-action:hover {
-		color: #fff !important;
-		background: #e26d5c;
+		color: var(--color-white) !important;
+		background: var(--color-red-light);
 		-webkit-animation: pulse 1.5s infinite;
 	}
 
 	.card-heading {
 		font-size: 14px;
 		font-weight: bold;
-		background: #fff;
+		background: var(--color-white);
 		padding: 10px 15px;
 	}
 
 	.card-text {
 		padding: 10px 15px;
-		background: #fff;
+		background: var(--color-white);
 		font-size: 14px;
-		color: #636262;
+		color: var(--color-black);
 	}
 
 	.price {
@@ -126,8 +127,8 @@
 		justify-content: center;
 		padding: 10px 0;
 		width: 100%;
-		background-color: #1f487e;
-		color: #fff;
+		background-color: var(--color-blue-light);
+		color: var(--color-white);
 		border-radius: 0 0 8px 8px;
 		border: none;
 		bottom: 0;
@@ -137,7 +138,7 @@
 	.card-button:hover {
 		text-decoration: none;
 		background-color: #1d3461;
-		color: #fff;
+		color: var(--color-white);
 	}
 
 

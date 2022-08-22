@@ -1,4 +1,5 @@
 import React from "react";
+import Feature from "../components/feature/Feature";
 
 export default function About() {
 	return (
@@ -21,8 +22,6 @@ export default function About() {
 				<h2>We hope you enjoy the site and the products </h2>
 			</div>
 
-		
-
 			<h2>Our Team</h2>
 			<div className="row">
 				<div className="column">
@@ -41,6 +40,7 @@ export default function About() {
 					</div>
 				</div>
 			</div>
+			<Feature />
 		</div>
 	);
 }
