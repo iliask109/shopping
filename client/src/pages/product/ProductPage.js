@@ -45,8 +45,8 @@ export default function ProductPage() {
 		error: errorProducts,
 		products,
 	} = productList;
-	const getCouponReducer = useSelector((state) => state.getCouponReducer);
-	const { coupon } = getCouponReducer;
+	const getCoupons = useSelector((state) => state.getCoupons);
+	const { coupons } = getCoupons;
 
 	useEffect(() => {
 		dispatch(detailsProduct(id));
@@ -55,7 +55,7 @@ export default function ProductPage() {
 	// add to cart
 	const addCart = (productId) => {
 		dispatch(
-			AddToCart(productId, query, couponConfirm && coupon?.discountCoupons)
+			AddToCart(productId, query, couponConfirm && coupons[0]?.discount)
 		);
 		setAddToCart(true);
 	};
@@ -202,12 +202,11 @@ export default function ProductPage() {
 												)}
 												{couponConfirm && product?.discount === 0
 													? product?.price -
-													  product?.price * (coupon?.discountCoupons / 100)
+													  product?.price * (coupons[0]?.discount / 100)
 													: couponConfirm && product?.discount > 0
 													? product?.price -
 													  product?.price *
-															((coupon?.discountCoupons + product?.discount) /
-																100)
+															((coupons[0]?.discount + product?.discount) / 100)
 													: product?.discount > 0
 													? product?.price -
 													  product?.price * (product?.discount / 100)
@@ -249,7 +248,7 @@ export default function ProductPage() {
 											<td>
 												<input
 													onChange={(e) => {
-														if (e.target.value === coupon?.nameCoupon) {
+														if (e.target.value === coupons[0]?.code) {
 															setCouponConfirm(true);
 															setCouponBtn(true);
 														}
@@ -277,12 +276,11 @@ export default function ProductPage() {
 														query *
 														(couponConfirm && product?.discount === 0
 															? product?.price -
-															  product?.price * (coupon?.discountCoupons / 100)
+															  product?.price * (coupons[0]?.discount / 100)
 															: couponConfirm && product?.discount > 0
 															? product?.price -
 															  product?.price *
-																	((coupon?.discountCoupons +
-																		product?.discount) /
+																	((coupons[0]?.discount + product?.discount) /
 																		100)
 															: product?.discount > 0
 															? product?.price -
@@ -474,7 +472,11 @@ export default function ProductPage() {
 									</div>
 									<button
 										className="btn btn-primary"
-										onClick={() => navigate(`/products/${item._id}`)}>
+										onClick={() => {
+											setCouponBtn(false);
+											setCouponConfirm(false);
+											navigate(`/products/${item._id}`);
+										}}>
 										Buy
 									</button>
 								</div>

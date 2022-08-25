@@ -272,12 +272,3 @@ exports.getSellerProducts = catchAsyncError(async (req, res, next) => {
 
 	res.status(200).json({ products });
 });
-
-// get /api/products/coupons
-
-exports.getCoupons = catchAsyncError(async (req, res, next) => {
-	const nameCoupon = "NEWshopping1";
-	const discountCoupons = 20;
-
-	res.status(200).json({ nameCoupon, discountCoupons });
-});

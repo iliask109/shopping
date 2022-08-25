@@ -9,30 +9,30 @@ import "./index.css";
 
 export default function Feature() {
 	return (
-		<div class="features">
-			<div class="feature">
-				<img src={shipping} alt="" class="featureIcon" />
-				<span class="featureTitle">FREE SHIPPING</span>
-				<span class="featureDesc">Free worldwide shipping on all orders.</span>
+		<div className="features">
+			<div className="feature">
+				<img src={shipping} alt="" className="featureIcon" />
+				<span className="featureTitle">FREE SHIPPING</span>
+				<span className="featureDesc">Free worldwide shipping on all orders.</span>
 			</div>
-			<div class="feature">
-				<img class="featureIcon" src={returnLOGO} alt="" />
-				<span class="featureTitle">30 DAYS RETURN</span>
-				<span class="featureDesc">
+			<div className="feature">
+				<img className="featureIcon" src={returnLOGO} alt="" />
+				<span className="featureTitle">30 DAYS RETURN</span>
+				<span className="featureDesc">
 					No question return and easy refund in 14 days.
 				</span>
 			</div>
-			<div class="feature">
-				<img class="featureIcon" src={gift} alt="" />
-				<span class="featureTitle">GIFT CARDS</span>
-				<span class="featureDesc">
+			<div className="feature">
+				<img className="featureIcon" src={gift} alt="" />
+				<span className="featureTitle">GIFT CARDS</span>
+				<span className="featureDesc">
 					Buy gift cards and use coupon codes easily.
 				</span>
 			</div>
-			<div class="feature">
-				<img class="featureIcon" src={contact} alt="" />
-				<span class="featureTitle">CONTACT US!</span>
-				<span class="featureDesc">
+			<div className="feature">
+				<img className="featureIcon" src={contact} alt="" />
+				<span className="featureTitle">CONTACT US!</span>
+				<span className="featureDesc">
 					Keep in touch via email and support system.
 				</span>
 			</div>

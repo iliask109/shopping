@@ -95,9 +95,7 @@ export default function Navbar() {
 
 	return (
 		<div className="navbar col-lg-12">
-			
 			<div className="wrapper ">
-				
 				{Mobile && <Sidebar />}
 				<div className="logo ">
 					<Link to="/" style={{ textDecoration: "none" }}>
@@ -158,7 +156,9 @@ export default function Navbar() {
 					)}
 
 					{userInfo ? (
-						<div className="item item_mobile_user" onClick={() => setUserOpen(true)}>
+						<div
+							className="item item_mobile_user"
+							onClick={() => setUserOpen(true)}>
 							<img src={userInfo?.avatar.url} alt="" className="avatar" />
 							<div className="user">{userInfo.name}</div>
 							{!userOpen ? (
@@ -287,6 +287,13 @@ export default function Navbar() {
 								style={{ textDecoration: "none" }}>
 								Reviews
 							</Link>
+							<Link
+								to="/admin/coupons"
+								className="item"
+								onClick={() => setUserOpen(false)}
+								style={{ textDecoration: "none" }}>
+								Coupons
+							</Link>
 						</>
 					)}
 					{userInfo?.role === "seller" && (
@@ -352,7 +359,6 @@ export default function Navbar() {
 					))}
 				</div>
 			)}
-			
 		</div>
 	);
 }

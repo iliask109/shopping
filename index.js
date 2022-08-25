@@ -9,6 +9,7 @@ const orderRouter = require("./routes/order");
 const productRouter = require("./routes/product");
 const authRouter = require("./routes/auth");
 const messageRouter = require("./routes/message");
+const couponRouter = require("./routes/coupon");
 
 const cloudinary = require("cloudinary");
 
@@ -45,7 +46,6 @@ cloudinary.config({
 	api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-
 app.use(limiter);
 
 app.use("/api", productRouter);
@@ -54,6 +54,7 @@ app.use("/api/user", userRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/message", messageRouter);
+app.use("/api/coupon", couponRouter);
 
 app.use(errorMiddleware);
 app.use(express.static(path.resolve(__dirname, "./client/build")));

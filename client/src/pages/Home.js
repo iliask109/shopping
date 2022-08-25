@@ -5,13 +5,15 @@ import Loading from "../components/loading/Loading";
 import MessageBox from "../components/MessageBox";
 import Product from "../components/product/Product";
 import Title from "../components/Title";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Lists from "../components/sidebar/list";
 import Rating from "../components/rating/Rating";
 import Feature from "../components/feature/Feature";
 
 export default function Home() {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const topSales = [];
 	let dealWeek = "";
 	useEffect(() => {
@@ -37,7 +39,7 @@ export default function Home() {
 	dealWeek = topSales.sort((a, b) => {
 		return b.discount - a.discount;
 	})[0];
-
+	console.log(dealWeek);
 
 	return (
 		<div className="row pt-2">
@@ -110,7 +112,11 @@ export default function Home() {
 										<del>${dealWeek.price}</del>
 									</div>
 
-									<button className="btn btn-success">ADD TO CART</button>
+									<button
+										className="btn btn-success"
+										onClick={() => navigate(`/products/${dealWeek._id}`)}>
+										ADD TO CART
+									</button>
 								</div>
 							</div>
 						)}

@@ -8,7 +8,6 @@ const {
 	deleteReview,
 	getSellerProducts,
 	getSellerProduct,
-	getCoupons,
 } = require("../controllers/productControllers");
 const {
 	isAuthenticatedUser,
@@ -29,6 +28,6 @@ router.route("/review").put(isAuthenticatedUser, createProductReview);
 router.route("/reviews").get(isAuthenticatedUser, getProductReviews);
 router.route("/reviews").delete(isAuthenticatedUser, deleteReview);
 
-router.route("/coupons").get(getCoupons);
+
 
 module.exports = router;

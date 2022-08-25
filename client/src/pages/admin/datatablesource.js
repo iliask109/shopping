@@ -83,7 +83,11 @@ export const productColumns = [
 		renderCell: (params) => {
 			return (
 				<div className="cellWithImg">
-					<img className="cellImg" src={params.row.images[0]?.url} alt={"imageProdct"} />
+					<img
+						className="cellImg"
+						src={params.row.images[0]?.url}
+						alt={"imageProdct"}
+					/>
 				</div>
 			);
 		},
@@ -254,5 +258,35 @@ export const messageColumns = [
 			return <div>{params.row.createdAt.slice(0, 10)}</div>;
 		},
 		width: 150,
+	},
+];
+
+export const couponsColumns = [
+	{
+		field: "code",
+		headerName: "Code",
+		width: 150,
+	},
+	{
+		field: "discount",
+		headerName: "Discount",
+		width: 200,
+	},
+
+	{
+		field: "dateStart",
+		headerName: "Start",
+		renderCell: (params) => {
+			return <div>{params.row.dateStart.slice(0, 10)}</div>;
+		},
+		width: 150,
+	},
+	{
+		field: "dateEnd",
+		headerName: "End",
+		renderCell: (params) => {
+			return <div>{params.row.dateEnd.slice(0, 10)}</div>;
+		},
+		width: 250,
 	},
 ];

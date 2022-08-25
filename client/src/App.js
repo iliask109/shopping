@@ -45,37 +45,60 @@ import ProductsSeller from "./pages/seller/ProductsSeller";
 import SingleProductSeller from "./pages/seller/SingelProductSeller";
 import SingleMessage from "./pages/admin/SingleMessage";
 
+import { getAllCouponsAdmin } from "../src/actions/couponsAction";
+
 import "./app.scss";
-import { getCoupons } from "./actions/productActions";
+import CouponsAdmin from "./pages/admin/couponsAdmin.js/CouponsAdmin";
+import CreateCoupon from "./pages/admin/couponsAdmin.js/CreateCoupon";
 
 function App() {
 	const dispatch = useDispatch();
 
 	const sidebarReducer = useSelector((state) => state.sidebarReducer);
 	const { Blur } = sidebarReducer;
-	const getCouponReducer = useSelector((state) => state.getCouponReducer);
-	const { coupon } = getCouponReducer;
+	const getCoupons = useSelector((state) => state.getCoupons);
+	const { coupons } = getCoupons;
 
 	const [couponShow, setCouponShow] = useState(true);
 
 	const Mobile = useMediaQuery({ query: "(min-width: 700px)" });
 
 	useEffect(() => {
-		dispatch(getCoupons());
+		dispatch(getAllCouponsAdmin());
 	}, []);
+
+	var monthNames = [
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December",
+	];
+
 
 	return (
 		<div className="main">
 			<BrowserRouter>
-				{couponShow && coupon?.discountCoupons && (
+				{couponShow && coupons && (
 					<div className="coupon">
-						Get {coupon?.discountCoupons}% off with the code{" "}
-						<span>{coupon?.nameCoupon}</span>
+						Get {coupons[0]?.discount}% off with the code{" "}
+						<span>{coupons[0]?.code}</span>
 						<label
 							className="remove_coupon"
 							onClick={() => setCouponShow(false)}>
 							X
-						</label>
+						</label>{" "}
+						<div>
+							Ends - {monthNames[new Date(coupons[0]?.dateEnd).getMonth()]}.
+							{new Date(coupons[0]?.dateEnd).getDate()+1}
+						</div>
 					</div>
 				)}
 				<Navbar />
@@ -244,6 +267,22 @@ function App() {
 								element={
 									<AdminRoute>
 										<SingleMessage />
+									</AdminRoute>
+								}
+							/>
+							<Route
+								path="/admin/coupons"
+								element={
+									<AdminRoute>
+										<CouponsAdmin />
+									</AdminRoute>
+								}
+							/>
+							<Route
+								path="/admin/coupon/new"
+								element={
+									<AdminRoute>
+										<CreateCoupon />
 									</AdminRoute>
 								}
 							/>

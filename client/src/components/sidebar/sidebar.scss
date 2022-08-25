@@ -42,7 +42,7 @@
 
   .btn-close {
     position: absolute;
-    top: 10px;
+    top: 50px;
     right: 10px;
     margin: 0;
     border: 0;
@@ -83,6 +83,7 @@
 
   .top {
     height: 40px;
+    margin-top: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -184,13 +185,13 @@
 @media screen and (max-width: 700px) {
   .sidebar.mobile {
     position: absolute;
-    margin-top: -43px;
+    margin-top: -75px;
   }
 
 }
 
 @media screen and (max-width: 500px) {
   .sidebar.mobile {
-    margin-top: -93px;
+    margin-top: -113px;
   }
 }

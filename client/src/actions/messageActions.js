@@ -74,7 +74,7 @@ export const deleteMessageAdmin = (messageId) => async (dispatch) => {
 };
 
 export const confirmMessageAdmin =
-	(messageId, meg = "22") =>
+	(messageId, meg) =>
 	async (dispatch) => {
 		dispatch({ type: CONFIRM_MESSAGE_REQUEST, payload: messageId });
 
