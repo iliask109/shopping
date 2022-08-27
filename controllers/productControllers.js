@@ -113,7 +113,6 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
 	if (!product) {
 		return next(new ErrorHandler("Product not found", 404));
 	}
-	console.log(req.body);
 	if (
 		req.user.role === "admin" ||
 		req.user._id.toString() === product.user.toString()

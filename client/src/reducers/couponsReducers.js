@@ -7,6 +7,7 @@ import {
 	GET_ALL_COUPONS_SUCCESS,
 	NEW_COUPON_FAIL,
 	NEW_COUPON_REQUEST,
+	NEW_COUPON_RESET,
 	NEW_COUPON_SUCCESS,
 } from "../constants/couponConstants";
 
@@ -43,6 +44,8 @@ export const createCouponReducer = (state = {}, action) => {
 			return { loading: false, success: true, coupon: action.payload };
 		case NEW_COUPON_FAIL:
 			return { loading: false, error: action.payload };
+		case NEW_COUPON_RESET:
+			return { };
 
 		default:
 			return state;

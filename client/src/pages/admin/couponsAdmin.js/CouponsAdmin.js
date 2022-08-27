@@ -10,12 +10,14 @@ import {
 	deleteCouponAdmin,
 	getAllCouponsAdmin,
 } from "../../../actions/couponsAction";
+import { NEW_COUPON_RESET } from "../../../constants/couponConstants";
 
 export default function CouponsAdmin() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getAllCouponsAdmin());
+		dispatch({ type: NEW_COUPON_RESET });
 	}, [dispatch]);
 
 	const getCoupons = useSelector((state) => state.getCoupons);

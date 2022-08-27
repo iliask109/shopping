@@ -39,7 +39,6 @@ export default function Home() {
 	dealWeek = topSales.sort((a, b) => {
 		return b.discount - a.discount;
 	})[0];
-	console.log(dealWeek);
 
 	return (
 		<div className="row pt-2">
@@ -92,7 +91,7 @@ export default function Home() {
 						{dealWeek && (
 							<div className="cardWeek">
 								<div className="left">
-									<img src={dealWeek.images[0].url} />
+									<img src={dealWeek.images[0].url} alt='' />
 								</div>
 								<div className="right">
 									<div className="rating">
